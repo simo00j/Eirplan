@@ -9,9 +9,8 @@ var svgFileReader = function (svgFilePath) {
   return jsonData;
 }
 
-var standDataExtractor = function(pathDataStruct, isPath) {
+var standDataExtractor = function(pathDataStruct, type) {
   var stand = {};
-  var isWall = false;
 
   if (pathDataStruct.keys) {
     stand = {
@@ -21,18 +20,22 @@ var standDataExtractor = function(pathDataStruct, isPath) {
         // ... respo + time
     };
   } else {
-    isWall = true;
     stand = {
-        id: 'wall',
+        id: 'wall'
     };
   }
 
-  if (isPath) {
+  if (type == 'path') {
     stand["path"] = pathDataStruct.d;
   } else {
-    stand["path"] = toPath(pathDataStruct);
+    var element = {
+      type:'element',
+      name:type,
+      attributes: pathDataStruct
+    }
+    stand["path"] = toPath(element);
   }
-  return {stand, isWall};
+  return stand;
 }
 
 var standsDataExtractor = function(gDataStruct) {
@@ -40,15 +43,14 @@ var standsDataExtractor = function(gDataStruct) {
   var stands = [];
   var walls = [];
 
-  if (gDataSet) {
+  if (gDataStruct) {
     for (const type in shapeTypes) {
       if (gDataStruct[type]) {
-        //shapeTypes[type] = gDataStruct[type].length;
-        //console.log(type+ ':' + shapeTypes[type]);
+        shapeTypes[type] = gDataStruct[type].length;
 
-        for (const index in shapeTypes[type]) {
-          let {shape, isWall} = standDataExtractor(shapeTypes[type][index], (type=='path'));
-          if (isWall)
+        for (const index in gDataStruct[type]) {
+          let shape = standDataExtractor(gDataStruct[type][index], type);
+          if (shape.id=='wall')
             walls.push(shape);
           else
             stands.push(shape);
