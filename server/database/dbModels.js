@@ -7,13 +7,18 @@ const keywordSchema = mongoose.Schema({
     name: String,
 });
 
+const wallSchema = mongoose.Schema({
+    _id: mongoose.Schema.Types.ObjectId,
+    path: String,
+});
+
 const standSchema = mongoose.Schema({
     _id: mongoose.Schema.Types.ObjectId,
     name: String,
     responsableName: String,
     startHour: Date,
     endHour: Date,
-    coords: String,
+    path: String,
     keywords: [keywordSchema]
 });
 const dateFormat = 'HH:mm';
@@ -21,11 +26,10 @@ const dateFormat = 'HH:mm';
 const floorSchema = mongoose.Schema({
     _id: mongoose.Schema.Types.ObjectId,
     name: {type:String, unique: true},
-    planShape: String,
+    planShape: [wallSchema],
     stands: [standSchema]
 });
 floorSchema.plugin(mongooseUniqueValidator);
-
 
 const eventSchema = mongoose.Schema({
     _id: mongoose.Schema.Types.ObjectId,
