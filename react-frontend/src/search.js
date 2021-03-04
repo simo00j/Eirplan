@@ -12,7 +12,7 @@ class List extends React.Component {
       search: false,
       keywords : [],
       list_kw : false,
-      card : false,
+      card : false, 
       company : {}
     };        
   this.kwords()
@@ -63,7 +63,8 @@ showCard(id){
     <input type="text"
     id="rechercher"
     className="input"
-    placeholder="Search..." />
+    placeholder="Search..." 
+      />
     <div onClick={() => this.inputkeyword(document.getElementById("rechercher").value)} className="btn btn-primary">
     Search
     </div>
