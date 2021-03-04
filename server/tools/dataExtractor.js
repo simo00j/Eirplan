@@ -2,7 +2,7 @@ const toPath = require('element-to-path');
 const fileReader = require('./fileReader');
 const Event = require('../database/dbModels');
 
-var standDataExtractor = function(pathDataStruct, type) {
+var standDataExtractor = function (pathDataStruct, type) {
   var stand = {};
 
   if (pathDataStruct.keys) {
@@ -31,7 +31,7 @@ var standDataExtractor = function(pathDataStruct, type) {
   return stand;
 }
 
-var standsDataExtractor = function(gDataStruct) {
+var standsDataExtractor = function (gDataStruct) {
   var shapeTypes =  { 'rect' : 0, 'circle' : 0, 'ellipse' : 0, 'line' : 0, 'polyline' : 0, 'polygon': 0, 'path': 0};
   var stands = [];
   var walls = [];
@@ -88,4 +88,5 @@ var eventDataExtractor = function (xmlEventFilePath) {
   return event;
 }
 
-module.exports = eventDataExtractor;
+exports.floorDataExtractor = floorDataExtractor;
+exports.eventDataExtractor = eventDataExtractor;
