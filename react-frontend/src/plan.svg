@@ -1281,7 +1281,8 @@
        y="24.533781"
        inkscape:label="#stand_entreprise1"
        sodipodi:type="rect"
-       d="m 64.75666,24.533781 h 9.275482 v 5.45497 H 64.75666 Z">
+       d="m 64.75666,24.533781 h 9.275482 v 5.45497 H 64.75666 Z"
+       onClick="alert('youclick')" >
       <title
          id="title689">entreprise1</title>
       <title

@@ -5,7 +5,9 @@ import "./svg.css"
 const App = () => {
   return (
     <div className="App">
-      <img src={Plan} alt="React Logo" />
+      <div class="justify-content-center">
+      <img src={Plan} alt="Map"></img> 
+      </div>
     </div>
   );
 }

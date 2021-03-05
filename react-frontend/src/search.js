@@ -59,7 +59,8 @@ showCard(id){
 };
 
   render(){
-    return <div className="container">
+    return <div className = "container">
+    <div class = "row justify-content-center">
     <input type="text"
     id="rechercher"
     className="input"
@@ -68,6 +69,8 @@ showCard(id){
     <div onClick={() => this.inputkeyword(document.getElementById("rechercher").value)} className="btn btn-primary">
     Search
     </div>
+    </div>
+    <div class = "row justify-content-center text-center">
     {this.state.list_kw ? (
       <div className="list">
         <h3> Mots-clés</h3>
@@ -81,6 +84,8 @@ showCard(id){
       ))} 
       </div>
     ): null}
+    </div>
+<div class = "row justify-content-center">
   {this.state.notfound ? (
     <h5> Aucun résultat </h5>
   ): null}
@@ -102,8 +107,11 @@ showCard(id){
     <div class="card-body">
       <h5 class="card-title">{this.state.company.name}</h5>
       <div className="list-group">
-      {this.state.keywords.map(keywords => (
-      <li class="list-group">{keywords}</li>))}
+      {this.state.company.keywords.map(kw =>(
+        <li>{kw}</li>
+      )
+
+      )}
       </div>
       <div onClick={() => this.setState({ card: false,
         list_kw : true,
@@ -113,7 +121,8 @@ showCard(id){
     </div>
   </div>
   ) : null}
-</div>
+ </div>
+ </div>
   }
 }
 
