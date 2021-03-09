@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-
+import Plan from './svg.js'
 
 
 class List extends React.Component {
@@ -7,18 +7,28 @@ class List extends React.Component {
   constructor(props) {
     super(props)
     this.state = {
+      plan: Plan,
       companies: [],
       notfound:false,
       search: false,
       keywords : [],
       list_kw : false,
-      card : false, 
+      card : false,
       company : {}
-    };        
+    };
   this.kwords()
   }
 
 
+  changeColor(idr) {
+    var elem = document.getElementById(idr);
+    if(elem != null){
+    if(elem.style.fill != "pink"){
+    elem.style.fill= "pink";}
+    else {
+      elem.style.fill= "red"}
+    }
+    }
 
   inputkeyword(name){
     if(name!= ""){
@@ -46,25 +56,36 @@ class List extends React.Component {
       this.setState({ list_kw: true });
     });
 }
-   
+
 showCard(id){
+  this.changeColor(id);
   fetch(`http://localhost:3001/companies/list/${id}`)
     .then(response => response.json())
     .then(responseJson => {
-      this.setState({ company: responseJson.data, 
+      this.setState({ company: responseJson.data,
         card: true,
         list_kw : false,
         search : false, });
     });
 };
 
+backfunc(id){
+  this.changeColor(id);
+  this.setState({ card: false,
+    list_kw : true,
+    search : true, })
+}
+
   render(){
     return <div className = "container">
+    <div class = "row justify-content-center">
+      <Plan />
+    </div>
     <div class = "row justify-content-center">
     <input type="text"
     id="rechercher"
     className="input"
-    placeholder="Search..." 
+    placeholder="Search..."
       />
     <div onClick={() => this.inputkeyword(document.getElementById("rechercher").value)} className="btn btn-primary">
     Search
@@ -79,9 +100,9 @@ showCard(id){
           onClick={() => (document.getElementById("rechercher").value = keywords, this.inputkeyword(keywords))}
           className="btn btn-outline-success"
           >
-          {keywords}  
+          {keywords}
           </li>
-      ))} 
+      ))}
       </div>
     ): null}
     </div>
@@ -91,7 +112,7 @@ showCard(id){
   ): null}
   {this.state.search ? (
     <div className="list-group">
-      <h5> Résultat de recherche pour {document.getElementById("rechercher").value} </h5> 
+      <h5> Résultat de recherche pour {document.getElementById("rechercher").value} </h5>
       {this.state.companies.map(companies => (
         <li
         onClick={() => this.showCard(companies._id)}
@@ -110,20 +131,18 @@ showCard(id){
       {this.state.company.keywords.map(kw =>(
         <li>{kw}</li>
       )
-
       )}
       </div>
-      <div onClick={() => this.setState({ card: false,
-        list_kw : true,
-        search : true, })} class="btn btn-primary">
+      <div onClick={() => this.backfunc(this.state.company._id)} class="btn btn-primary">
         Back
       </div>
     </div>
   </div>
-  ) : null}
+  ) :null}
  </div>
  </div>
   }
 }
+
 
 export default List;
