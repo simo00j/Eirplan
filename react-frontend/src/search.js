@@ -78,10 +78,10 @@ backfunc(id){
 
   render(){
     return <div className = "container">
-    <div class = "row justify-content-center">
+    <div className = "row justify-content-center">
       <Plan />
     </div>
-    <div class = "row justify-content-center">
+    <div className = "row justify-content-center">
     <input type="text"
     id="rechercher"
     className="input"
@@ -91,7 +91,7 @@ backfunc(id){
     Search
     </div>
     </div>
-    <div class = "row justify-content-center text-center">
+    <div className = "row justify-content-center text-center">
     {this.state.list_kw ? (
       <div className="list">
         <h3> Mots-clés</h3>
@@ -106,7 +106,7 @@ backfunc(id){
       </div>
     ): null}
     </div>
-<div class = "row justify-content-center">
+<div className = "row justify-content-center">
   {this.state.notfound ? (
     <h5> Aucun résultat </h5>
   ): null}
@@ -124,16 +124,16 @@ backfunc(id){
    </div>
   ): null}
   {this.state.card ? (
-  <div class="card" style={{ width: "18rem" }}>
-    <div class="card-body">
-      <h5 class="card-title">{this.state.company.name}</h5>
+  <div className="card" style={{ width: "18rem" }}>
+    <div className="card-body">
+      <h5 className="card-title">{this.state.company.name}</h5>
       <div className="list-group">
       {this.state.company.keywords.map(kw =>(
         <li>{kw}</li>
       )
       )}
       </div>
-      <div onClick={() => this.backfunc(this.state.company._id)} class="btn btn-primary">
+      <div onClick={() => this.backfunc(this.state.company._id)} className="btn btn-primary">
         Back
       </div>
     </div>

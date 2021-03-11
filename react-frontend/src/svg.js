@@ -5,8 +5,8 @@ import "./svg.css"
   function Plan() {
     return (
       <div className="App">
-        <div class="row justify-content-center">
-          <svg class="plan" id="plan" width="210mm" height="145mm" version="1.1" viewBox="-12 -10 210 145"><g transform="translate(-21.309 -24.361)">
+        <div className="row justify-content-center">
+          <svg className="plan" id="plan" width="210mm" height="145mm" version="1.1" viewBox="-12 -10 210 145"><g transform="translate(-21.309 -24.361)">
             <g fill="#00f" fill-rule="evenodd">
               <path x="21.309423" y="24.361353" width="173.5912" height="38.714207" d="m21.309 24.361h173.59v38.714h-173.59z" stroke-width=".26458">
                 <title>Batiment1</title>
