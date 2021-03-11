@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
-import Plan from './svg.js'
+import Plan from './svg.js';
+import Keyboard from "react-simple-keyboard";
+import 'react-simple-keyboard/build/css/index.css';
 
 
 class List extends React.Component {
@@ -76,6 +78,11 @@ backfunc(id){
     search : true, })
 }
 
+onChange(input) {
+  document.getElementById("rechercher").value = input;
+  console.log("Input changed", input);
+}
+
   render(){
     return <div className = "container">
     <div className = "row justify-content-center">
@@ -140,6 +147,10 @@ backfunc(id){
   </div>
   ) :null}
  </div>
+ <div id="keyyboard"> 
+   <Keyboard onChange={input => this.onChange(input)} />
+ </div>
+
  </div>
   }
 }

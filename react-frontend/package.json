@@ -10,6 +10,7 @@
     "@testing-library/user-event": "^12.6.3",
     "node-sass": "^5.0.0",
     "react-scripts": "4.0.2",
+    "react-simple-keyboard": "^2.5.179",
     "web-vitals": "^1.1.0"
   },
   "scripts": {
