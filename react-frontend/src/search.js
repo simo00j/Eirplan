@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 import Plan from './svg.js';
 import Keyboard from "react-simple-keyboard";
 import 'react-simple-keyboard/build/css/index.css';
+import { faAngleDown, faAngleUp } from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 
 class List extends React.Component {
@@ -85,6 +87,11 @@ onChange(input) {
 
   render(){
     return <div className = "container">
+      <h1> Nom du salon </h1>
+      <div className="btn-group-vertical">
+        <div class="btn btn-dark" href="#"><FontAwesomeIcon icon={faAngleUp} size="2x"/></div>
+        <div class="btn btn-dark" href="#"><FontAwesomeIcon icon={faAngleDown} size="2x"/></div>
+      </div>
     <div className = "row justify-content-center">
       <Plan />
     </div>
