@@ -18,6 +18,7 @@ class List extends React.Component {
       keywords : [],
       list_kw : false,
       card : false,
+      keyboard : false,
       company : {}
     };
   this.kwords()
@@ -35,6 +36,7 @@ class List extends React.Component {
     }
 
   inputkeyword(name){
+    this.setState({keyboard: false })
     if(name!= ""){
       if(this.state.companies.length == 0) {
         this.setState({
@@ -86,20 +88,22 @@ onChange(input) {
 }
 
   render(){
-    return <div className = "container">
-      <h1> Nom du salon </h1>
+    return <div className="vw-100 vh-100">
+    <h1> Nom du salon </h1>
       <div className="btn-group-vertical">
         <div class="btn btn-dark" href="#"><FontAwesomeIcon icon={faAngleUp} size="2x"/></div>
         <div class="btn btn-dark" href="#"><FontAwesomeIcon icon={faAngleDown} size="2x"/></div>
       </div>
+      <div className="w-40 h-40 row justify-content-center">
+      <Plan/>
+      </div>
     <div className = "row justify-content-center">
-      <Plan />
-    </div>
-    <div className = "row justify-content-center">
-    <input type="text"
+    <input 
+    type="text"
     id="rechercher"
     className="input"
     placeholder="Search..."
+    onClick={() => this.setState({keyboard: true})} 
       />
     <div onClick={() => this.inputkeyword(document.getElementById("rechercher").value)} className="btn btn-primary">
     Search
@@ -154,10 +158,11 @@ onChange(input) {
   </div>
   ) :null}
  </div>
- <div id="keyyboard"> 
-   <Keyboard onChange={input => this.onChange(input)} />
+ {this.state.keyboard ? (
+ <div className = "text-center" style={{position: "fixed", bottom : "0", margin:"auto", left:"0", width: "100%", height:"auto"}}> 
+   <Keyboard className="keyyboard" onChange={input => this.onChange(input)} />
  </div>
-
+  ): null}
  </div>
   }
 }
