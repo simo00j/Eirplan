@@ -37,7 +37,7 @@ class List extends React.Component {
 
   inputkeyword(name){
     this.setState({keyboard: false })
-    if(name!= ""){
+    if(name!= "" && this.state.card==false){
       if(this.state.companies.length == 0) {
         this.setState({
           notfound: true});}
@@ -88,16 +88,22 @@ onChange(input) {
 }
 
   render(){
-    return <div className="vw-100 vh-100">
+    return <div className="vw-100 vh-100 mx-auto">
+      <div className="text-center">
     <h1> Nom du salon </h1>
+    </div>  
+    <div class="row mx-auto align-items-center">
+      <div className="col-sm-1">
       <div className="btn-group-vertical">
         <div class="btn btn-dark" href="#"><FontAwesomeIcon icon={faAngleUp} size="2x"/></div>
         <div class="btn btn-dark" href="#"><FontAwesomeIcon icon={faAngleDown} size="2x"/></div>
       </div>
-      <div className="w-40 h-40 row justify-content-center">
+      </div>
+      <div className="w-40 h-40 col-sm">
       <Plan/>
       </div>
-    <div className = "row justify-content-center">
+      </div>
+    <div className = "row justify-content-center mx-auto ">
     <input 
     type="text"
     id="rechercher"
@@ -109,7 +115,7 @@ onChange(input) {
     Search
     </div>
     </div>
-    <div className = "row justify-content-center text-center">
+    <div className = "text-center">
     {this.state.list_kw ? (
       <div className="list">
         <h3> Mots-clés</h3>
@@ -124,12 +130,12 @@ onChange(input) {
       </div>
     ): null}
     </div>
-<div className = "row justify-content-center">
+<div className = "row justify-content-center mx-auto">
   {this.state.notfound ? (
     <h5> Aucun résultat </h5>
   ): null}
   {this.state.search ? (
-    <div className="list-group">
+    <div className="list-group text-center">
       <h5> Résultat de recherche pour {document.getElementById("rechercher").value} </h5>
       {this.state.companies.map(companies => (
         <li
