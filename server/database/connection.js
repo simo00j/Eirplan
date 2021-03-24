@@ -2,10 +2,17 @@ const mongoose = require('mongoose');
 
 const con = function (usr = 'admin', pwd = 'randompassword', dbName = 'Eirplan') {
   mongoose.connect('mongodb+srv://'+usr+':'+pwd+'@eirplan.gdcbx.mongodb.net/'+dbName+'?retryWrites=true&w=majority',
-  { useNewUrlParser: true,
+  { 
+    useCreateIndex: true,
+    useNewUrlParser: true,
     useUnifiedTopology: true })
-  .then(() => console.log('Succesfully connected to MongoDB Database !'))
-  .catch(() => console.log('connection failed to the MongoDB Database !'));
+  .then(client => {
+    console.log('Succesfully connected to MongoDB Database !')
+    })
+  .catch(error => {
+    console.log('connection failed to the MongoDB Database !')
+    console.error(error)
+    });
 }
 
 exports.con = con;

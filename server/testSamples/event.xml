@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<event>
+  <name>TestEvent</name>
+  <logoEventPath>First test Path</logoEventPath>
+  <logoHostPath>Second test Path</logoHostPath>
+  <floor>./testSamples/basement.xml</floor>
+  <floor>./testSamples/floor1.xml</floor>
+  <floor>./testSamples/floor2.xml</floor>
+</event>

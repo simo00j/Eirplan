@@ -2,6 +2,16 @@ const toPath = require('element-to-path');
 const fileReader = require('./fileReader');
 const Event = require('../database/dbModels');
 
+var keysParser = function (keys) {
+  var keysArray = [];
+  for (let k of keys) {
+    keysArray.push( {
+                      name: k
+                    });
+  }  
+  return keysArray;
+}
+
 var standDataExtractor = function (pathDataStruct, type) {
   var stand = {};
 
@@ -9,7 +19,7 @@ var standDataExtractor = function (pathDataStruct, type) {
     stand = {
         id: pathDataStruct.id,
         name: pathDataStruct.id,
-        keywords: pathDataStruct.keys.split(',')
+        keywords: keysParser(pathDataStruct.keys.split(','))
         // ... respo + time
     };
   } else {
@@ -55,8 +65,8 @@ var standsDataExtractor = function (gDataStruct) {
   return {stands, walls};
 }
 
-var floorDataExtractor = function (svgFloorFilePath) {
-  let floorJson = fileReader(svgFloorFilePath);
+var floorDataExtractor = function (svgFloorFile) {
+  let floorJson = fileReader(svgFloorFile);
   let {stands, walls} = standsDataExtractor(floorJson.svg.g);
 
   var floor = {
@@ -68,17 +78,17 @@ var floorDataExtractor = function (svgFloorFilePath) {
   return floor;
 }
 
+
 var eventDataExtractor = function (xmlEventFilePath) {
-  let eventJson = fileReader(xmlEventFilePath);
+  let eventJson = fileReader(xmlEventFilePath).event;
   let floors = [];
 
-  for (const floorFilePath of eventJson.floors) {
+  for (const floorFilePath of eventJson.floor) {
     var floor = floorDataExtractor(floorFilePath);
     floors.push(floor);
   }
 
   var event = new Event ({
-    _id: new mongoose.Types.ObjectId(),
     name: eventJson.name,
     logoEvent: eventJson.logoEventPath,
     logoHost: eventJson.logoHostPath,
