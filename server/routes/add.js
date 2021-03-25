@@ -1,7 +1,7 @@
 const express = require('express');
 const dataExt = require('../tools/dataExtractor');
 const dbModels = require('../database/dbModels');
-const fs = require('fs-extra');
+const fs = require('fs');
 const router = express.Router();
 var path= require('path');
 const xmlParser = require('xml2json');
@@ -10,7 +10,6 @@ const xmlParser = require('xml2json');
 router.get('/',(req,res) => {
     res.sendFile(path.resolve(__dirname + '/../interface/index2.html'))
 }); 
-
 
 
 

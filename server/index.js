@@ -3,7 +3,9 @@ const bodyParser= require('body-parser');
 const mongoose = require('mongoose');
 const express = require('express');
 const upload = require('express-fileupload');
+const cors = require('cors');
 const app = express();
+const port = 3000;
 
 //connection
 connect.con();
@@ -18,15 +20,17 @@ app.use(upload());
 const eventroutes = require('./routes/event')
 const addroutes = require('./routes/add')
 const homeroute = require('./routes/home')
+const sendroutes = require('./routes/send')
 
-//set routes
-app.use('/',homeroute);
-app.use('/add',addroutes);
-app.use('/event',eventroutes);
+//set routes 
+app.use('/', homeroute);
+app.use('/add', addroutes);
+app.use('/event', eventroutes);
+app.use('/send', sendroutes);
 
 
-//listin to port 
-app.listen(3000, function() {
+//listen to port 
+app.listen(port, () => {
   console.log('listening on 3000');
 });
 
