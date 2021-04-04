@@ -1,7 +1,17 @@
-to test the back office :
-go to server/
-to make sure all dependencies are fulfilled run :
-    npm install . 
-then to start the server :
-    node index.js 
-u can also test the server using the testsamples
+to launch the server :
+	go to the server sub :
+		cd server 
+	install dependencies :
+		npm install 
+	launch server :
+		node index.js
+
+
+to launch the CLient :
+	go to the client sub : 
+		cd Client 
+	install dependencies :
+		npm install 
+	launch the Client :
+		npm start 
+
