@@ -1,7 +1,7 @@
 import './App.css';
 
 import List from '../components/Searchbar/Searchbar';
-import Plan from '../components/Plan/Plan';
+import Event from '../components/Event/Event';
 
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 
@@ -13,7 +13,7 @@ function App() {
   return (
       <div >
       <Router>
-        <Plan />
+        <Event />
       </Router>
       </div>
   );

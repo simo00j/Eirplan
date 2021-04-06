@@ -5,7 +5,8 @@ const express = require('express');
 const upload = require('express-fileupload');
 const cors = require('cors');
 const app = express();
-const port = 3000;
+const port = process.env.PORT || 3001;
+//const port = 3001;
 
 //connection
 connect.con();
@@ -31,6 +32,6 @@ app.use('/send', sendroutes);
 
 //listen to port 
 app.listen(port, () => {
-  console.log('listening on 3000');
+  console.log('listening on '+ port);
 });
 
