@@ -4,7 +4,17 @@ import Keyboard from "react-simple-keyboard";
 import 'react-simple-keyboard/build/css/index.css';
 import { faAngleDown, faAngleUp } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { TagCloud } from 'react-tagcloud';
 
+const data = [
+  { value: 'JavaScript', count: 38 },
+  { value: 'React', count: 30 },
+  { value: 'Nodejs', count: 28 },
+  { value: 'Express.js', count: 25 },
+  { value: 'HTML5', count: 33 },
+  { value: 'MongoDB', count: 18 },
+  { value: 'CSS3', count: 20 },
+]
 
 class List extends React.Component {
 
@@ -147,6 +157,12 @@ onChange(input) {
       ))}
    </div>
   ): null}
+  <TagCloud
+    minSize={12}
+    maxSize={35}
+    tags={data}
+    onClick={tag => alert(`'${tag.value}' was selected!`)}
+  />
   {this.state.card ? (
   <div className="card" style={{ width: "18rem" }}>
     <div className="card-body">
