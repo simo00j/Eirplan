@@ -15,7 +15,6 @@ class Plan extends Component {
     constructor(props) {
         super(props);
         this.currFloor = props.currFloor;
-        console.log(this.currFloor);
         this.keywords = {};
         this.defStandColor = "#FFC27A";
         this.defStorkColor = "black";

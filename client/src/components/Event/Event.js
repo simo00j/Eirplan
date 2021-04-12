@@ -1,46 +1,51 @@
 import React, {Component} from "react";
 import { Dimensions, View } from "react-native";
 import Svg, {G, Circle} from "react-native-svg";
-import event from "./Svg";
+
 
 import Plan from "../Plan/Plan";
 
 class Event extends Component {
     constructor(props) {
         super(props);
-        this.event = event;
-        //this.defaultFloor = {props.defaultFloor === undefined ? 0 : props.defaultFloor};
-        this.currentFloorId = "605cc8da2fb39e95d879e6b6";
-        this.currFloor = this.getFloor(this.currentFloorId);
+        this.currFloor = null;
+        this.currentFloorId = "606c6d509130ba960a027d43";
         this.state = {
-            infoShown: false
+            infoShown: false,
+            isLoading: true , 
+            event:undefined 
         }
     }
-    async fetchevent(){
-        await fetch("http://localhost:3001/send")
-       .then(response => response.json())
-       .then(responseJson => {
-         this.event=responseJson.data[0];
-       }).catch(err=> {console.log(err)})
-   }
     getFloor(_id) {
         let floor = null;
-        for (let f of this.event.floors) {
-            if (f._id.$oid === _id) {
+        for (let f of this.state.event.floors) {
+            if (f._id === _id) {
                 floor = f;
                 break;
             }
         }
         return floor;
+        
     }
 
-    drawPlan() {
+     drawPlan() {
+        let floorr =this.getFloor(this.currentFloorId);
         return (
-            <Plan currFloor={this.currFloor}/>
+            <Plan  currFloor={floorr}/>
         );
     }
-
+    componentWillMount(){
+        fetch("http://localhost:3001/send")
+        .then(response => response.json())
+        .then(responseJson => {
+             this.setState({event: responseJson.data[0]}); 
+             this.setState({isLoading: false});
+       }).catch(err=> {console.log(err)})
+    }
     render() {
+        const {isLoading,event} = this.state;
+        if(isLoading)
+            return <div >Loading...</div>;
         return (
            this.drawPlan()
         );
