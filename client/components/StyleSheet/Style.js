@@ -50,6 +50,9 @@ const Styles = StyleSheet.create ({
         resizeMode: "cover",
         justifyContent: "center"
       },
+    searchbar: { 
+        paddingHorizontal:100, 
+    },
 })
 
 
