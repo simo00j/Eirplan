@@ -1,7 +1,8 @@
 import React, {Component} from "react";
 import { Dimensions, View, Text } from "react-native";
 import Svg, {G, Circle} from "react-native-svg";
-
+import event from "./Svg";
+import WordCloud from "../WordCloud/WordCloud";
 
 import Plan from "../Plan/Plan";
 import Searchbar from "../SearchBar/SearchBar";
@@ -63,6 +64,7 @@ class Event extends Component {
         );
     }
 
+    
     componentWillMount(){
         fetch("http://23.251.135.209:3001/send")
         .then(response => response.json())
