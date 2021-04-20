@@ -4,6 +4,7 @@ import Svg, {G, Circle} from "react-native-svg";
 
 
 import Plan from "../Plan/Plan";
+import Searchbar from "../SearchBar/SearchBar";
 
 class Event extends Component {
     constructor(props) {
@@ -12,10 +13,17 @@ class Event extends Component {
         this.currentFloorId = null;
         this.state = {
             infoShown: false,
+            standShown: undefined,
             isLoading: true , 
             event:undefined 
         }
     }
+
+    OnPressStandHandler(s) {
+        this.setState({infoShown: true});
+        this.setState({standShown: s})
+    }
+
     getFloor(_id) {
         let floor = null;
         if(_id == null)
@@ -33,15 +41,30 @@ class Event extends Component {
         
     }
 
-     drawPlan() {
-        let floorr =this.getFloor(this.currentFloorId);
+    getDesciption(s) {
+        return 'Id:'+s.id+', Name: '+s.name;
+    }
+
+    drawPlan() {
+        let floor =this.getFloor(this.currentFloorId);
         return (
-            <Plan  currFloor={floorr}/>
+            <Plan currFloor={floor} handler={this.OnPressStandHandler.bind(this)}/>
+        );
+    }
+
+    showInfo() {
+        if (this.state.infoShown) {
+            return (
+                <Text> {this.getDesciption(this.state.standShown)} </Text>
+            );
+        }
+        return (
+            <Text> Select a Stand to see more Info </Text>
         );
     }
 
     componentWillMount(){
-        fetch("http://192.168.43.69:3001/send")
+        fetch("http://23.251.135.209:3001/send")
         .then(response => response.json())
         .then(responseJson => {
              this.setState({event: responseJson.data[0]}); 
@@ -57,8 +80,12 @@ class Event extends Component {
             </View>
             );
         else 
-            return (
-            this.drawPlan()
+            return (     
+            <>    
+                {this.drawPlan()}
+                {this.showInfo()} 
+                <Searchbar /> 
+            </>
             );
     }
 }

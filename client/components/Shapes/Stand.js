@@ -13,13 +13,10 @@ class Stand extends Component {
         this.strokeColor = props.strokeColor;
         this.strokeWidth = props.strokeWidth;
         this.state = {
+            handler: props.handler,
             isSelected: false,
             isOnMouse: false,
         };
-    }
-
-    getDescription() {
-        return 'Id:'+this.id+', Name: '+this.name;
     }
 
     render() {
@@ -30,8 +27,8 @@ class Stand extends Component {
                     fill={this.state.isSelected || this.state.isOnMouse ? this.onSelected : this.fillColor} //{this.fillColor} 
                     stroke={this.strokeColor} 
                     strokeWidth={this.strokeWidth}
-                    onPress={() => {this.setState({ isSelected: this.state.isSelected === true ? false : true })
-                                    alert(this.getDescription())}}
+                    onPress={() => {this.props.handler({id:this.props.id,
+                                                        name:this.props.name})}}
                     onMouseMove={() => {this.setState({ isOnMouse: true })}}
                     onMouseLeave={() => {this.setState({ isOnMouse: false })}}
                 />

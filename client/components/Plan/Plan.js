@@ -15,26 +15,25 @@ class Plan extends Component {
     constructor(props) {
         super(props);
         this.currFloor = props.currFloor;
-        console.log(this.currFloor);
         this.keywords = {};
         this.defStandColor = "#FFC27A";
         this.defStorkColor = "black";
+        this.state = {
+            handler: props.handler,
+        };
     }
 
-    getDesciption(s) {
-        return 'Id:'+s._id.$oid+', Name: '+s.name;
-    }
 
     drawStand(s) {
         // x && y to add later
         return (
-            <Stand id={s._id.$oid} name={s.name} d={s.path} fillColor={this.defStandColor} strokeColor={this.defStorkColor} strokeWidth={1} />
+            <Stand id={s._id} name={s.name} d={s.path} key={s._id} fillColor={this.defStandColor} strokeColor={this.defStorkColor} strokeWidth={1} handler={this.props.handler}/>
         );
     }
 
     drawWall(w) {
         return (
-            <Wall id={w._id.$oid} d={w.path} />
+            <Wall id={w._id} d={w.path} key={w._id}/>
         );
     }
 
