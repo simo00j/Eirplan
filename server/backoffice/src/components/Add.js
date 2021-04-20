@@ -2,6 +2,7 @@ import React from "react";
 import API from "../utils/API";
 
 
+import "./Add.css";
 export class Add extends React.Component{
     state ={
         name:"",
@@ -73,7 +74,7 @@ export class Add extends React.Component{
         </div> 
 
             <div className="form-group row">
-                <label htmlFor="eventname" className="col-sm-2 col-form-label">Event name</label>
+                <label htmlFor="Eventname" className="col-sm-2 col-form-label">Event name</label>
                 <div className="col-sm-10">
                     <input type="text" name="eventname" id="name" className="form-control "
                         aria-describedby="validationTooltipUsernamePrepend" required value={name} onChange={this.handleChange}>
@@ -82,7 +83,7 @@ export class Add extends React.Component{
             </div>
 
             <div className="form-group">
-                <label htmlFor="logopath">event logo path </label>
+                <label htmlFor="logopath">Event logo path </label>
                 <input type="file" name="logopath" className="form-control-file" id="logoEvent" value={logoEvent} onChange={this.handleChange}>
                 </input>            <div className="text-center">
                 <button  className="btn btn__primary btn__lg" > Add Floor</button>
@@ -90,20 +91,20 @@ export class Add extends React.Component{
             </div>
 
             <div className="form-group">
-                <label htmlFor="hostpath">host logo path</label>
+                <label htmlFor="hostpath">Host logo path    </label>
                 <input type="file" name="hostpath" className="form-control-file" id="logoHost" value={logoHost} onChange={this.handleChange}>
             </input>
             </div>
 
             <div className="form-group">
-                <label htmlFor="floorpath">floor paths</label>
+                <label htmlFor="floorpath">Floor paths  </label>
                 <input type="file" name="1" className="form-control-file" id="floor" value={floor} onChange={this.handleChange}>
             
             </input>
             
             </div>
 
-                <button  onClick={this.send} type="submit"  >submit</button>
+                <button  onClick={this.send} type="submit"  >Submit</button>
         
         </div>
         </form>

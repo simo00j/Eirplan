@@ -1,0 +1,50 @@
+body {
+    background-color: rgb(213, 231, 183);
+  }
+
+h1{
+    text-align: center;
+
+    color: black;
+
+    padding: 0px 0px 0;
+    font-size: 32px;
+    text-shadow: 2px 2px 0px green;
+
+}
+
+h2{
+    text-align: center;
+}
+
+
+input[type=file]{
+
+    background-color:gainsboro;
+    color: red;
+    box-shadow:1px 0px 1px #D83F3D inset;
+
+}
+
+label{
+    padding: 10px 10px 0;
+
+    color : rgb(22, 32, 6);
+    text-shadow: 1px 1px 1px rgb(71, 126, 25);
+
+}
+button{
+    height: 30px;
+    width: 50%;
+    border-top: solid #000 2px;
+    border-bottom: solid #000 2px;
+    border-left: solid #000 2px;
+    border-right: solid #000 2px;
+    background-color:rgb(71, 126, 25);
+    padding: 0px 0px 0;
+
+}
+.col-sm-10{
+    padding: 5px 10px 0;
+
+}

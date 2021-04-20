@@ -6,7 +6,7 @@ import { PrivateRoute } from "./components/PrivateRoute.js";
 import{Event} from "./components/Event";
 import{EventId} from "./components/EventId";
 
-import "./App.css";
+
 
 class App extends Component {
   render() {
