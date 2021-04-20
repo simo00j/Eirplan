@@ -1,7 +1,8 @@
 import React, {Component} from "react";
 import { Dimensions, View, Text } from "react-native";
 import Svg, {G, Circle} from "react-native-svg";
-
+import event from "./Svg";
+import WordCloud from "../WordCloud/WordCloud";
 
 import Plan from "../Plan/Plan";
 
@@ -40,8 +41,9 @@ class Event extends Component {
         );
     }
 
+    
     componentWillMount(){
-        fetch("http://192.168.43.69:3001/send")
+        fetch("http://192.168.122.1:3001/send")
         .then(response => response.json())
         .then(responseJson => {
              this.setState({event: responseJson.data[0]}); 
