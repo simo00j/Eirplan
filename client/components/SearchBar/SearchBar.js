@@ -3,6 +3,7 @@ import Styles from "../StyleSheet/Style";
 import { View } from 'react-native';
 import { SearchBar } from 'react-native-elements';
 
+
 let kw = ["info", "informatique", "mathématiques", "matmeca"]
 
 class Searchbar extends Component {
@@ -24,7 +25,7 @@ class Searchbar extends Component {
     var no_match = false;
     var len2 = keyword.length
     console.log(searchKw)
-    if (len2 <= len) {
+    if (len2 < len) {
       return false
     }
     while (len2 >= len && compt < len && no_match == false) {

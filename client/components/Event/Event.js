@@ -2,11 +2,13 @@ import React, {Component} from "react";
 import { Dimensions, View, Text } from "react-native";
 import Svg, {G, Circle} from "react-native-svg";
 import event from "./Svg";
-import WordCloud from "../WordCloud/WordCloud";
+//import WordCloud from "../WordCloud/WordCloud";
+import { Card, ListItem, Button, Icon } from 'react-native-elements';
 
+import Searchbar from '../SearchBar/SearchBar';
+
+import StandCard from '../StandCard/StandCard';
 import Plan from "../Plan/Plan";
-import Searchbar from "../SearchBar/SearchBar";
-
 class Event extends Component {
     constructor(props) {
         super(props);
@@ -23,7 +25,7 @@ class Event extends Component {
     OnPressStandHandler(s) {
         this.setState({infoShown: true});
         this.setState({standShown: s})
-    }
+    } 
 
     getFloor(_id) {
         let floor = null;
@@ -41,10 +43,28 @@ class Event extends Component {
         return floor;
         
     }
+    
+    buttonBackClickListener = () =>{        
+        this.setState({infoShown: false});
+    }
 
     getDesciption(s) {
-        return 'Id:'+s.id+', Name: '+s.name;
+        return (<Card>
+            <Card.Title>{s.name}</Card.Title>
+            <Card.Divider/>
+              <Text style={{marginBottom: 10}}> 
+              Responsable : {s.id}{/*"\n"}
+              Heure de début : {stand.start_hour}{"\n"}
+              Heure de fin : {stand.end_hour}{"\n"}
+        Mots-clés : {stand.keywords}{"\n"*/}
+              </Text>
+              <Button
+                buttonStyle={{borderRadius: 0, marginLeft: 0, marginRight: 0, marginBottom: 0}}
+                title='Back'
+                onPress={this.buttonBackClickListener} />
+          </Card>);
     }
+
 
     drawPlan() {
         let floor =this.getFloor(this.currentFloorId);
