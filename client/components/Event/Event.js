@@ -1,9 +1,11 @@
 import React, {Component} from "react";
-import { Dimensions, View, Text } from "react-native";
+import { View, Text } from "react-native";
+import { Card, Button } from 'react-native-elements';
 
 import WordCloud from "../WordCloud/WordCloud";
 import Plan from "../Plan/Plan";
 import Searchbar from "../SearchBar/SearchBar";
+// import StandCard from '../StandCard/StandCard';
 
 class Event extends Component {
     constructor(props) {
@@ -23,7 +25,7 @@ class Event extends Component {
     OnPressStandHandler(s) {
         this.setState({infoShown: true}); 
         this.setState({standShown: s})
-    }
+    } 
 
     OnPressKeyWordHandler(k) {
         this.setState({keyisChosen: true});
@@ -46,10 +48,28 @@ class Event extends Component {
         return floor;
         
     }
+    
+    buttonBackClickListener = () =>{        
+        this.setState({infoShown: false});
+    }
 
     getDesciption(s) {
-        return 'Id: '+s.id+', Name: '+s.name;
+        return (<Card>
+            <Card.Title>{s.name}</Card.Title>
+            <Card.Divider/>
+              <Text style={{marginBottom: 10}}> 
+              Responsable : {s.id}{/*"\n"}
+              Heure de début : {stand.start_hour}{"\n"}
+              Heure de fin : {stand.end_hour}{"\n"}
+        Mots-clés : {stand.keywords}{"\n"*/}
+              </Text>
+              <Button
+                buttonStyle={{borderRadius: 0, marginLeft: 0, marginRight: 0, marginBottom: 0}}
+                title='Back'
+                onPress={this.buttonBackClickListener} />
+          </Card>);
     }
+
 
     getKey(k) {
         return 'label: '+k.label+', iterations: '+k.frequency;
