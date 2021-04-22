@@ -1,9 +1,7 @@
 import React, {Component} from "react";
 import { Dimensions, View, Text } from "react-native";
-import Svg, {G, Circle} from "react-native-svg";
-import event from "./Svg";
-import WordCloud from "../WordCloud/WordCloud";
 
+import WordCloud from "../WordCloud/WordCloud";
 import Plan from "../Plan/Plan";
 import Searchbar from "../SearchBar/SearchBar";
 
@@ -15,14 +13,21 @@ class Event extends Component {
         this.state = {
             infoShown: false,
             standShown: undefined,
-            isLoading: true , 
+            isLoading: true,
+            keyisChosen: false,
+            keywordPressed: undefined,
             event:undefined 
         }
     }
 
     OnPressStandHandler(s) {
-        this.setState({infoShown: true});
+        this.setState({infoShown: true}); 
         this.setState({standShown: s})
+    }
+
+    OnPressKeyWordHandler(k) {
+        this.setState({keyisChosen: true});
+        this.setState({keywordPressed: k})
     }
 
     getFloor(_id) {
@@ -43,7 +48,11 @@ class Event extends Component {
     }
 
     getDesciption(s) {
-        return 'Id:'+s.id+', Name: '+s.name;
+        return 'Id: '+s.id+', Name: '+s.name;
+    }
+
+    getKey(k) {
+        return 'label: '+k.label+', iterations: '+k.frequency;
     }
 
     drawPlan() {
@@ -61,6 +70,17 @@ class Event extends Component {
         }
         return (
             <Text> Select a Stand to see more Info </Text>
+        );
+    }
+
+    showKeyWord() {
+        if (this.state.keyisChosen) {
+            return (
+                <Text> {this.getKey(this.state.keywordPressed)} </Text>
+            );
+        }
+        return (
+            <Text> Select a KeyWord to see more Info </Text>
         );
     }
 
@@ -87,6 +107,8 @@ class Event extends Component {
                 {this.drawPlan()}
                 {this.showInfo()} 
                 <Searchbar /> 
+                {this.showKeyWord()}
+                <WordCloud OnPressHandler={this.OnPressKeyWordHandler.bind(this)}/>
             </>
             );
     }
