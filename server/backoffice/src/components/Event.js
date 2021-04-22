@@ -1,5 +1,6 @@
 import React from "react";
 import API from "../utils/API";
+import "./Event.css";
 
 
 export class Event extends React.Component {
@@ -12,9 +13,9 @@ export class Event extends React.Component {
 
 
         return (
-            <div>
-                <h1> base added successfully </h1>
-                <h2> search by event id </h2>
+            <div className="Event">
+                <h1> Base added successfully </h1>
+                <h3> Search for the event  </h3>
                 <form   className="main-form">
                     <div className="form-group">
                         <label htmlFor="eventname">Event id :</label>

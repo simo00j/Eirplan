@@ -92,8 +92,8 @@ export class Add extends React.Component{
 
             <div className="form-group">
                 <label htmlFor="hostpath">Host logo path    </label>
-                <input type="file" name="hostpath" className="form-control-file" id="logoHost" value={logoHost} onChange={this.handleChange}>
-            </input>
+                    <input type="file" name="hostpath" className="form-control-file" id="logoHost" value={logoHost} onChange={this.handleChange}>
+                </input>
             </div>
 
             <div className="form-group">

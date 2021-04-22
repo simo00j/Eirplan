@@ -1,6 +1,7 @@
 import React from "react";
 import API from "../utils/API";
 
+import "./Home.css"
 
 export class Home extends React.Component{
 
@@ -10,10 +11,11 @@ export class Home extends React.Component{
     };
 render(){
     return (
-        <div>
-        <h1> BackOffice Interface </h1>
+        <div className="Home">
+        <h4> Back office Interface </h4>
+
         <form method="GET" action="/add">
-          <button type="submit">add an event</button>
+          <button type="Add">Add an event</button>
         </form>
         </div>
         );

@@ -1,7 +1,6 @@
 body {
-    background-color: rgb(213, 231, 183);
-  }
-
+    background-color:rgb(188, 238, 188);
+}
 h1{
     text-align: center;
 
@@ -9,7 +8,7 @@ h1{
 
     padding: 0px 0px 0;
     font-size: 32px;
-    text-shadow: 2px 2px 0px green;
+    text-shadow: 2px 2px 0px blanchedalmond;
 
 }
 
@@ -28,23 +27,30 @@ input[type=file]{
 
 label{
     padding: 10px 10px 0;
-
     color : rgb(22, 32, 6);
     text-shadow: 1px 1px 1px rgb(71, 126, 25);
 
 }
 button{
+    padding-bottom:0px; 
     height: 30px;
-    width: 50%;
+    width: 30%;
+    
     border-top: solid #000 2px;
     border-bottom: solid #000 2px;
     border-left: solid #000 2px;
     border-right: solid #000 2px;
-    background-color:rgb(71, 126, 25);
-    padding: 0px 0px 0;
-
+    color:beige;
+    background-color:rgb(63, 97, 39);
+    position:relative; 
+    left:4%;
 }
 .col-sm-10{
-    padding: 5px 10px 0;
+    padding: 4px 20px 1px;
+    position:relative; 
+    left:4%;
+}
+.form-group{
+    padding: 0px 0px 10px ;
 
 }
