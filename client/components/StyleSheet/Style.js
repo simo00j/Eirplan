@@ -5,7 +5,7 @@ const Styles = StyleSheet.create ({
     container: {
         flex: 1,
         flexDirection: "column",
-        backgroundColor: '#fff',
+        backgroundColor: '#3c3c3c',
         alignItems: 'center',
         justifyContent: 'space-around',
       },
@@ -16,7 +16,7 @@ const Styles = StyleSheet.create ({
     },
 
     layer: {
-        backgroundColor: 'white',
+        backgroundColor: '#3c3c3c',
         flex: 1,
         justifyContent: "center",
         alignItems: "center",
@@ -46,12 +46,18 @@ const Styles = StyleSheet.create ({
         backgroundColor: "#000000a0"
     },
     background: {
+        color: '#3c3c3c',
         flex: 1,
         resizeMode: "cover",
         justifyContent: "center"
       },
     searchbar: { 
+        backgroundColor: '#fff',
         paddingHorizontal:100, 
+    },
+
+    wordcloud: {
+
     },
 })
 

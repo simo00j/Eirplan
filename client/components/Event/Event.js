@@ -5,6 +5,7 @@ import { Card, Button } from 'react-native-elements';
 import WordCloud from "../WordCloud/WordCloud";
 import Plan from "../Plan/Plan";
 import Searchbar from "../SearchBar/SearchBar";
+import Styles from "../StyleSheet/Style"
 // import StandCard from '../StandCard/StandCard';
 
 class Event extends Component {
@@ -117,19 +118,19 @@ class Event extends Component {
         const {isLoading,event} = this.state;
         if(isLoading)
             return (
-            <View>
+            <View style={Styles.layer}>
                 <Text >Loading...</Text>
             </View>
             );
         else 
             return (     
-            <>    
+            <View style={Styles.layer}>    
                 {this.drawPlan()}
                 {this.showInfo()} 
                 <Searchbar /> 
                 {this.showKeyWord()}
                 <WordCloud OnPressHandler={this.OnPressKeyWordHandler.bind(this)}/>
-            </>
+            </View>
             );
     }
 }
