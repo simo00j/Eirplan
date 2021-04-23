@@ -39,7 +39,7 @@ class Plan extends Component {
 
     render() {
         return (
-          <View style={Styles.layer}   onStartShouldSetResponder={() => true}>
+          <View onStartShouldSetResponder={() => true}>
             <Svg
               width={width}
               height={height}

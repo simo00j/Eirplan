@@ -1,16 +1,20 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import {View} from 'react-native';
+import {Dimensions, View} from 'react-native';
 import Canvas from 'react-native-canvas';
 import {Svg, Circle, G} from 'react-native-svg';
 import { generateCircles, calcPositions, drawCirclesOnCanvas } from './utils';
+
+
+const width = Dimensions.get("window").width;
+const height = Dimensions.get("window").height;
 
 class KeywordsCloud extends React.Component {
 
   constructor(props) {
     super(props);
     const { keywords,scale, largestAtCenter, drawContainerCircle,containerCircleColor } = this.props;
-    const center = { x: 300 / 2, y: 300 / 2 };
+    const center = { x: width/2, y: height/4 };
     const circles = generateCircles(
         keywords, center, scale, largestAtCenter);
     calcPositions(circles);
@@ -26,8 +30,8 @@ class KeywordsCloud extends React.Component {
   handleCanvas = (canvas) => {
     const { keywords,scale, largestAtCenter, drawContainerCircle,containerCircleColor } = this.props;
     if (canvas) {
-      canvas.width = 300 
-      canvas.height = 300 
+      canvas.width = width
+      canvas.height = height
       drawCirclesOnCanvas(this.state.circles, canvas, drawContainerCircle, containerCircleColor);
     }
   }
@@ -35,10 +39,10 @@ class KeywordsCloud extends React.Component {
   render() { 
     return (
       <View>
-        <View style={{justifyContent:'center',alignItems:'center', width:300, height:300}}>
+        <View style={{justifyContent:'center',alignItems:'center', width:width, height:height}}>
           <Canvas ref={canvas => {this.handleCanvas(canvas);}} />
         </View>
-        <View style={{justifyContent:'center',alignItems:'center',position: 'absolute', width:300, height:300}}>
+        <View style={{justifyContent:'center',alignItems:'center',position: 'absolute', width:width, height:height}}>
           <Svg>
             <G category="Wall"> 
               {this.state.circles.map((c) => {

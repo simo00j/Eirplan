@@ -2,33 +2,64 @@ import { StyleSheet } from "react-native";
 
 
 const Styles = StyleSheet.create ({
-    container: {
-        flex: 1,
+    cardViewContainer: {
+        flex: 0,
         flexDirection: "column",
-        backgroundColor: '#3c3c3c',
+        backgroundColor: '#696969',
         alignItems: 'center',
         justifyContent: 'space-around',
       },
+    cardContainer:{
+        flex: 1,
+        flexDirection: "column",
+        backgroundColor: '#ffe4c4',
+        alignItems: 'center',
+        justifyContent: 'space-around'
+    },
+    keywordContainer: {
+        flex: 1,
+        backgroundColor: '#696969',
+        alignItems: 'center',        
+        justifyContent: 'space-around',
+        paddingHorizontal: '100%',
+        maxHeight:'50%'
+      },
+    container: {
+        flex: 1,
+        flexDirection: "column",
+        backgroundColor: '#696969',
+        alignItems: 'center',
+        justifyContent: 'space-around',
+      },
+    listContainer:{
+        flex: 1,
+        flexDirection: "column",
+        alignItems: 'center',
+        justifyContent: 'space-around',
+    },
     header: {
         flex: 1,
         justifyContent: "space-around",
         flexDirection: "row",
     },
-
     layer: {
-        backgroundColor: '#3c3c3c',
+        backgroundColor: '#696969',
         flex: 1,
-        justifyContent: "center",
         alignItems: "center",
+        
     },
     searchView: {
-        // paddingTop: windowHeight/20,
-        // paddingBottom: windowHeight/20,
-        // paddingHorizontal: windowWidth/5,
-        justifyContent: "center",
-        alignItems: "center",
         flex: 1,
-    },  
+        flexDirection: "column",
+        backgroundColor: '#696969',
+        alignItems: 'center',
+        justifyContent: 'space-around',
+        maxHeight:'9%'
+    }, 
+    listView : {
+        backgroundColor: '#696969',
+        maxHeight:'20%'
+    }, 
     stand: {
         flex: 1,
         justifyContent: "center",
@@ -46,19 +77,11 @@ const Styles = StyleSheet.create ({
         backgroundColor: "#000000a0"
     },
     background: {
-        color: '#3c3c3c',
+        color: '#696969',
         flex: 1,
         resizeMode: "cover",
         justifyContent: "center"
       },
-    searchbar: { 
-        backgroundColor: '#fff',
-        paddingHorizontal:100, 
-    },
-
-    wordcloud: {
-
-    },
 })
 
 

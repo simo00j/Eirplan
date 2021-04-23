@@ -1,20 +1,19 @@
 import React, { Component } from 'react';
 import Styles from "../StyleSheet/Style";
 import { View } from 'react-native';
-import { SearchBar } from 'react-native-elements';
+import { SearchBar, ListItem, Text } from 'react-native-elements';
 
 
-let kw = ["info", "informatique", "mathématiques", "matmeca"]
+const kw = [{name:"info"}, {name: "informatique"}, {name: "mathématiques"}, {name: "matmeca"}]
 
 class Searchbar extends Component {
-  state = {
-    search: '',
-    keywords: [],
-  };
-
 
   constructor(props) {
-    super(props)
+    super(props);
+    this.state = {
+      search: '',
+      keywords: []
+    }
   }
 
   searchMatch(keyword) {
@@ -23,13 +22,12 @@ class Searchbar extends Component {
     var compt = 0;
     var fautes = 0;
     var no_match = false;
-    var len2 = keyword.length
-    console.log(searchKw)
-    if (len2 < len) {
+    var len2 = keyword.name.length
+    if (len2 < len || len==0) {
       return false
     }
     while (len2 >= len && compt < len && no_match == false) {
-      if (keyword[compt] != searchKw[compt]) {
+      if (keyword.name[compt] != searchKw[compt]) {
         if (fautes > 1 || len < 3) {
           no_match = true
         }
@@ -47,25 +45,48 @@ class Searchbar extends Component {
 
   searchKeyword() {
     var final_list = kw.filter(item => this.searchMatch(item))
-    this.setState(() => ({ keywords: final_list }), () => { console.log(this.state.keywords) });
+    this.setState(() => ({ keywords: final_list}));
   };
+
+  OnPressKeyWordHandler(k) {
+    alert(k.name)
+}
+  displayList(){
+    if(this.state.keywords.length>0){
+      return <View>
+        {this.state.keywords.map((l, i) => (
+              <ListItem key={i}  containerStyle={{backgroundColor: '#ffe4c4'}} bottomDivider onPress={() => {this.OnPressKeyWordHandler(l);}}>
+                  <ListItem.Content>
+                      <ListItem.Title>{l.name}</ListItem.Title>
+                  </ListItem.Content>
+              </ListItem>
+          ))
+      }
+      </View>
+    }
+  }
 
   updateSearch = (search) => {
     this.setState(() => ({search}), () => {this.searchKeyword()})
   };
 
-
-  render() {
+  showSearchbar(){
     const { search } = this.state;
     return (
-      <View style={Styles.container}>
-        <SearchBar style={Styles.searchbar}
-          placeholder="Search..."
-          onChangeText={this.updateSearch}
-          value={search}
-          placeholderTextColor={"black"}
-          platform="android"
-        />
+    <SearchBar
+    placeholder="Search..."
+    onChangeText={this.updateSearch}
+    value={search}
+    placeholderTextColor={"black"}
+    platform="android"
+    containerStyle={Styles.searchView}
+  />)
+  }
+  render() {
+    return (
+      <View style={Styles.listView}>
+        <Text>{this.showSearchbar()}</Text>
+        <Text>{this.displayList()}</Text>
       </View>
     )
   }

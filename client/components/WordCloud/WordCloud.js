@@ -1,7 +1,12 @@
 import React, { Component } from 'react';
 import KeywordsCloud from "./lib/cloud";
 import randomColor from 'randomcolor';
+import {Dimensions, View} from "react-native";
+import Styles from '../StyleSheet/Style';
 
+
+const width = Dimensions.get("window").width;
+const height = Dimensions.get("window").height;
 
 //Temporaire
 
@@ -51,28 +56,63 @@ const keywordsArray = [
         frequency: 10,      // the frequency of this keyword
         color: randomColor({
                 luminosity: 'dark',
-                hue: 'red'})     // the color of the circle that shows this keyword
+                hue: '#ffe4c4'})     // the color of the circle that shows this keyword
     },
     {
         keyword: "word2",    // the actual keyword
         frequency: 20,      // the frequency of this keyword
         color: randomColor({
             luminosity: 'dark',
-            hue: 'red'})     // the color of the circle that shows this keyword
+            hue: '#ffe4c4'})     // the color of the circle that shows this keyword
     },
     {
         keyword: "word3",    // the actual keyword
         frequency: 30,      // the frequency of this keyword
         color: randomColor({
                 luminosity: 'dark',
-                hue: 'red'})     // the color of the circle that shows this keyword
+                hue: '#ffe4c4'})     // the color of the circle that shows this keyword
     },
     {
         keyword: "word4",    // the actual keyword
         frequency: 15,      // the frequency of this keyword
         color: randomColor({
             luminosity: 'dark',
-            hue: 'red'})     // the color of the circle that shows this keyword
+            hue: '#ffe4c4'})     // the color of the circle that shows this keyword
+    },
+    {
+        keyword: "word5",    // the actual keyword
+        frequency: 15,      // the frequency of this keyword
+        color: randomColor({
+            luminosity: 'dark',
+            hue: '#ffe4c4'})     // the color of the circle that shows this keyword
+    },
+    {
+        keyword: "word6",    // the actual keyword
+        frequency: 15,      // the frequency of this keyword
+        color: randomColor({
+            luminosity: 'dark',
+            hue: '#ffe4c4'})     // the color of the circle that shows this keyword
+    },
+    {
+        keyword: "word7",    // the actual keyword
+        frequency: 15,      // the frequency of this keyword
+        color: randomColor({
+            luminosity: 'dark',
+            hue: '#ffe4c4'})     // the color of the circle that shows this keyword
+    },
+    {
+        keyword: "word8",    // the actual keyword
+        frequency: 15,      // the frequency of this keyword
+        color: randomColor({
+            luminosity: 'dark',
+            hue: '#ffe4c4'})     // the color of the circle that shows this keyword
+    },
+    {
+        keyword: "word9",    // the actual keyword
+        frequency: 15,      // the frequency of this keyword
+        color: randomColor({
+            luminosity: 'dark',
+            hue: '#ffe4c4'})     // the color of the circle that shows this keyword
     }
 ]
 
@@ -130,14 +170,16 @@ class WordCloud extends Component {
     //method inputkeyword ?
 
     render() {
-        return ( <KeywordsCloud 
+        return ( <View style={Styles.keywordContainer}>
+        <KeywordsCloud 
                     keywords={keywordsArray} 
-                    scale={200} 
+                    scale={height/2.5}
                     largestAtCenter={true} 
                     drawContainerCircle={false} 
                     containerCircleColor={'#345678'}
                     handler={this.props.OnPressHandler}
                     />
+                </View>
         )
     }
 

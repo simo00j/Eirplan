@@ -1,13 +1,31 @@
-import React, {Component} from "react";
+import React, { Component } from "react";
 import { View, Text } from "react-native";
-import { Card, Button } from 'react-native-elements';
+import { Card, Button, ListItem } from 'react-native-elements';
 
 import WordCloud from "../WordCloud/WordCloud";
 import Plan from "../Plan/Plan";
 import Searchbar from "../SearchBar/SearchBar";
 import Styles from "../StyleSheet/Style"
 // import StandCard from '../StandCard/StandCard';
+const list = [
+    {
+        name: 'Amy Farha',
+        id: 'Vice President'
+    },
+    {
+        name: 'Chris Jackson',
+        id: 'Vice Chairman'
+    },
+    {
+        name: 'Chris Jacon',
+        id: 'Vice'
+    },
+    {
+        name: 'Chris Jackson',
+        id: 'Vice Chairman'
+    }
 
+]
 class Event extends Component {
     constructor(props) {
         super(props);
@@ -19,67 +37,89 @@ class Event extends Component {
             isLoading: true,
             keyisChosen: false,
             keywordPressed: undefined,
-            event:undefined 
+            event: undefined
         }
     }
 
     OnPressStandHandler(s) {
-        this.setState({infoShown: true}); 
-        this.setState({standShown: s})
-    } 
+        this.setState({ infoShown: true });
+        this.setState({ standShown: s })
+    }
 
     OnPressKeyWordHandler(k) {
-        this.setState({keyisChosen: true});
-        this.setState({keywordPressed: k})
+        this.setState({ keyisChosen: true });
+        this.setState({ keywordPressed: k })
     }
 
+    OnPressCompanyHandler(k) {
+        this.setState({ infoShown: true });
+        this.setState({ standShown: k})
+    }
     getFloor(_id) {
         let floor = null;
-        if(_id == null)
-            floor=this.state.event.floors[0]
-        else
-        {
-        for (let f of this.state.event.floors) {
-            if (f._id === _id) {
-                floor = f;
-                break;
+        if (_id == null)
+            floor = this.state.event.floors[0]
+        else {
+            for (let f of this.state.event.floors) {
+                if (f._id === _id) {
+                    floor = f;
+                    break;
+                }
             }
         }
-        }   
         return floor;
-        
+
     }
-    
-    buttonBackClickListener = () =>{        
-        this.setState({infoShown: false});
+
+    buttonBackClickListener = () => {
+        this.setState({ infoShown: false });
+    }
+
+    buttonBackkwClickListener = () => {
+        this.setState({ keyisChosen: false });
     }
 
     getDesciption(s) {
-        return (<Card>
-            <Card.Title>{s.name}</Card.Title>
-            <Card.Divider/>
-              <Text style={{marginBottom: 10}}> 
-              Responsable : {s.id}{/*"\n"}
+        return (
+            <Card containerStyle={Styles.cardContainer}>
+                <Card.Title>{s.name}</Card.Title>
+                <Card.Divider />
+                <Text style={{ marginBottom: 10 }}>
+                    Responsable : {s.id}{/*"\n"}
               Heure de début : {stand.start_hour}{"\n"}
               Heure de fin : {stand.end_hour}{"\n"}
         Mots-clés : {stand.keywords}{"\n"*/}
-              </Text>
-              <Button
-                buttonStyle={{borderRadius: 0, marginLeft: 0, marginRight: 0, marginBottom: 0}}
-                title='Back'
-                onPress={this.buttonBackClickListener} />
-          </Card>);
+                </Text>
+                <Button
+                    buttonStyle={{ borderRadius: 0, marginLeft: 0, marginRight: 0, marginBottom: 0, backgroundColor: '#deb887' }}
+                    title='Back'
+                    onPress={this.buttonBackClickListener} />
+            </Card>);
     }
 
 
     getKey(k) {
-        return 'label: '+k.label+', iterations: '+k.frequency;
+        return <View>
+            {
+                list.map((l, i) => (
+                    <ListItem key={i}  containerStyle={{backgroundColor: '#ffe4c4'}} bottomDivider  onPress={() => {this.OnPressCompanyHandler(l);}} >
+                        <ListItem.Content>
+                            <ListItem.Title>{l.name}</ListItem.Title>
+                        </ListItem.Content>
+                    </ListItem>
+                ))
+            }
+            <Button
+                buttonStyle={{ borderRadius: 0, marginLeft: 0, marginRight: 0, marginBottom: 0, backgroundColor: '#deb887' }}
+                title='Back'
+                onPress={this.buttonBackkwClickListener} />
+        </View>
     }
 
     drawPlan() {
-        let floor =this.getFloor(this.currentFloorId);
+        let floor = this.getFloor(this.currentFloorId);
         return (
-            <Plan currFloor={floor} handler={this.OnPressStandHandler.bind(this)}/>
+            <Plan currFloor={floor} handler={this.OnPressStandHandler.bind(this)} />
         );
     }
 
@@ -90,7 +130,9 @@ class Event extends Component {
             );
         }
         return (
-            <Text> Select a Stand to see more Info </Text>
+            <View style={Styles.cardViewContainer}>
+                <Text> Select a Stand to see more Info </Text>
+            </View>
         );
     }
 
@@ -101,36 +143,44 @@ class Event extends Component {
             );
         }
         return (
-            <Text> Select a KeyWord to see more Info </Text>
+            <View style={{alignItems: 'center'}}>
+            <Text > Select a KeyWord to see more Info </Text>
+            {this.showWordCloud()}
+            </View>
         );
     }
 
-    
-    componentWillMount(){
+    showWordCloud(){
+        return <WordCloud OnPressHandler={this.OnPressKeyWordHandler.bind(this)} />
+    }
+
+    showSearchbar(){
+        return <Searchbar/>
+    }
+    componentWillMount() {
         fetch("http://23.251.135.209:3001/send")
-        .then(response => response.json())
-        .then(responseJson => {
-             this.setState({event: responseJson.data[0]}); 
-             this.setState({isLoading: false});
-       }).catch(err=> {console.log(err)})
+            .then(response => response.json())
+            .then(responseJson => {
+                this.setState({ event: responseJson.data[0] });
+                this.setState({ isLoading: false });
+            }).catch(err => { console.log(err) })
     }
     render() {
-        const {isLoading,event} = this.state;
-        if(isLoading)
+        const { isLoading, event } = this.state;
+        if (isLoading)
             return (
-            <View style={Styles.layer}>
-                <Text >Loading...</Text>
-            </View>
+                <View style={Styles.layer}>
+                    <Text >Loading...</Text>
+                </View>
             );
-        else 
-            return (     
-            <View style={Styles.layer}>    
-                {this.drawPlan()}
-                {this.showInfo()} 
-                <Searchbar /> 
-                {this.showKeyWord()}
-                <WordCloud OnPressHandler={this.OnPressKeyWordHandler.bind(this)}/>
-            </View>
+        else
+            return (
+                <View style={Styles.layer}>
+                    {this.drawPlan()}
+                    {this.showInfo()}
+                    {this.showSearchbar()}
+                    {this.showKeyWord()}
+                </View>
             );
     }
 }
