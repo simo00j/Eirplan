@@ -44,13 +44,15 @@ class Plan extends Component {
     drawUpArrow() {
         if (this.props.showUpArr)
             return (
+                <View style={Styles.bottomFloor}>
                 <Pressable onPress={() => this.state.upHandler()}>
-                    <FontAwesomeIcon icon={faAngleUp} size={250}/>
+                    <FontAwesomeIcon icon={faAngleUp} size={width/4}/>
                 </Pressable>
+                </View>
             );
         else 
             return (
-                <FontAwesomeIcon icon={faAngleUp} size={250} color="transparent"/>
+                <FontAwesomeIcon icon={faAngleUp} size={width/4} color="transparent"/>
             );
     }
 
@@ -58,19 +60,19 @@ class Plan extends Component {
         if (this.props.showDownArr)
             return (
                 <Pressable onPress={() => this.state.downHandler()}>
-                    <FontAwesomeIcon icon={faAngleDown} size={250}/>
+                    <FontAwesomeIcon icon={faAngleDown} size={width/4}/>
                 </Pressable>
             );
         else 
             return (
-                <FontAwesomeIcon icon={faAngleDown} size={250} color="transparent"/>
+                <FontAwesomeIcon icon={faAngleDown} size={width/4} color="transparent"/>
             );
     }
 
     render() {
         return (
           <View style={{flexDirection:'row',alignItems:'center',alignContent:'center'}}>
-            <View style={{alignItems:'center'}} onStartShouldSetResponder={() => true}>
+            <View style={{flex: 4, alignItems:'center'}} onStartShouldSetResponder={() => true}>
                 <Svg
                 width={width}
                 height={height}
@@ -93,9 +95,9 @@ class Plan extends Component {
                     </G>
                 </Svg>
             </View>
-            <View style={{flexDirection:'column',alignItems:'center',justifyContent:'space-around'}}>
+            <View style={{flex: 1, flexDirection:'column', alignItems:'center',justifyContent:'space-around'}}>
                 {this.drawUpArrow()}
-                <Text style={{fontSize:50}}> {this.props.floorId} </Text>
+                <Text style={Styles.buttonFloor}> {this.props.floorId} </Text>
                 {this.drawDownArrow()}
             </View> 
           </View>

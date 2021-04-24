@@ -11,7 +11,8 @@ const Styles = StyleSheet.create ({
         height:200
     },
     planStyle:{
-        flex:3,        
+        flex:3, 
+        flexDirection:'row'
     },
     bottomStyle:{
         flex:6,            
@@ -102,7 +103,9 @@ const Styles = StyleSheet.create ({
         letterSpacing: 1,
         padding: 40,
     },
-
+    buttonFloor:{
+        fontSize: RFPercentage(4),
+    },
     tinyLogo: {
         width: "15%",
         height: "60%",
