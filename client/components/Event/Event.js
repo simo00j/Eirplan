@@ -141,7 +141,9 @@ class Event extends Component {
     drawPlan() {
         let floor = this.getFloor(this.state.currentFloorId);
         return (
-            <Plan currFloor={floor} floorId={this.state.currentFloorId} showUpArr={this.state.showUpArr} showDownArr={this.state.showDownArr} upHandler={this.OnPressChangeFloorUp.bind(this)} downHandler={this.OnPressChangeFloorDown.bind(this)} handler={this.OnPressStandHandler.bind(this)} />
+            <View style={Styles.planContainer}>
+            <Plan currFloor={floor} handler={this.OnPressStandHandler.bind(this)} />
+            </View>
         );
     }
 
@@ -152,7 +154,7 @@ class Event extends Component {
             );
         }
         return (
-            <View style={Styles.cardViewContainer}>
+            <View>
                 <Text> Select a Stand to see more Info </Text>
             </View>
         );
@@ -204,10 +206,18 @@ class Event extends Component {
             return (
                 <View style={Styles.layer}>
                     {this.showHeader()}
-                    {this.drawPlan()}
-                    {this.showInfo()}
-                    {this.showSearchbar()}
-                    {this.showKeyWord()}
+                    <View style={Styles.planStyle}>
+                        {this.drawPlan()}
+                    </View>                    
+                    <View style={Styles.bottomStyle}>
+                        <View style={Styles.cardStyle}>
+                            {this.showInfo()}                    
+                            {this.showSearchbar()} 
+                        </View>                   
+                        <View style={Styles.kwStyle}>
+                            {this.showKeyWord()}
+                        </View>
+                    </View>
                 </View>
             );
     }
