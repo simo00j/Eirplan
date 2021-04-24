@@ -142,7 +142,7 @@ class Event extends Component {
         let floor = this.getFloor(this.state.currentFloorId);
         return (
             <View style={Styles.planContainer}>
-            <Plan currFloor={floor} handler={this.OnPressStandHandler.bind(this)} />
+                <Plan currFloor={floor} floorId={this.state.currentFloorId} showUpArr={this.state.showUpArr} showDownArr={this.state.showDownArr} upHandler={this.OnPressChangeFloorUp.bind(this)} downHandler={this.OnPressChangeFloorDown.bind(this)} handler={this.OnPressStandHandler.bind(this)} />
             </View>
         );
     }

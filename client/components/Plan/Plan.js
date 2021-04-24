@@ -2,7 +2,7 @@ import React, {Component} from "react";
 import { Dimensions, View, Text, Pressable } from "react-native";
 import { FontAwesomeIcon } from "@fortawesome/react-native-fontawesome"; 
 import { faAngleDown, faAngleUp } from "@fortawesome/free-solid-svg-icons"; 
-import Svg, {G, Circle} from "react-native-svg";
+import Svg, {G} from "react-native-svg";
 import Styles from "../StyleSheet/Style";
 import Stand from "../Shapes/Stand";
 import Wall from "../Shapes/Wall";
@@ -56,15 +56,15 @@ class Plan extends Component {
 
     drawDownArrow() {
         if (this.props.showDownArr)
-        return (
-            <Pressable onPress={() => this.state.downHandler()}>
-                <FontAwesomeIcon icon={faAngleDown} size={250}/>
-            </Pressable>
-        );
-    else 
-        return (
-            <FontAwesomeIcon icon={faAngleDown} size={250} color="transparent"/>
-        );
+            return (
+                <Pressable onPress={() => this.state.downHandler()}>
+                    <FontAwesomeIcon icon={faAngleDown} size={250}/>
+                </Pressable>
+            );
+        else 
+            return (
+                <FontAwesomeIcon icon={faAngleDown} size={250} color="transparent"/>
+            );
     }
 
     render() {
