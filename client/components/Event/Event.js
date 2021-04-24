@@ -1,11 +1,12 @@
 import React, { Component } from "react";
-import { View, Text } from "react-native";
+import { View, Text} from "react-native";
 import { Card, Button, ListItem } from 'react-native-elements';
 
 import WordCloud from "../WordCloud/WordCloud";
 import Plan from "../Plan/Plan";
 import Searchbar from "../SearchBar/SearchBar";
-import Styles from "../StyleSheet/Style"
+import Styles from "../StyleSheet/Style";
+import Header from "../Header/Header";
 // import StandCard from '../StandCard/StandCard';
 const list = [
     {
@@ -157,6 +158,10 @@ class Event extends Component {
     showSearchbar(){
         return <Searchbar/>
     }
+
+    showHeader(){
+        return <Header/>
+    }
     componentWillMount() {
         fetch("http://23.251.135.209:3001/send")
             .then(response => response.json())
@@ -176,6 +181,7 @@ class Event extends Component {
         else
             return (
                 <View style={Styles.layer}>
+                    {this.showHeader()}
                     {this.drawPlan()}
                     {this.showInfo()}
                     {this.showSearchbar()}

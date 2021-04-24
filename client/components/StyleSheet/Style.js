@@ -82,6 +82,26 @@ const Styles = StyleSheet.create ({
         resizeMode: "cover",
         justifyContent: "center"
       },
+
+    header: {
+        width: '100%',
+        flex: 1,    
+        flexDirection: 'row',
+        alignItems: 'center',
+    },
+
+    headerText: {
+        fontWeight: 'bold',
+        fontSize: 20,
+        color: '#333',
+        letterSpacing: 1,
+        padding: 40,
+    },
+
+    tinyLogo: {
+        width: 60,
+        height: 60,
+      },
 })
 
 
