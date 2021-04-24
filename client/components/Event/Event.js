@@ -1,12 +1,12 @@
 import React, { Component } from "react";
 import { View, Text} from "react-native";
-import { Card, Button, ListItem } from 'react-native-elements';
-
+import { Card, Button, ListItem, ThemeConsumer } from 'react-native-elements';
 import WordCloud from "../WordCloud/WordCloud";
 import Plan from "../Plan/Plan";
 import Searchbar from "../SearchBar/SearchBar";
 import Styles from "../StyleSheet/Style";
 import Header from "../Header/Header";
+import Loader from "../Loader/Loader";
 // import StandCard from '../StandCard/StandCard';
 const list = [
     {
@@ -30,16 +30,40 @@ const list = [
 class Event extends Component {
     constructor(props) {
         super(props);
-        this.currFloor = null;
-        this.currentFloorId = null;
         this.state = {
+            currentFloorId: 0,
             infoShown: false,
             standShown: undefined,
             isLoading: true,
             keyisChosen: false,
             keywordPressed: undefined,
+            showUpArr:true,
+            showDownArr:false,
             event: undefined
         }
+    }
+
+    OnPressChangeFloorUp() {
+        if (this.state.currentFloorId < this.state.event.floors.length - 1) {
+            this.setState({currentFloorId:this.state.currentFloorId+1});
+            this.setState({showUpArr:true, showDownArr:true});
+        }
+        else {
+            this.setState({currentFloorId:this.state.currentFloorId+1});
+            this.setState({showUpArr:false, showDownArr:true});
+        }
+    }
+
+    OnPressChangeFloorDown() {
+        if (this.state.currentFloorId > 1) {
+            this.setState({currentFloorId:this.state.currentFloorId-1});
+            this.setState({showUpArr:true, showDownArr:true});
+        }
+        else {
+            this.setState({currentFloorId:this.state.currentFloorId-1});
+            this.setState({showUpArr:true, showDownArr:false});
+        }
+
     }
 
     OnPressStandHandler(s) {
@@ -56,17 +80,14 @@ class Event extends Component {
         this.setState({ infoShown: true });
         this.setState({ standShown: k})
     }
+
     getFloor(_id) {
         let floor = null;
-        if (_id == null)
-            floor = this.state.event.floors[0]
-        else {
-            for (let f of this.state.event.floors) {
-                if (f._id === _id) {
-                    floor = f;
-                    break;
-                }
-            }
+        if (_id == null) {
+            floor = this.state.event.floors[0];
+            this.setState({currentFloorId: 0});
+        } else {
+            floor = this.state.event.floors[_id];
         }
         return floor;
 
@@ -118,9 +139,9 @@ class Event extends Component {
     }
 
     drawPlan() {
-        let floor = this.getFloor(this.currentFloorId);
+        let floor = this.getFloor(this.state.currentFloorId);
         return (
-            <Plan currFloor={floor} handler={this.OnPressStandHandler.bind(this)} />
+            <Plan currFloor={floor} floorId={this.state.currentFloorId} showUpArr={this.state.showUpArr} showDownArr={this.state.showDownArr} upHandler={this.OnPressChangeFloorUp.bind(this)} downHandler={this.OnPressChangeFloorDown.bind(this)} handler={this.OnPressStandHandler.bind(this)} />
         );
     }
 
@@ -170,12 +191,13 @@ class Event extends Component {
                 this.setState({ isLoading: false });
             }).catch(err => { console.log(err) })
     }
+
     render() {
-        const { isLoading, event } = this.state;
+        const { isLoading } = this.state;
         if (isLoading)
             return (
-                <View style={Styles.layer}>
-                    <Text >Loading...</Text>
+                <View style={Styles.loader}>
+                    <Loader/>    
                 </View>
             );
         else

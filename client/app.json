@@ -25,6 +25,12 @@
         "backgroundColor": "#FFFFFF"
       }
     },
+    "androidNavigationBar": {
+      "visible": "immersive"
+    },
+    "androidStatusBar":{
+      "hidden": true
+    },
     "web": {
       "favicon": "./assets/favicon.png"
     }

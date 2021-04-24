@@ -2,18 +2,21 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import {Dimensions, View} from 'react-native';
 import Canvas from 'react-native-canvas';
-import {Svg, Circle, G} from 'react-native-svg';
+import {Svg, Circle} from 'react-native-svg';
 import { generateCircles, calcPositions, drawCirclesOnCanvas } from './utils';
 
-
+const MARGIN = 0;
 const width = Dimensions.get("window").width;
 const height = Dimensions.get("window").height;
+
+console.log(width)
+console.log(height)
 
 class KeywordsCloud extends React.Component {
 
   constructor(props) {
     super(props);
-    const { keywords,scale, largestAtCenter, drawContainerCircle,containerCircleColor } = this.props;
+    const { keywords,scale, largestAtCenter } = this.props;
     const center = { x: width/2, y: height/4 };
     const circles = generateCircles(
         keywords, center, scale, largestAtCenter);
@@ -28,7 +31,7 @@ class KeywordsCloud extends React.Component {
   }
 
   handleCanvas = (canvas) => {
-    const { keywords,scale, largestAtCenter, drawContainerCircle,containerCircleColor } = this.props;
+    const { drawContainerCircle, containerCircleColor } = this.props;
     if (canvas) {
       canvas.width = width
       canvas.height = height
@@ -38,19 +41,17 @@ class KeywordsCloud extends React.Component {
 
   render() { 
     return (
-      <View>
-        <View style={{justifyContent:'center',alignItems:'center', width:width, height:height}}>
+      <View >
+        <View style={{justifyContent:'center',alignItems:'center',width:width, height:height}}>
           <Canvas ref={canvas => {this.handleCanvas(canvas);}} />
         </View>
-        <View style={{justifyContent:'center',alignItems:'center',position: 'absolute', width:width, height:height}}>
-          <Svg>
-            <G category="Wall"> 
+        <View style={{position: 'absolute'}} >
+          <Svg width={width} height={height}>
               {this.state.circles.map((c) => {
                 return (
-                  <Circle cx={c.x} cy={c.y} key={c.label} r={c.size} color="transparent" onPress={() => {this.props.handler(c)}}/>
+                  <Circle cx={c.x} cy={c.y} key={c.label} r={c.size} color="pink" onPress={() => {this.props.handler(c)}}/>
                 );
               })}
-            </G>
           </Svg> 
         </View>
       </View> 

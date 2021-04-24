@@ -2,6 +2,14 @@ import { StyleSheet } from "react-native";
 
 
 const Styles = StyleSheet.create ({
+    loaderView: {
+        alignItems:'center',
+        justifyContent:'center',
+    },
+    loader: {
+        width:200,
+        height:200
+    },
     cardViewContainer: {
         flex: 0,
         flexDirection: "column",
