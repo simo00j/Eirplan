@@ -1,9 +1,32 @@
 import { StyleSheet } from "react-native";
-
+import { RFPercentage } from "react-native-responsive-fontsize";
 
 const Styles = StyleSheet.create ({
+    planStyle:{
+        flex:3,        
+    },
+    bottomStyle:{
+        flex:6,            
+        justifyContent: 'center',  
+        alignItems:"center"
+    },
+    cardStyle:{
+        maxWidth:"100%",      
+    },
+    searchStyle:{
+        flex:1,        
+        justifyContent: 'center',
+    },
+    kwStyle:{
+        flex:4,
+        height:"100%",
+        width:"100%",
+        alignItems:'center'
+    },
+    planContainer: {
+        flex:1,
+    },
     cardViewContainer: {
-        flex: 0,
         flexDirection: "column",
         backgroundColor: '#696969',
         alignItems: 'center',
@@ -22,7 +45,7 @@ const Styles = StyleSheet.create ({
         alignItems: 'center',        
         justifyContent: 'space-around',
         paddingHorizontal: '100%',
-        maxHeight:'50%'
+        height:'100%'
       },
     container: {
         flex: 1,
@@ -31,12 +54,6 @@ const Styles = StyleSheet.create ({
         alignItems: 'center',
         justifyContent: 'space-around',
       },
-    listContainer:{
-        flex: 1,
-        flexDirection: "column",
-        alignItems: 'center',
-        justifyContent: 'space-around',
-    },
     header: {
         flex: 1,
         justifyContent: "space-around",
@@ -46,61 +63,41 @@ const Styles = StyleSheet.create ({
         backgroundColor: '#696969',
         flex: 1,
         alignItems: "center",
+        width:'100%',
         
+    },
+    listView:{
+        flex:4,
+        backgroundColor: '#ffe4c4'
     },
     searchView: {
         flex: 1,
-        flexDirection: "column",
         backgroundColor: '#696969',
-        alignItems: 'center',
-        justifyContent: 'space-around',
-        maxHeight:'9%'
-    }, 
-    listView : {
-        backgroundColor: '#696969',
-        maxHeight:'20%'
+        alignSelf:"center"
     }, 
     stand: {
         flex: 1,
         justifyContent: "center",
-        alignItems: "center",
     },
-    defLogo : {
-        // width: windowWidth/4,
-        // height: windowHeight/4,
-    },
-    bigText: {
-        color: "white",
-        fontSize: 42,
-        fontWeight: "bold",
-        textAlign: "center",
-        backgroundColor: "#000000a0"
-    },
-    background: {
-        color: '#696969',
-        flex: 1,
-        resizeMode: "cover",
-        justifyContent: "center"
-      },
-
     header: {
         width: '100%',
         flex: 1,    
-        flexDirection: 'row',
-        alignItems: 'center',
+        flexDirection: 'row',        
+        justifyContent: 'space-around',
+        alignItems: 'center'
     },
 
     headerText: {
         fontWeight: 'bold',
-        fontSize: 20,
+        fontSize: RFPercentage(4),
         color: '#333',
         letterSpacing: 1,
         padding: 40,
     },
 
     tinyLogo: {
-        width: 60,
-        height: 60,
+        width: "15%",
+        height: "60%",
       },
 })
 

@@ -53,9 +53,9 @@ class Searchbar extends Component {
 }
   displayList(){
     if(this.state.keywords.length>0){
-      return <View>
+      return <View >
         {this.state.keywords.map((l, i) => (
-              <ListItem key={i}  containerStyle={{backgroundColor: '#ffe4c4'}} bottomDivider onPress={() => {this.OnPressKeyWordHandler(l);}}>
+              <ListItem key={i} containerStyle={Styles.listView} bottomDivider onPress={() => {this.OnPressKeyWordHandler(l);}}>
                   <ListItem.Content>
                       <ListItem.Title>{l.name}</ListItem.Title>
                   </ListItem.Content>
@@ -77,14 +77,14 @@ class Searchbar extends Component {
     placeholder="Search..."
     onChangeText={this.updateSearch}
     value={search}
-    placeholderTextColor={"black"}
     platform="android"
+    placeholderTextColor={"black"}
     containerStyle={Styles.searchView}
   />)
   }
   render() {
     return (
-      <View style={Styles.listView}>
+      <View>
         <Text>{this.showSearchbar()}</Text>
         <Text>{this.displayList()}</Text>
       </View>
