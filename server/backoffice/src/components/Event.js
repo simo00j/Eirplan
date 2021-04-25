@@ -5,7 +5,7 @@ import "./Event.css";
 
 export class Event extends React.Component {
     send=()=>{
-        API.eventid();
+        API.event();
         window.location="/event"
     }
     render() {
