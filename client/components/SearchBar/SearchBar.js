@@ -1,11 +1,13 @@
 import React, { Component } from 'react';
 import Styles from "../StyleSheet/Style";
-import { View } from 'react-native';
+import {Dimensions, View } from 'react-native';
 import { SearchBar, ListItem, Text } from 'react-native-elements';
 
 
-const kw = [{name:"info"}, {name: "informatique"}, {name: "mathématiques"}, {name: "matmeca"}]
+const kw = [{name:"ingénierie"}, {name: "informatique"}, {name: "mathématiques"}, {name: "matmeca"}, {name: "innovation"}, {name: "iOs"}, {name: "inria"}]
 
+const width1 = Dimensions.get("window").width;
+const width = width1/25
 class Searchbar extends Component {
 
   constructor(props) {
@@ -57,7 +59,7 @@ class Searchbar extends Component {
         {this.state.keywords.map((l, i) => (
               <ListItem key={i} containerStyle={Styles.listView} bottomDivider onPress={() => {this.OnPressKeyWordHandler(l);}}>
                   <ListItem.Content>
-                      <ListItem.Title>{l.name}</ListItem.Title>
+                      <ListItem.Title style={Styles.inputSearch}>{l.name}</ListItem.Title>
                   </ListItem.Content>
               </ListItem>
           ))
@@ -78,8 +80,11 @@ class Searchbar extends Component {
     onChangeText={this.updateSearch}
     value={search}
     platform="android"
-    placeholderTextColor={"black"}
     containerStyle={Styles.searchView}
+    inputStyle={Styles.inputSearch}
+    searchIcon={{size:width}}
+    clearIcon={{size:width}}
+    cancelIcon={{size:width}}
   />)
   }
   render() {

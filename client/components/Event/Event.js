@@ -10,20 +10,20 @@ import Loader from "../Loader/Loader";
 // import StandCard from '../StandCard/StandCard';
 const list = [
     {
-        name: 'Amy Farha',
-        id: 'Vice President'
+        name: 'Entreprise1',
+        id: 'Mr X'
     },
     {
-        name: 'Chris Jackson',
-        id: 'Vice Chairman'
+        name: 'Entreprise2',
+        id: 'Mr X'
     },
     {
-        name: 'Chris Jacon',
-        id: 'Vice'
+        name: 'Entreprise3',
+        id: 'Mr X'
     },
     {
-        name: 'Chris Jackson',
-        id: 'Vice Chairman'
+        name: 'Entreprise4',
+        id: 'Mr X'
     }
 
 ]
@@ -104,9 +104,9 @@ class Event extends Component {
     getDesciption(s) {
         return (
             <Card containerStyle={Styles.cardContainer}>
-                <Card.Title>{s.name}</Card.Title>
+                <Card.Title style={Styles.inputSearch}>{s.name}</Card.Title>
                 <Card.Divider />
-                <Text style={{ marginBottom: 10 }}>
+                <Text style={Styles.textInfo}>
                     Responsable : {s.id}{/*"\n"}
               Heure de début : {stand.start_hour}{"\n"}
               Heure de fin : {stand.end_hour}{"\n"}
@@ -115,6 +115,7 @@ class Event extends Component {
                 <Button
                     buttonStyle={{ borderRadius: 0, marginLeft: 0, marginRight: 0, marginBottom: 0, backgroundColor: '#deb887' }}
                     title='Back'
+                    titleStyle={Styles.inputSearch}
                     onPress={this.buttonBackClickListener} />
             </Card>);
     }
@@ -126,14 +127,15 @@ class Event extends Component {
                 list.map((l, i) => (
                     <ListItem key={i}  containerStyle={{backgroundColor: '#ffe4c4'}} bottomDivider  onPress={() => {this.OnPressCompanyHandler(l);}} >
                         <ListItem.Content>
-                            <ListItem.Title>{l.name}</ListItem.Title>
+                            <ListItem.Title  style={Styles.inputSearch}>{l.name}</ListItem.Title>
                         </ListItem.Content>
                     </ListItem>
                 ))
             }
             <Button
-                buttonStyle={{ borderRadius: 0, marginLeft: 0, marginRight: 0, marginBottom: 0, backgroundColor: '#deb887' }}
+                buttonStyle={{ borderRadius: 0, marginLeft: 0, marginRight: 0, marginBottom: 0, backgroundColor: '#deb887'}}
                 title='Back'
+                titleStyle={Styles.inputSearch}
                 onPress={this.buttonBackkwClickListener} />
         </View>
     }
@@ -155,7 +157,7 @@ class Event extends Component {
         }
         return (
             <View>
-                <Text> Select a Stand to see more Info </Text>
+                <Text style={Styles.textInfo}> Select a Stand to see more Info </Text>
             </View>
         );
     }
@@ -168,7 +170,7 @@ class Event extends Component {
         }
         return (
             <View style={{alignItems: 'center'}}>
-            <Text > Select a KeyWord to see more Info </Text>
+            <Text style={Styles.textInfo}> Select a KeyWord to see more Info </Text>
             {this.showWordCloud()}
             </View>
         );

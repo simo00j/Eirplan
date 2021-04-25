@@ -5,11 +5,11 @@ import { View, Text, Image } from "react-native";
 export default function Header() {
     return(
         <View style={Styles.header}>
-            <Image style={Styles.tinyLogo} source={require('./logo1.png')}></Image>
+            <Image style={Styles.tinyLogo1} source={require('./logo1.png')}></Image>
             <View>
-                <Text style={Styles.headerText}> EIRPLAN </Text>
+                <Text style={Styles.headerText}> Forum Ingenib </Text>
             </View>
-            <Image style={Styles.tinyLogo} source={require('./logo2.png')}></Image>
+            <Image style={Styles.tinyLogo1} source={require('./logo2.png')}></Image>
         </View>
     )
 }

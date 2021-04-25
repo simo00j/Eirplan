@@ -52,63 +52,63 @@ const data = [
 
 const keywordsArray = [
     {
-        keyword: "word1",    // the actual keyword
+        keyword: "Informatique",    // the actual keyword
         frequency: 10,      // the frequency of this keyword
         color: randomColor({
                 luminosity: 'dark',
                 hue: '#ffe4c4'})     // the color of the circle that shows this keyword
     },
     {
-        keyword: "word2",    // the actual keyword
+        keyword: "Mathématiques",    // the actual keyword
         frequency: 20,      // the frequency of this keyword
         color: randomColor({
             luminosity: 'dark',
             hue: '#ffe4c4'})     // the color of the circle that shows this keyword
     },
     {
-        keyword: "word3",    // the actual keyword
+        keyword: "iOs",    // the actual keyword
         frequency: 30,      // the frequency of this keyword
         color: randomColor({
                 luminosity: 'dark',
                 hue: '#ffe4c4'})     // the color of the circle that shows this keyword
     },
     {
-        keyword: "word4",    // the actual keyword
+        keyword: "Robotique",    // the actual keyword
         frequency: 15,      // the frequency of this keyword
         color: randomColor({
             luminosity: 'dark',
             hue: '#ffe4c4'})     // the color of the circle that shows this keyword
     },
     {
-        keyword: "word5",    // the actual keyword
+        keyword: "Aéronautique",    // the actual keyword
         frequency: 15,      // the frequency of this keyword
         color: randomColor({
             luminosity: 'dark',
             hue: '#ffe4c4'})     // the color of the circle that shows this keyword
     },
     {
-        keyword: "word6",    // the actual keyword
+        keyword: "Innovation",    // the actual keyword
+        frequency: 20,      // the frequency of this keyword
+        color: randomColor({
+            luminosity: 'dark',
+            hue: '#ffe4c4'})     // the color of the circle that shows this keyword
+    },
+    {
+        keyword: "Bordeaux",    // the actual keyword
         frequency: 15,      // the frequency of this keyword
         color: randomColor({
             luminosity: 'dark',
             hue: '#ffe4c4'})     // the color of the circle that shows this keyword
     },
     {
-        keyword: "word7",    // the actual keyword
-        frequency: 15,      // the frequency of this keyword
+        keyword: "Génie logiciel",    // the actual keyword
+        frequency: 23,      // the frequency of this keyword
         color: randomColor({
             luminosity: 'dark',
             hue: '#ffe4c4'})     // the color of the circle that shows this keyword
     },
     {
-        keyword: "word8",    // the actual keyword
-        frequency: 15,      // the frequency of this keyword
-        color: randomColor({
-            luminosity: 'dark',
-            hue: '#ffe4c4'})     // the color of the circle that shows this keyword
-    },
-    {
-        keyword: "word9",    // the actual keyword
+        keyword: "Electronique",    // the actual keyword
         frequency: 15,      // the frequency of this keyword
         color: randomColor({
             luminosity: 'dark',

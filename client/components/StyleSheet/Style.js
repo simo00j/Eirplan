@@ -1,5 +1,11 @@
-import { StyleSheet } from "react-native";
+import { text } from "@fortawesome/fontawesome-svg-core";
+import { StyleSheet, Dimensions } from "react-native";
 import { RFPercentage } from "react-native-responsive-fontsize";
+
+const width1 = Dimensions.get("window").width;
+const height1 = Dimensions.get("window").height;
+const width = width1*0.10
+const height = height1*0.08
 
 const Styles = StyleSheet.create ({
     loaderView: {
@@ -16,15 +22,15 @@ const Styles = StyleSheet.create ({
     },
     bottomStyle:{
         flex:6,            
-        justifyContent: 'center',  
-        alignItems:"center"
+        alignItems:"center",         
     },
     cardStyle:{
-        maxWidth:"100%",      
+        maxWidth:"100%",       
     },
     searchStyle:{
         flex:1,        
-        justifyContent: 'center',
+        justifyContent: 'center',        
+        width:"100%",
     },
     kwStyle:{
         flex:4,
@@ -46,7 +52,7 @@ const Styles = StyleSheet.create ({
         flexDirection: "column",
         backgroundColor: '#ffe4c4',
         alignItems: 'center',
-        justifyContent: 'space-around'
+        justifyContent: 'space-around',
     },
     keywordContainer: {
         flex: 1,
@@ -77,12 +83,13 @@ const Styles = StyleSheet.create ({
     },
     listView:{
         flex:4,
-        backgroundColor: '#ffe4c4'
+        backgroundColor: '#ffe4c4',
     },
     searchView: {
         flex: 1,
         backgroundColor: '#696969',
-        alignSelf:"center"
+        alignSelf:"center",
+        width:"100%",
     }, 
     stand: {
         flex: 1,
@@ -106,10 +113,17 @@ const Styles = StyleSheet.create ({
     buttonFloor:{
         fontSize: RFPercentage(4),
     },
-    tinyLogo: {
-        width: "15%",
-        height: "60%",
+    tinyLogo1: {
+        width:"20%",
+        height:"90%",
+        resizeMode:'contain',
       },
+    inputSearch:{
+        fontSize: RFPercentage(2),
+    },
+    textInfo:{        
+        fontSize: RFPercentage(1),
+    }
 })
 
 

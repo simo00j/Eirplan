@@ -10,7 +10,8 @@ import Wall from "../Shapes/Wall";
 const MARGIN = 10;
 const vWidth = 600 + MARGIN;
 const vHeight = 300 + MARGIN;
-const width = Dimensions.get("window").width - 250;
+const width1 = Dimensions.get("window").width;
+const width = width1 - width1*0.22 ;
 const height = (width * vHeight) / vWidth;
 
 class Plan extends Component {
@@ -46,13 +47,13 @@ class Plan extends Component {
             return (
                 <View style={Styles.bottomFloor}>
                 <Pressable onPress={() => this.state.upHandler()}>
-                    <FontAwesomeIcon icon={faAngleUp} size={width/4}/>
+                    <FontAwesomeIcon icon={faAngleUp} size={width/5}/>
                 </Pressable>
                 </View>
             );
         else 
             return (
-                <FontAwesomeIcon icon={faAngleUp} size={width/4} color="transparent"/>
+                <FontAwesomeIcon icon={faAngleUp} size={width/5} color="transparent"/>
             );
     }
 
@@ -60,7 +61,7 @@ class Plan extends Component {
         if (this.props.showDownArr)
             return (
                 <Pressable onPress={() => this.state.downHandler()}>
-                    <FontAwesomeIcon icon={faAngleDown} size={width/4}/>
+                    <FontAwesomeIcon icon={faAngleDown} size={width/5}/>
                 </Pressable>
             );
         else 
