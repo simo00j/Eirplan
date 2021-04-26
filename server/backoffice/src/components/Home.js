@@ -13,10 +13,15 @@ render(){
     return (
         <div className="Home">
         <h4> Back office Interface </h4>
-
+        
         <form method="GET" action="/add">
           <button type="Add">Add an event</button>
         </form>
+        
+        <form method="GET" action="/event">
+          <button type="Add">Search an event</button>
+        </form>
+
         </div>
         );
 

@@ -1,17 +1,22 @@
-import React from "react";
+import React ,{useState} from "react";
 import API from "../utils/API";
-
+import Floor from "./Floor";
+import FormFloor from "./FormFloor";
+import {nanoid} from 'nanoid';
 
 import "./Add.css";
+
+
 export class Add extends React.Component{
     state ={
         name:"",
         logoEvent:"",
         logoHost:"",
-        floor:"",
+        floor:[],
         numberFloor:0,
     };
     
+
     send = async ()=>{
         const { name,logoEvent,logoHost,floor,numberFloor} = this.state;
         if (!name||name.length===0) {return ;}
@@ -46,22 +51,51 @@ export class Add extends React.Component{
         console.log(event.target.value);
         console.log(this.state.floor);
    };
-    handleChangefloorNumber=(event)=>{
+  /* handleChangefloorNumber=(event)=>{
         
         //console.log(event.target.value);
         this.setState({
-            [event.target.id] : [event.target.id] + [event.target.value],
-            [event.target.id]: [...this.state.floor,event.target.value],
+            [event.target.id]: [[...this.state.floor],event.target.value]
         });
         this.state.numberFloor++;
         console.log(this.state.floor);
        console.log(this.state.numberFloor + "number");
 
+    };*/
+    editFloor=(id,newPath)=>{
+        const editFloors = this.state.floor.map(floor=>{
+            if (id === floor.id){
+                return {...floor,path:newPath};
+            }
+            return floor;
+        });
+        this.setState({
+            floor:editFloors
+        });
+        console.log(this.state.floor);
     };
+    delitingFloor=(id)=>{
+        const deleteFloors=this.state.floor.filter(floor=>id!==floor.id);
+        this.setState({
+            floor:deleteFloors
+        });
+        this.state.numberFloor--;
+    };
+    addFloor=(path)=>{
+        const newFloor = {id :nanoid(),path:path};
+        this.setState({
+            floor:[...this.state.floor,newFloor]
+        
+            }    );
+            this.state.numberFloor++;
 
-
+    }
+    
+    
+    
     render(){
-        console.log(this.state.floor.length);
+        const floorList = this.state.floor.map(floor =><Floor id={floor.id} path={floor.path} 
+                                                            deletingFloor={this.delitingFloor} editFloor={this.editFloor} />);
 
         const {name,logoEvent,logoHost,floor,numberFloor} =  this.state;
         return(
@@ -72,7 +106,7 @@ export class Add extends React.Component{
         <h1>Back Office</h1>
         <h2>Add an event</h2>
         </div> 
-
+        
             <div className="form-group row">
                 <label htmlFor="Eventname" className="col-sm-2 col-form-label">Event name</label>
                 <div className="col-sm-10">
@@ -85,8 +119,8 @@ export class Add extends React.Component{
             <div className="form-group">
                 <label htmlFor="logopath">Event logo path </label>
                 <input type="file" name="logopath" className="form-control-file" id="logoEvent" value={logoEvent} onChange={this.handleChange}>
-                </input>            <div className="text-center">
-                <button  className="btn btn__primary btn__lg" > Add Floor</button>
+                </input>          
+                  <div className="text-center">
             </div>
             </div>
 
@@ -95,15 +129,17 @@ export class Add extends React.Component{
                     <input type="file" name="hostpath" className="form-control-file" id="logoHost" value={logoHost} onChange={this.handleChange}>
                 </input>
             </div>
+            <FormFloor addFloor={this.addFloor}/>
+           <div>
+            <ul
+        role="list"
+        className="floor-list stack-large stack-exception"
+        aria-labelledby="list-heading"
+      >
+       {floorList}
 
-            <div className="form-group">
-                <label htmlFor="floorpath">Floor paths  </label>
-                <input type="file" name="1" className="form-control-file" id="floor" value={floor} onChange={this.handleChange}>
-            
-            </input>
-            
-            </div>
-
+      </ul>
+      </div>
                 <button  onClick={this.send} type="submit"  >Submit</button>
         
         </div>

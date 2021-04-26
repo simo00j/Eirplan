@@ -10,8 +10,8 @@ h4{
 
 }
 button[type="add"]{
-    padding: 10px 0px 2%;
-
+    padding: 10px 10px 2%;
+    height: auto;
     position:relative; 
     left:36%;
     font-size: x-large;
