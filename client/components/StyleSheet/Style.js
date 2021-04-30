@@ -19,7 +19,6 @@ const Styles = StyleSheet.create ({
     planStyle:{
         flex : 4, 
         flexDirection:'row',
-        backgroundColor: 'red',
     },
     firstStyle:{
         flex:10,            
@@ -39,8 +38,7 @@ const Styles = StyleSheet.create ({
         flex:6,
         height:"100%",
         width:"100%",
-        alignItems:'center',        
-        backgroundColor: 'green'
+        alignItems:'center',       
     },
     planContainer: {
         flex:1,

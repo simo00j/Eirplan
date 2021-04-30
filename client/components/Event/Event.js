@@ -200,7 +200,7 @@ class Event extends Component {
         return <Header />
     }
     componentWillMount() {
-        fetch("http://192.168.1.3:3001/send")
+        fetch("http://23.251.135.209:3001/send")
             .then(response => response.json())
             .then(responseJson => {
                 this.setState({ event: responseJson.data[0] });
