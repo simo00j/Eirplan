@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { View, Text} from "react-native";
+import { View, Text } from "react-native";
 import { Card, Button, ListItem, ThemeConsumer } from 'react-native-elements';
 import WordCloud from "../WordCloud/WordCloud";
 import Plan from "../Plan/Plan";
@@ -37,31 +37,32 @@ class Event extends Component {
             isLoading: true,
             keyisChosen: false,
             keywordPressed: undefined,
-            showUpArr:true,
-            showDownArr:false,
-            event: undefined
+            showUpArr: true,
+            showDownArr: false,
+            event: undefined,
+            switchDisplay: false
         }
     }
 
     OnPressChangeFloorUp() {
         if (this.state.currentFloorId < this.state.event.floors.length - 1) {
-            this.setState({currentFloorId:this.state.currentFloorId+1});
-            this.setState({showUpArr:true, showDownArr:true});
+            this.setState({ currentFloorId: this.state.currentFloorId + 1 });
+            this.setState({ showUpArr: true, showDownArr: true });
         }
         else {
-            this.setState({currentFloorId:this.state.currentFloorId+1});
-            this.setState({showUpArr:false, showDownArr:true});
+            this.setState({ currentFloorId: this.state.currentFloorId + 1 });
+            this.setState({ showUpArr: false, showDownArr: true });
         }
     }
 
     OnPressChangeFloorDown() {
         if (this.state.currentFloorId > 1) {
-            this.setState({currentFloorId:this.state.currentFloorId-1});
-            this.setState({showUpArr:true, showDownArr:true});
+            this.setState({ currentFloorId: this.state.currentFloorId - 1 });
+            this.setState({ showUpArr: true, showDownArr: true });
         }
         else {
-            this.setState({currentFloorId:this.state.currentFloorId-1});
-            this.setState({showUpArr:true, showDownArr:false});
+            this.setState({ currentFloorId: this.state.currentFloorId - 1 });
+            this.setState({ showUpArr: true, showDownArr: false });
         }
 
     }
@@ -78,14 +79,14 @@ class Event extends Component {
 
     OnPressCompanyHandler(k) {
         this.setState({ infoShown: true });
-        this.setState({ standShown: k})
+        this.setState({ standShown: k })
     }
 
     getFloor(_id) {
         let floor = null;
         if (_id == null) {
             floor = this.state.event.floors[0];
-            this.setState({currentFloorId: 0});
+            this.setState({ currentFloorId: 0 });
         } else {
             floor = this.state.event.floors[_id];
         }
@@ -101,13 +102,24 @@ class Event extends Component {
         this.setState({ keyisChosen: false });
     }
 
+    buttonSwitchClickListener = () => {
+        if (this.state.switchDisplay) {
+            this.setState({ switchDisplay: false })
+        } else {
+            this.setState({ switchDisplay: true })
+        }
+    }
+
     getDesciption(s) {
         return (
             <Card containerStyle={Styles.cardContainer}>
                 <Card.Title style={Styles.inputSearch}>{s.name}</Card.Title>
                 <Card.Divider />
                 <Text style={Styles.textInfo}>
-                    Responsable : {s.id}{/*"\n"}
+                    Responsable : {s.id}{"\n"}
+                    Start hour{"\n"}                    
+                    End hour{"\n"}                                     
+                    Keywords{/*"\n"}
               Heure de début : {stand.start_hour}{"\n"}
               Heure de fin : {stand.end_hour}{"\n"}
         Mots-clés : {stand.keywords}{"\n"*/}
@@ -125,15 +137,15 @@ class Event extends Component {
         return <View>
             {
                 list.map((l, i) => (
-                    <ListItem key={i}  containerStyle={{backgroundColor: '#ffe4c4'}} bottomDivider  onPress={() => {this.OnPressCompanyHandler(l);}} >
+                    <ListItem key={i} containerStyle={{ backgroundColor: '#ffe4c4' }} bottomDivider onPress={() => { this.OnPressCompanyHandler(l); }} >
                         <ListItem.Content>
-                            <ListItem.Title  style={Styles.inputSearch}>{l.name}</ListItem.Title>
+                            <ListItem.Title style={Styles.inputSearch}>{l.name}</ListItem.Title>
                         </ListItem.Content>
                     </ListItem>
                 ))
             }
             <Button
-                buttonStyle={{ borderRadius: 0, marginLeft: 0, marginRight: 0, marginBottom: 0, backgroundColor: '#deb887'}}
+                buttonStyle={{ borderRadius: 0, marginLeft: 0, marginRight: 0, marginBottom: 0, backgroundColor: '#deb887' }}
                 title='Back'
                 titleStyle={Styles.inputSearch}
                 onPress={this.buttonBackkwClickListener} />
@@ -169,26 +181,26 @@ class Event extends Component {
             );
         }
         return (
-            <View style={{alignItems: 'center'}}>
-            <Text style={Styles.textInfo}> Select a KeyWord to see more Info </Text>
-            {this.showWordCloud()}
+            <View style={{ alignItems: 'center' }}>
+                <Text style={Styles.textInfo}> Select a KeyWord to see more Info </Text>
+                {this.showWordCloud()}
             </View>
         );
     }
 
-    showWordCloud(){
+    showWordCloud() {
         return <WordCloud OnPressHandler={this.OnPressKeyWordHandler.bind(this)} />
     }
 
-    showSearchbar(){
-        return <Searchbar/>
+    showSearchbar() {
+        return <Searchbar />
     }
 
-    showHeader(){
-        return <Header/>
+    showHeader() {
+        return <Header />
     }
     componentWillMount() {
-        fetch("http://23.251.135.209:3001/send")
+        fetch("http://192.168.1.3:3001/send")
             .then(response => response.json())
             .then(responseJson => {
                 this.setState({ event: responseJson.data[0] });
@@ -196,31 +208,65 @@ class Event extends Component {
             }).catch(err => { console.log(err) })
     }
 
+    showAll() {
+        if (this.state.switchDisplay) {
+            return <View style={Styles.layer}>
+                {this.showHeader()}        
+                <View style={Styles.firstStyle}>                            
+                    <View style={Styles.kwStyle}>
+                        {this.showKeyWord()}
+                    </View>
+                    <View style={Styles.cardStyle}>
+                        {this.showSearchbar()}
+                        {this.showInfo()}
+                    </View>                                  
+                    <View style={Styles.planStyle}>
+                        {this.drawPlan()}
+                    </View>  
+                    <Button
+                        buttonStyle={{borderRadius: 5, backgroundColor: '#deb887' }}
+                        title='Switch display'
+                        titleStyle={Styles.inputSwitch}
+                        onPress={this.buttonSwitchClickListener} />
+                </View>    
+            </View>
+
+        } else {return <View style={Styles.layer}>
+                {this.showHeader()}
+                <View style={Styles.firstStyle}>                                  
+                    <View style={Styles.planStyle}>
+                        {this.drawPlan()}
+                    </View>
+                    <View style={Styles.cardStyle}>
+                        {this.showSearchbar()}
+                        {this.showInfo()}
+                    </View>
+                    <View style={Styles.kwStyle}>
+                        {this.showKeyWord()}
+                    </View>                          
+                    <Button
+                        buttonStyle={{borderRadius: 5, backgroundColor: '#deb887' }}
+                        title='Switch display'
+                        titleStyle={Styles.inputSwitch}
+                        onPress={this.buttonSwitchClickListener} />
+                </View>
+            </View>
+        }
+    }
+
     render() {
         const { isLoading } = this.state;
         if (isLoading)
             return (
                 <View style={Styles.loader}>
-                    <Loader/>    
+                    <Loader />
                 </View>
             );
         else
             return (
-                <View style={Styles.layer}>
-                    {this.showHeader()}
-                    <View style={Styles.planStyle}>
-                        {this.drawPlan()}
-                    </View>                    
-                    <View style={Styles.bottomStyle}>
-                        <View style={Styles.cardStyle}>
-                            {this.showInfo()}                    
-                            {this.showSearchbar()} 
-                        </View>                   
-                        <View style={Styles.kwStyle}>
-                            {this.showKeyWord()}
-                        </View>
-                    </View>
-                </View>
+            <View>
+                {this.showAll()}
+            </View>
             );
     }
 }

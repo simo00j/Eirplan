@@ -17,38 +17,43 @@ const Styles = StyleSheet.create ({
         height:200
     },
     planStyle:{
-        flex:3, 
-        flexDirection:'row'
+        flex : 4, 
+        flexDirection:'row',
+        backgroundColor: 'red',
     },
-    bottomStyle:{
-        flex:6,            
-        alignItems:"center",         
+    firstStyle:{
+        flex:10,            
+        alignItems:"center",   
     },
     cardStyle:{
-        maxWidth:"100%",       
+        flex:2,
+        maxWidth:"100%"
     },
     searchStyle:{
         flex:1,        
         justifyContent: 'center',        
-        width:"100%",
+        width:"100%", 
+        zIndex : 9
     },
     kwStyle:{
-        flex:4,
+        flex:6,
         height:"100%",
         width:"100%",
-        alignItems:'center'
+        alignItems:'center',        
+        backgroundColor: 'green'
     },
     planContainer: {
         flex:1,
     },
     cardViewContainer: {
+        zIndex:9,
         flexDirection: "column",
         backgroundColor: '#696969',
         alignItems: 'center',
         justifyContent: 'space-around',
       },
     cardContainer:{
-        flex: 1,
+        zIndex:9,
         flexDirection: "column",
         backgroundColor: '#ffe4c4',
         alignItems: 'center',
@@ -56,7 +61,6 @@ const Styles = StyleSheet.create ({
     },
     keywordContainer: {
         flex: 1,
-        backgroundColor: '#696969',
         alignItems: 'center',        
         justifyContent: 'space-around',
         paddingHorizontal: '100%',
@@ -82,8 +86,7 @@ const Styles = StyleSheet.create ({
         
     },
     listView:{
-        flex:4,
-        backgroundColor: '#ffe4c4',
+        backgroundColor: '#ffe4c4'
     },
     searchView: {
         flex: 1,
@@ -120,6 +123,9 @@ const Styles = StyleSheet.create ({
       },
     inputSearch:{
         fontSize: RFPercentage(2),
+    },
+    inputSwitch:{
+        fontSize: RFPercentage(1),
     },
     textInfo:{        
         fontSize: RFPercentage(1),
