@@ -26,7 +26,8 @@ const Styles = StyleSheet.create ({
     },
     cardStyle:{
         flex:2,
-        maxWidth:"100%"
+        maxWidth:"100%",
+        alignItems:"center"
     },
     searchStyle:{
         flex:1,        
@@ -81,11 +82,11 @@ const Styles = StyleSheet.create ({
         flex: 1,
         alignItems: "center",
         width:'100%',
-        
     },
     listView:{
         backgroundColor: '#ffe4c4',
         alignSelf:"center",
+        width:0.79*width1
     },
     searchView: {
         flex: 1,

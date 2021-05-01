@@ -75,23 +75,23 @@ class Searchbar extends Component {
   showSearchbar(){
     const { search } = this.state;
     return (
-    <SearchBar
-    placeholder="Search..."
-    onChangeText={this.updateSearch}
-    value={search}
-    platform="android"
-    containerStyle={Styles.searchView}
-    inputStyle={Styles.inputSearch}
-    searchIcon={{size:width1/30}}
-    clearIcon={{size:width1/30}}
-    cancelIcon={{size:width1/30}}
-  />)
+      <SearchBar
+        placeholder="Search..."
+        onChangeText={this.updateSearch}
+        value={search}
+        platform="android"
+        containerStyle={Styles.searchView}
+        inputStyle={Styles.inputSearch}
+        searchIcon={{size:width1/30}}
+        clearIcon={{size:width1/30}}
+        cancelIcon={{size:width1/30}}
+      />)
   }
   render() {
     return (
       <View >
         <Text>{this.showSearchbar()}</Text>
-        <Text>{this.displayList()}</Text>
+        <Text style={{alignSelf:'center'}}>{this.displayList()}</Text>
       </View>
     )
   }

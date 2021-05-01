@@ -49,7 +49,8 @@ class KeywordsCloud extends React.Component {
           <Svg width={width} height={height}>
               {this.state.circles.map((c) => {
                 return (
-                  <Circle cx={c.x} cy={c.y} key={c.label} r={c.size} color="pink" onPress={() => {this.props.handler(c)}}/>
+                  <Circle cx={c.x} cy={c.y} key={c.label} r={c.size} color="pink" onPress={() => {this.props.handler(c)
+                                                                                                  this.props.handlerChange()}}/>
                 );
               })}
           </Svg> 
