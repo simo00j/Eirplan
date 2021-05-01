@@ -26,8 +26,8 @@ router.post('/addEvent',(req, res) =>{
   //fill the event
   var event = new dbModels ({
     name: req.body.eventname,
-    logoEvent:logopath.name,
-    logoHost:hostpath.name,
+    //logoEvent:logopath.name,
+    //logoHost:hostpath.name,
     floors: floors
   });
   event.save(function(err) {
