@@ -19,8 +19,10 @@ var standDataExtractor = function (pathDataStruct, type) {
     stand = {
         id: pathDataStruct.id,
         name: pathDataStruct.id,
-        keywords: keysParser(pathDataStruct.keys.split(','))
-        // ... respo + time
+        respo: pathDataStruct.respo,
+        keywords: keysParser(pathDataStruct.keys.split(',')),
+        starthour: pathDataStruct.starthour,
+        endhour: pathDataStruct.endhour,       
     };
   } else {
     stand = {

@@ -111,18 +111,23 @@ class Event extends Component {
     }
 
     getDesciption(s) {
+        console.log(s)
         return (
             <Card containerStyle={Styles.cardContainer}>
                 <Card.Title style={Styles.inputSearch}>{s.name}</Card.Title>
                 <Card.Divider />
                 <Text style={Styles.textInfo}>
-                    Responsable : {s.id}{"\n"}
-                    Start hour{"\n"}                    
-                    End hour{"\n"}                                     
-                    Keywords{/*"\n"}
-              Heure de début : {stand.start_hour}{"\n"}
-              Heure de fin : {stand.end_hour}{"\n"}
-        Mots-clés : {stand.keywords}{"\n"*/}
+                    Responsable : {s.respo}{"\n"}
+                    Heure de début : {s.starthour}{"\n"}
+                    Heure de fin : {s.endhour}{"\n"}
+                    Mots-clés : 
+                        {
+                            s.keywords.map((l, i) => (
+                                <Text key={i} containerStyle={Styles.textInfo} onPress={() => { this.OnPressCompanyHandler(l); }} >
+                                     {" "}{l.name}
+                                </Text>
+                            ))
+                        }
                 </Text>
                 <Button
                     buttonStyle={{ borderRadius: 0, marginLeft: 0, marginRight: 0, marginBottom: 0, backgroundColor: '#deb887' }}
@@ -200,7 +205,7 @@ class Event extends Component {
         return <Header />
     }
     componentWillMount() {
-        fetch("http://23.251.135.209:3001/send")
+        fetch("http://192.168.1.3:3001/send")
             .then(response => response.json())
             .then(responseJson => {
                 this.setState({ event: responseJson.data[0] });
@@ -211,29 +216,30 @@ class Event extends Component {
     showAll() {
         if (this.state.switchDisplay) {
             return <View style={Styles.layer}>
-                {this.showHeader()}        
-                <View style={Styles.firstStyle}>                            
+                {this.showHeader()}
+                <View style={Styles.firstStyle}>
                     <View style={Styles.kwStyle}>
                         {this.showKeyWord()}
                     </View>
                     <View style={Styles.cardStyle}>
                         {this.showSearchbar()}
                         {this.showInfo()}
-                    </View>                                  
+                    </View>
                     <View style={Styles.planStyle}>
                         {this.drawPlan()}
-                    </View>  
+                    </View>
                     <Button
-                        buttonStyle={{borderRadius: 5, backgroundColor: '#deb887' }}
+                        buttonStyle={{ borderRadius: 5, backgroundColor: '#deb887' }}
                         title='Switch display'
                         titleStyle={Styles.inputSwitch}
                         onPress={this.buttonSwitchClickListener} />
-                </View>    
+                </View>
             </View>
 
-        } else {return <View style={Styles.layer}>
+        } else {
+            return <View style={Styles.layer}>
                 {this.showHeader()}
-                <View style={Styles.firstStyle}>                                  
+                <View style={Styles.firstStyle}>
                     <View style={Styles.planStyle}>
                         {this.drawPlan()}
                     </View>
@@ -243,9 +249,9 @@ class Event extends Component {
                     </View>
                     <View style={Styles.kwStyle}>
                         {this.showKeyWord()}
-                    </View>                          
+                    </View>
                     <Button
-                        buttonStyle={{borderRadius: 5, backgroundColor: '#deb887' }}
+                        buttonStyle={{ borderRadius: 5, backgroundColor: '#deb887' }}
                         title='Switch display'
                         titleStyle={Styles.inputSwitch}
                         onPress={this.buttonSwitchClickListener} />
@@ -264,9 +270,9 @@ class Event extends Component {
             );
         else
             return (
-            <View>
-                {this.showAll()}
-            </View>
+                <View>
+                    {this.showAll()}
+                </View>
             );
     }
 }

@@ -14,9 +14,9 @@ const wallSchema = mongoose.Schema({
 const standSchema = mongoose.Schema({
     //_id: mongoose.Schema.Types.ObjectId,
     name: String,
-    //responsableName: String,
-    //startHour: Date,
-    //endHour: Date,
+    respo: String,
+    starthour: String,
+    endhour: String,
     path: String,
     keywords: [keywordSchema]
 });

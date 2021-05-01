@@ -7,6 +7,10 @@ class Stand extends Component {
         super(props);
         this.id = props.id;
         this.name = props.name;
+        this.respo = props.respo;
+        this.starthour = props.starthour;
+        this.endhour = props.endhour;
+        this.keywords = props.keywords;
         this.d = props.d;
         this.fillColor = props.fillColor;
         this.onSelected = "#32a852";
@@ -28,7 +32,12 @@ class Stand extends Component {
                     stroke={this.strokeColor} 
                     strokeWidth={this.strokeWidth}
                     onPress={() => {this.props.handler({id:this.props.id,
-                                                        name:this.props.name})}}
+                                                        name:this.props.name,
+                                                        respo:this.props.respo,
+                                                        starthour:this.props.starthour,
+                                                        endhour:this.props.endhour,
+                                                        keywords:this.props.keywords},
+                                                        )}}
                     onMouseMove={() => {this.setState({ isOnMouse: true })}}
                     onMouseLeave={() => {this.setState({ isOnMouse: false })}}
                 />
