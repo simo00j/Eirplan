@@ -84,13 +84,15 @@ const Styles = StyleSheet.create ({
         
     },
     listView:{
-        backgroundColor: '#ffe4c4'
+        backgroundColor: '#ffe4c4',
+        alignSelf:"center",
     },
     searchView: {
         flex: 1,
-        backgroundColor: '#696969',
+        backgroundColor: '#767676',
         alignSelf:"center",
-        width:"100%",
+        width:0.8*width1,
+        borderRadius:28,
     }, 
     stand: {
         flex: 1,
@@ -112,7 +114,7 @@ const Styles = StyleSheet.create ({
         padding: 40,
     },
     buttonFloor:{
-        fontSize: RFPercentage(4),
+        fontSize: RFPercentage(3),
     },
     tinyLogo1: {
         width:"20%",
@@ -120,6 +122,7 @@ const Styles = StyleSheet.create ({
         resizeMode:'contain',
       },
     inputSearch:{
+        fontFamily: "Roboto",
         fontSize: RFPercentage(2),
     },
     inputSwitch:{

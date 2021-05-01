@@ -7,7 +7,7 @@ import { SearchBar, ListItem, Text } from 'react-native-elements';
 const kw = [{name:"ingénierie"}, {name: "informatique"}, {name: "mathématiques"}, {name: "matmeca"}, {name: "innovation"}, {name: "iOs"}, {name: "inria"}]
 
 const width1 = Dimensions.get("window").width;
-const width = width1/25
+const width = width1/2
 class Searchbar extends Component {
 
   constructor(props) {
@@ -82,9 +82,9 @@ class Searchbar extends Component {
     platform="android"
     containerStyle={Styles.searchView}
     inputStyle={Styles.inputSearch}
-    searchIcon={{size:width}}
-    clearIcon={{size:width}}
-    cancelIcon={{size:width}}
+    searchIcon={{size:width1/30}}
+    clearIcon={{size:width1/30}}
+    cancelIcon={{size:width1/30}}
   />)
   }
   render() {
