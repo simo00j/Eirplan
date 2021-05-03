@@ -87,11 +87,13 @@ class WordCloud extends Component {
 
     tirage(data)  {
         var dataRestants=data.slice(0);
-        console.log(dataRestants)
+        //console.log(dataRestants)
         var dataAleatoires=[];
         while (dataAleatoires.length<7) 
             dataAleatoires.push(dataRestants.splice(Math.floor(Math.random()*dataRestants.length),1)[0]);
-        console.log(dataAleatoires)
+        //console.log(dataAleatoires)
+        console.log(keywordsArray[0][0])
+        //console.log("END")
         return dataAleatoires;
     }
     
