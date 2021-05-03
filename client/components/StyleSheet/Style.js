@@ -57,6 +57,8 @@ const Styles = StyleSheet.create ({
         backgroundColor: '#ffe4c4',
         alignItems: 'center',
         justifyContent: 'space-around',
+        borderRadius: 27,
+        width: 0.4*width1
     },
     keywordContainer: {
         flex: 1,
@@ -122,15 +124,31 @@ const Styles = StyleSheet.create ({
         height:"90%",
         resizeMode:'contain',
       },
-    inputSearch:{
+    inputSearch: {
         fontFamily: "Roboto",
         fontSize: RFPercentage(2),
     },
-    inputSwitch:{
+    inputSwitch: {
         fontSize: RFPercentage(1),
     },
-    textInfo:{        
+    textInfo: {        
         fontSize: RFPercentage(1),
+    },
+    paragraph: {
+        fontSize: RFPercentage(1),
+        textAlign:'justify'
+    },
+    boxCompany: {
+        width: 0.4*width1,
+        color: 'white'
+    },
+    backButton: {
+        width:"100%", 
+        borderRadius: 70, 
+        marginLeft: 0, 
+        marginRight: 0, 
+        marginBottom: 0, 
+        backgroundColor: '#deb887'
     }
 })
 

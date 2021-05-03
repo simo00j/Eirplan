@@ -7,7 +7,7 @@ import Searchbar from "../SearchBar/SearchBar";
 import Styles from "../StyleSheet/Style";
 import Header from "../Header/Header";
 import Loader from "../Loader/Loader";
-// import StandCard from '../StandCard/StandCard';
+
 const list = [
     {
         name: 'Entreprise1',
@@ -160,20 +160,24 @@ class Event extends Component {
                 <Card.Title style={Styles.inputSearch}>{s.name}</Card.Title>
                 <Card.Divider />
                 <Text style={Styles.textInfo}>
-                    Responsable : {s.respo}{"\n"}
-                    Heure de début : {s.starthour}{"\n"}
-                    Heure de fin : {s.endhour}{"\n"}
-                    Mots-clés : 
+                    <Text style={{fontWeight:'bold'}}>Responsable  </Text> <Text style={Styles.textInfo}>{s.respo}{"\n"}</Text>
+                    <Text style={{fontWeight:'bold'}}>Heure de début  </Text> <Text style={Styles.textInfo}>{s.starthour}{"\n"}</Text>
+                    <Text style={{fontWeight:'bold'}}>Heure de fin  </Text> <Text style={Styles.textInfo}>{s.endhour}{"\n"}</Text>
+                    <Text style={{fontWeight:'bold'}}>Mots-clés  </Text>
                         {
                             s.keywords.map((l, i) => (
                                 <Text key={i} containerStyle={Styles.textInfo} onPress={() => { this.OnPressCompanyHandler(l); }} >
                                      {" "}{l.name}
                                 </Text>
                             ))
-                        }
+                        }{"\n"}
+                </Text>
+                <Card.Divider />
+                <Text style={Styles.paragraph}> 
+                    Thales est un leader mondial des hautes technologies pour les marchés de l'Aérospatial, du Transport, de la Défense et de la Sécurité. Fort de 61 000 collaborateurs dans 56 pays, Thales a réalisé en 2014 un chiffre d'affaires de 13 milliards d'euros.
                 </Text>
                 <Button
-                    buttonStyle={{ borderRadius: 0, marginLeft: 0, marginRight: 0, marginBottom: 0, backgroundColor: '#deb887' }}
+                    buttonStyle={Styles.backButton}
                     title='Back'
                     titleStyle={Styles.inputSearch}
                     onPress={this.buttonBackClickListener} />
@@ -181,22 +185,23 @@ class Event extends Component {
     }
 
     getKey(k) {//relier les noms des stands affichés au mot-clé choisi (si le mot-clé est dans la liste des kw alors on le met dans la liste)
-        return <View>
-            {
-                list.map((l, i) => (
-                    <ListItem key={i} containerStyle={{ backgroundColor: '#ffe4c4' }} bottomDivider onPress={() => { this.OnPressCompanyHandler(l); }} >
-                        <ListItem.Content>
-                            <ListItem.Title style={Styles.inputSearch}>{l.name}</ListItem.Title>
-                        </ListItem.Content>
-                    </ListItem>
-                ))
-            }
-            <Button
-                buttonStyle={{ borderRadius: 0, marginLeft: 0, marginRight: 0, marginBottom: 0, backgroundColor: '#deb887' }}
-                title='Back'
-                titleStyle={Styles.inputSearch}
-                onPress={this.buttonBackkwClickListener} />
-        </View>
+        return (
+            <View style={Styles.boxCompany}>
+                {
+                    list.map((l, i) => (
+                        <ListItem key={i} containerStyle={{ backgroundColor: '#ffe4c4', borderRadius:27}} bottomDivider onPress={() => { this.OnPressCompanyHandler(l); }} >
+                            <ListItem.Content>
+                                <ListItem.Title style={Styles.inputSearch}>{l.name}</ListItem.Title>
+                            </ListItem.Content>
+                        </ListItem>
+                    ))
+                }
+                <Button
+                    buttonStyle={Styles.backButton}
+                    title='Back'
+                    titleStyle={Styles.inputSearch}
+                    onPress={this.buttonBackkwClickListener} />
+            </View>);
     }
 
     drawPlan() {
@@ -244,10 +249,10 @@ class Event extends Component {
     }
 
     showHeader() {
-        return <Header />
+        return <Header eventName={this.state.event.name} />
     }
     componentWillMount() {
-        fetch("http://192.168.1.3:3001/send")
+        fetch("http://localhost:3001/send")
             .then(response => response.json())
             .then(responseJson => {
                 this.setState({ event: responseJson.data[0] });
