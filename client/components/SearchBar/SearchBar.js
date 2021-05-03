@@ -4,8 +4,6 @@ import {Dimensions, View } from 'react-native';
 import { SearchBar, ListItem, Text } from 'react-native-elements';
 
 
-const kw = [{name:"ingénierie"}, {name: "informatique"}, {name: "mathématiques"}, {name: "matmeca"}, {name: "innovation"}, {name: "iOs"}, {name: "inria"}]
-
 const width1 = Dimensions.get("window").width;
 const width = width1/2
 class Searchbar extends Component {
@@ -14,23 +12,26 @@ class Searchbar extends Component {
     super(props);
     this.state = {
       search: '',
-      keywords: []
+      keywords: [],
+      allKeywords: props.allKeywords,
+      OnPressKeyWordHandler: props.OnPressKeyWordHandler
     }
   }
 
-  searchMatch(keyword) {
+  searchMatch(keyw) {
     var searchKw = this.state.search.toLowerCase()
+    var keyword = keyw.keyword.toLowerCase()
     var len = searchKw.length;
     var compt = 0;
     var fautes = 0;
     var no_match = false;
-    var len2 = keyword.name.length
+    var len2 = keyword.length
     if (len2 < len || len==0) {
       return false
     }
     while (len2 >= len && compt < len && no_match == false) {
-      if (keyword.name[compt] != searchKw[compt]) {
-        if (fautes > 1 || len < 3) {
+      if (keyword[compt] != searchKw[compt]) {
+        if (fautes > 0  || len < 3) {
           no_match = true
         }
         else {
@@ -46,20 +47,18 @@ class Searchbar extends Component {
   };
 
   searchKeyword() {
-    var final_list = kw.filter(item => this.searchMatch(item))
+    var final_list = this.props.allKeywords.filter(item => this.searchMatch(item))
     this.setState(() => ({ keywords: final_list}));
   };
 
-  OnPressKeyWordHandler(k) {
-    alert(k.name)
-}
+  
   displayList(){
     if(this.state.keywords.length>0){
       return <View style={{zIndex : 10}}>
         {this.state.keywords.map((l, i) => (
-              <ListItem key={i} containerStyle={Styles.listView} bottomDivider onPress={() => {this.OnPressKeyWordHandler(l);}}>
+              <ListItem key={i} containerStyle={Styles.listView} bottomDivider onPress={() => {this.props.OnPressKeyWordHandler(l);}}>
                   <ListItem.Content>
-                      <ListItem.Title style={Styles.inputSearch}>{l.name}</ListItem.Title>
+                      <ListItem.Title style={Styles.inputSearch}>{l.keyword}</ListItem.Title>
                   </ListItem.Content>
               </ListItem>
           ))
@@ -74,6 +73,7 @@ class Searchbar extends Component {
 
   showSearchbar(){
     const { search } = this.state;
+    console.log("ea", search)
     return (
       <SearchBar
         placeholder="Search..."

@@ -27,6 +27,49 @@ const list = [
     }
 
 ]
+var keywordsArray = [
+    {
+        keyword: "Informatique",    // the actual keyword
+        frequency: 10,      // the frequency of this keyword
+    },
+    {
+        keyword: "Mathématiques",    // the actual keyword
+        frequency: 20,      // the frequency of this keyword
+    },
+    {
+        keyword: "iOs",    // the actual keyword
+        frequency: 30,      // the frequency of this keyword
+    },
+    {
+        keyword: "Robotique",    // the actual keyword
+        frequency: 15,      // the frequency of this keywor
+    },
+    {
+        keyword: "Aéronautique",    // the actual keyword
+        frequency: 15,      // the frequency of this keyword
+    },
+    {
+        keyword: "Innovation",    // the actual keyword
+        frequency: 20,      // the frequency of this keyword
+    },
+    {
+        keyword: "Bordeaux",    // the actual keyword
+        frequency: 15,      // the frequency of this keyword
+    },
+    {
+        keyword: "Génie logiciel",    // the actual keyword
+        frequency: 23,      // the frequency of this keyword
+
+    },
+    {
+        keyword: "Electronique",    // the actual keyword
+        frequency: 15,      // the frequency of this keyword
+
+    }
+]
+
+
+
 class Event extends Component {
     constructor(props) {
         super(props);
@@ -74,7 +117,7 @@ class Event extends Component {
 
     OnPressKeyWordHandler(k) {
         this.setState({ keyisChosen: true });
-        this.setState({ keywordPressed: k })
+        this.setState({ keywordPressed: k.keyword });
     }
 
     OnPressCompanyHandler(k) {
@@ -137,8 +180,7 @@ class Event extends Component {
             </Card>);
     }
 
-
-    getKey(k) {
+    getKey(k) {//relier les noms des stands affichés au mot-clé choisi (si le mot-clé est dans la liste des kw alors on le met dans la liste)
         return <View>
             {
                 list.map((l, i) => (
@@ -194,11 +236,11 @@ class Event extends Component {
     }
 
     showWordCloud() {
-        return <WordCloud OnPressHandler={this.OnPressKeyWordHandler.bind(this)} />
+        return <WordCloud keywordsArray={keywordsArray} OnPressHandler={this.OnPressKeyWordHandler.bind(this)} />
     }
 
     showSearchbar() {
-        return <Searchbar />
+        return <Searchbar OnPressKeyWordHandler={this.OnPressKeyWordHandler.bind(this)} allKeywords={keywordsArray}/>
     }
 
     showHeader() {
