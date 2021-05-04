@@ -73,7 +73,6 @@ class Searchbar extends Component {
 
   showSearchbar(){
     const { search } = this.state;
-    console.log("ea", search)
     return (
       <SearchBar
         placeholder="Search..."
