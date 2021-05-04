@@ -64,7 +64,7 @@ const Styles = StyleSheet.create ({
         flex: 1,
         alignItems: 'center',        
         justifyContent: 'space-around',
-        paddingHorizontal: '100%',
+        paddingHorizontal: 0.9*width1,
         height:'100%'
       },
     container: {
@@ -85,10 +85,16 @@ const Styles = StyleSheet.create ({
         alignItems: "center",
         width:'100%',
     },
-    listView:{
+    boxList: {
+        zIndex : 10,
+        backgroundColor: '#ffe4c4',
+        borderRadius: 27
+    },
+    listView: {
         backgroundColor: '#ffe4c4',
         alignSelf:"center",
-        width:0.79*width1
+        width:0.79*width1,
+        borderRadius: 27
     },
     searchView: {
         flex: 1,
@@ -139,16 +145,45 @@ const Styles = StyleSheet.create ({
         textAlign:'justify'
     },
     boxCompany: {
+        zIndex:9,
+        flexDirection: "column",
         width: 0.4*width1,
-        color: 'white'
+        backgroundColor: '#ffe4c4',
+        borderRadius:27
     },
     backButton: {
-        width:"100%", 
+        width:"96%", 
         borderRadius: 70, 
         marginLeft: 0, 
         marginRight: 0, 
-        marginBottom: 0, 
+        marginBottom: 15, 
+        alignSelf: 'center',
         backgroundColor: '#deb887'
+    },
+    listCompany: {
+        fontSize: RFPercentage(1.5),
+        alignSelf: 'center'
+    },
+    titleBoxCompany: {
+        fontWeight:'bold',
+        color:'#585656',
+        fontSize:RFPercentage(2),
+        alignSelf:'center',
+        marginBottom:15
+    },
+    keywordButton: {
+        borderRadius: 70, 
+        width:'90%',
+        marginLeft: 0, 
+        marginTop: 0,
+        marginRight: 0, 
+        marginBottom: 0, 
+        alignSelf: 'center',
+        backgroundColor: '#deb887'
+    },
+    keywordButtonText: {
+        fontSize: RFPercentage(1),
+        color: 'white',
     }
 })
 

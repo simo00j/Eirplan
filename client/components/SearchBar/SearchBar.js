@@ -54,7 +54,7 @@ class Searchbar extends Component {
   
   displayList(){
     if(this.state.keywords.length>0){
-      return <View style={{zIndex : 10}}>
+      return <View style={Styles.boxList}>
         {this.state.keywords.map((l, i) => (
               <ListItem key={i} containerStyle={Styles.listView} bottomDivider onPress={() => {this.props.OnPressKeyWordHandler(l);}}>
                   <ListItem.Content>

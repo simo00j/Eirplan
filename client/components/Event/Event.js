@@ -7,6 +7,7 @@ import Searchbar from "../SearchBar/SearchBar";
 import Styles from "../StyleSheet/Style";
 import Header from "../Header/Header";
 import Loader from "../Loader/Loader";
+import { RFPercentage } from "react-native-responsive-fontsize";
 
 const list = [
     {
@@ -166,9 +167,11 @@ class Event extends Component {
                     <Text style={{fontWeight:'bold'}}>Mots-clés  </Text>
                         {
                             s.keywords.map((l, i) => (
-                                <Text key={i} containerStyle={Styles.textInfo} onPress={() => { this.OnPressCompanyHandler(l); }} >
-                                     {" "}{l.name}
-                                </Text>
+                                <View style={Styles.keywordButton}>
+                                    <Text key={i} style={Styles.keywordButtonText} onPress={() => { this.OnPressCompanyHandler(l); }} >
+                                         {" "}{l.name}{" "}
+                                    </Text>
+                                </View>
                             ))
                         }{"\n"}
                 </Text>
@@ -183,15 +186,16 @@ class Event extends Component {
                     onPress={this.buttonBackClickListener} />
             </Card>);
     }
-
+    
     getKey(k) {//relier les noms des stands affichés au mot-clé choisi (si le mot-clé est dans la liste des kw alors on le met dans la liste)
         return (
             <View style={Styles.boxCompany}>
+                <Text style={Styles.titleBoxCompany}> Companies </Text>
                 {
                     list.map((l, i) => (
-                        <ListItem key={i} containerStyle={{ backgroundColor: '#ffe4c4', borderRadius:27}} bottomDivider onPress={() => { this.OnPressCompanyHandler(l); }} >
+                        <ListItem key={i} containerStyle={{backgroundColor: '#ffe4c4', borderRadius:27}} topDivider onPress={() => { this.OnPressCompanyHandler(l); }} >
                             <ListItem.Content>
-                                <ListItem.Title style={Styles.inputSearch}>{l.name}</ListItem.Title>
+                                <ListItem.Title style={Styles.listCompany}>{l.name}</ListItem.Title>
                             </ListItem.Content>
                         </ListItem>
                     ))
@@ -252,7 +256,7 @@ class Event extends Component {
         return <Header eventName={this.state.event.name} />
     }
     componentWillMount() {
-        fetch("http://localhost:3001/send")
+        fetch("http://192.168.0.11:3001/send")
             .then(response => response.json())
             .then(responseJson => {
                 this.setState({ event: responseJson.data[0] });
