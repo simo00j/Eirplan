@@ -1,3 +1,9 @@
+import { StyleSheet, Dimensions } from "react-native";
+
+
+const width = Dimensions.get("window").width;
+const height = Dimensions.get("window").height;
+
 const length = vector => Math.sqrt(vector.x * vector.x + vector.y * vector.y + vector.z * vector.z);
 
 const scaleBy = (vector, x, y = x, z = x) => (
@@ -28,10 +34,10 @@ export const generateCircles = (keywordData, center, scale, largestAtCenter) => 
   const sum = sortedKeywords.reduce((acc, current) => acc + current.frequency, 0);
   const circles = sortedKeywords.map((keyword, index, arr) => ({
     center,
-    size: (keyword.frequency / (sum)) * scale,
+    size: width * 0.12 * ((14 - index) / 77) *scale,
     color: keyword.color,
     label: keyword.keyword,
-    frequency: keyword.frequency,
+    frequency: 14-index,
     id: keyword.id,
     ...spiralGenerator(index),
   }));
@@ -110,7 +116,7 @@ export const drawCirclesOnCanvas = (circles, canvas, drawContainerCircle, contai
     ctx.fill();
     ctx.textAlign = 'center';
     ctx.textBaseline = 'middle';
-    ctx.font = `lighter ${Math.floor(circle.size / 4)}px sans-serif`;
+    ctx.font = `lighter ${((circle.label.length > 5) ? 4 : 2) * Math.floor(4 * circle.size / (5 * circle.label.length))}px sans-serif`;
     ctx.fillStyle = '#000000';
     ctx.fillText(circle.label, circle.x, circle.y);
   });

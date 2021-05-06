@@ -393,15 +393,10 @@ class Event extends Component {
                     <Text style={{fontWeight:'bold'}}>Heure de fin  </Text> <Text style={Styles.textInfo}>{s.endhour}{"\n"}</Text>
                     <Text style={{fontWeight:'bold'}}>Mots-clés  </Text>
                         {
-                            /*
-                            <ButtonGroup
-                                onPress={}/>*/
                             s.keywords.map((l, i) => (
-                                //<View key={i} style={Styles.keywordButton}>
-                                    <Text key={i} style={Styles.keywordButtonText} onPress={() => { this.OnPressCompanyHandler(l); }} >
+                                    <Text key={i} style={Styles.textInfo} onPress={() => { this.OnPressCompanyHandler(l); }} >
                                          {" "}{l.name}{" "}
                                     </Text>
-                                //</View>
                             ))
                         }{"\n"}
                 </Text>

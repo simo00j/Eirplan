@@ -19,7 +19,7 @@ class Header extends Component {
                 <View>
                     <Text style={Styles.headerText}> {this.state.eventName} </Text>
                 </View>
-                <Image style={Styles.tinyLogo1} source={{uri:this.state.urlHostLogo}} />
+                <Image style={Styles.tinyLogo2} source={{uri:this.state.urlHostLogo}} />
 
             </View>
         );

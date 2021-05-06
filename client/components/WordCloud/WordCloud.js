@@ -40,7 +40,7 @@ class WordCloud extends Component {
         return ( <View style={Styles.keywordContainer}>
         <KeywordsCloud 
                     keywords={this.state.shownKeyword} 
-                    scale={height/2.5}
+                    scale={height/300}
                     largestAtCenter={true} 
                     drawContainerCircle={false} 
                     containerCircleColor={'#345678'}

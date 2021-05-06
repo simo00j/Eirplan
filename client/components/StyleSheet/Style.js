@@ -108,11 +108,12 @@ const Styles = StyleSheet.create ({
         justifyContent: "center",
     },
     header: {
-        width: '100%',
+        width: width1,
         flex: 1,    
         flexDirection: 'row',        
-        justifyContent: 'space-around',
-        alignItems: 'center'
+        justifyContent: 'space-between',
+        alignItems: 'center',
+        marginBottom: 30
     },
 
     headerText: {
@@ -129,6 +130,17 @@ const Styles = StyleSheet.create ({
         width:"20%",
         height:"90%",
         resizeMode:'contain',
+        marginLeft: 10,
+        marginTop: 10,
+        borderRadius: 20
+    },
+    tinyLogo2: {
+        width:"20%",
+        height:"90%",
+        resizeMode:'contain',
+        marginRight: 10,
+        marginTop: 10,
+        borderRadius: 20
       },
     inputSearch: {
         fontFamily: "Roboto",
@@ -145,7 +157,7 @@ const Styles = StyleSheet.create ({
         textAlign:'justify'
     },
     boxCompany: {
-        zIndex:9,
+        zIndex:8,
         flexDirection: "column",
         width: 0.4*width1,
         backgroundColor: '#ffe4c4',
@@ -180,14 +192,6 @@ const Styles = StyleSheet.create ({
         marginBottom: 0, 
         alignSelf: 'center',
         backgroundColor: '#deb887'
-    },
-    keywordButtonText: {
-        fontSize: RFPercentage(1),
-        color: 'white',
-        backgroundColor: '#deb887',
-        borderRadius: 70,
-        paddingLeft:-10,
-        paddingRight:-10
     }
 })
 
