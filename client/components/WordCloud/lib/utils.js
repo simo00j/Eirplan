@@ -32,6 +32,7 @@ export const generateCircles = (keywordData, center, scale, largestAtCenter) => 
     color: keyword.color,
     label: keyword.keyword,
     frequency: keyword.frequency,
+    id: keyword.id,
     ...spiralGenerator(index),
   }));
   return circles;

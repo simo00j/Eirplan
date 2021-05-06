@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { View, Text } from "react-native";
-import { Card, Button, ListItem, ThemeConsumer } from 'react-native-elements';
+import { Card, Button, ListItem, ButtonGroup, ThemeConsumer } from 'react-native-elements';
 import WordCloud from "../WordCloud/WordCloud";
 import Plan from "../Plan/Plan";
 import Searchbar from "../SearchBar/SearchBar";
@@ -9,66 +9,290 @@ import Header from "../Header/Header";
 import Loader from "../Loader/Loader";
 import { RFPercentage } from "react-native-responsive-fontsize";
 
-const list = [
-    {
-        name: 'Entreprise1',
-        id: 'Mr X'
-    },
-    {
-        name: 'Entreprise2',
-        id: 'Mr X'
-    },
-    {
-        name: 'Entreprise3',
-        id: 'Mr X'
-    },
-    {
-        name: 'Entreprise4',
-        id: 'Mr X'
-    }
 
+const list = [//lire le commentaire!!!!
+     {
+        id: 1,
+        keyword: "Informatique",
+        stand_names: ["Altran", "CapGemini", "all", "Thales", "Atos", "Sopra Steria"]//normalement mettre les stands dans le tableau au lieu de leurs noms!!!
+    },
+    {
+        id: 2,
+        keyword: "Mathématiques",
+        stand_names: ["all"]
+    },
+    {
+        id: 3,
+        name: 'iOs',
+        stand_names: ["all"]
+    },
+    {
+        id: 4,
+        name: 'Robotique',
+        stand_names: ["Thales"]
+    },
+    {
+        id: 5,
+        name: "Telecommunications",
+        stand_names: ["Sopra Steria"]
+    },
+    {
+        id: 6,
+        name: "Innovation",
+        stand_names: ["X-Rays"]
+    },
+    {
+        id: 20,
+        name: "React Native",
+        stand_names: ["Scalian"]
+    },
+    {
+        id: 16,
+        name: "Finance",
+        stand_names: ["X-Rays"]
+    },
+    {
+        id: 17,
+        name: "Developpement web",
+        stand_names: ["Scalian", "X-Rays"]
+    },
+    {
+        id: 7,
+        name: "Bordeaux",
+        stand_names: ["all", "RPR"]
+    },
+    {
+        id: 8,
+        name: "Génie logiciel",
+        stand_names: ["RPR"]
+    },
+    {
+        id: 9,
+        name: "Electronique",
+        stand_names: ["Thales", "Altran"]
+    },
+    {
+        id: 10,
+        name: "Réseaux",
+        stand_names: ["CapGemini"]
+    },
+    {
+        id: 11,
+        name: "Cybersécurité",
+        stand_names: ["CapGemini"]
+    },
+    {
+        id: 12,
+        name: "ERP",
+        stand_names: ["RPR"]
+    },
+    {
+        id: 13,
+        name: "International",
+        stand_names: ["RPR"]
+    },
+    {
+        id: 14,
+        name: "Son",
+        stand_names: ["Altran"]
+    },
+    {
+        id: 15,
+        name: "Jeux vidéos",
+        stand_names: ["Altran"]
+    },
+    {
+        id: 18,
+        name: "Python",
+        stand_names: ["Scalian", "Sopra Steria"]
+    },
+    {
+        id: 19,
+        name: "Java",
+        stand_names: ["Scalian", "Sopra Steria"]
+    },
+    {
+        id: 21,
+        name: "Paris",
+        stand_names: ["Thales"]
+    },
+    {
+        id: 22,
+        name: "Intelligence Artificielle",
+        stand_names: ["Atos"]
+    },
+    {
+        id: 23,
+        name: "Deep Learning",
+        stand_names: ["Atos"]
+    },
+    {
+        id: 24,
+        name: "Mécanique",
+        stand_names: ["LaBRI"]
+    },
+    {
+        id: 25,
+        name: "Fluides",
+        stand_names: ["LaBRI"]
+    },
+    {
+        id: 26,
+        name: "Recherche",
+        stand_names: ["Atos"]
+    },
 ]
 var keywordsArray = [
     {
+        id: 1,
         keyword: "Informatique",    // the actual keyword
-        frequency: 10,      // the frequency of this keyword
+        frequency: 6,      // the frequency of this keyword
     },
     {
+        id: 2,
         keyword: "Mathématiques",    // the actual keyword
-        frequency: 20,      // the frequency of this keyword
+        frequency: 1,      // the frequency of this keyword
     },
     {
+        id: 3,
         keyword: "iOs",    // the actual keyword
-        frequency: 30,      // the frequency of this keyword
+        frequency: 1,      // the frequency of this keyword
     },
     {
+        id: 4,
         keyword: "Robotique",    // the actual keyword
-        frequency: 15,      // the frequency of this keywor
+        frequency: 1,      // the frequency of this keywor
     },
     {
-        keyword: "Aéronautique",    // the actual keyword
-        frequency: 15,      // the frequency of this keyword
+        id: 5,
+        keyword: "Telecommunications",    // the actual keyword
+        frequency: 2,      // the frequency of this keyword
     },
     {
+        id: 6,
         keyword: "Innovation",    // the actual keyword
-        frequency: 20,      // the frequency of this keyword
+        frequency: 1,      // the frequency of this keyword
     },
     {
+        id: 7,
         keyword: "Bordeaux",    // the actual keyword
-        frequency: 15,      // the frequency of this keyword
+        frequency: 2,      // the frequency of this keyword
     },
     {
+        id: 8,
         keyword: "Génie logiciel",    // the actual keyword
-        frequency: 23,      // the frequency of this keyword
+        frequency: 1,      // the frequency of this keyword
 
     },
     {
+        id: 9,
         keyword: "Electronique",    // the actual keyword
-        frequency: 15,      // the frequency of this keyword
+        frequency: 2,      // the frequency of this keyword
 
-    }
+    },
+    {
+        id: 10,
+        keyword: "Réseaux",    // the actual keyword
+        frequency: 1,      // the frequency of this keyword
+
+    },
+    {
+        id: 11,
+        keyword: "Cybersécurité",    // the actual keyword
+        frequency: 1,      // the frequency of this keyword
+
+    },
+    {
+        id: 12,
+        keyword: "ERP",    // the actual keyword
+        frequency: 1,      // the frequency of this keyword
+
+    },
+    {
+        id: 13,
+        keyword: "International",    // the actual keyword
+        frequency: 1,      // the frequency of this keyword
+
+    },
+    {
+        id: 14,
+        keyword: "Son",    // the actual keyword
+        frequency: 1,      // the frequency of this keyword
+
+    },
+    {
+        id: 15,
+        keyword: "Jeux Vidéos",    // the actual keyword
+        frequency: 1,      // the frequency of this keyword
+
+    },
+    {
+        id: 16,
+        keyword: "Finance",    // the actual keyword
+        frequency: 1,      // the frequency of this keyword
+
+    },
+    {
+        id: 17,
+        keyword: "Developpement web",    // the actual keyword
+        frequency: 2,      // the frequency of this keyword
+
+    },
+    {
+        id: 18,
+        keyword: "Python",    // the actual keyword
+        frequency: 2,      // the frequency of this keyword
+
+    },
+    {
+        id: 19,
+        keyword: "Java",    // the actual keyword
+        frequency: 2,      // the frequency of this keyword
+
+    },
+    {
+        id: 20,
+        keyword: "React Native",    // the actual keyword
+        frequency: 1,      // the frequency of this keyword
+
+    },
+    {
+        id: 21,
+        keyword: "Paris",    // the actual keyword
+        frequency: 1,      // the frequency of this keyword
+
+    },
+    {
+        id: 22,
+        keyword: "Intelligence Artificielle",    // the actual keyword
+        frequency: 1,      // the frequency of this keyword
+
+    },
+    {
+        id: 23,
+        keyword: "Deep Learning",    // the actual keyword
+        frequency: 1,      // the frequency of this keyword
+
+    },
+    {
+        id: 24,
+        keyword: "Mécanique",    // the actual keyword
+        frequency: 2,      // the frequency of this keyword
+
+    },
+    {
+        id: 25,
+        keyword: "Fluides",    // the actual keyword
+        frequency: 1,      // the frequency of this keyword
+
+    },
+    {
+        id: 26,
+        keyword: "Recherche",    // the actual keyword
+        frequency: 1,      // the frequency of this keyword
+
+    },
 ]
-
 
 
 class Event extends Component {
@@ -113,12 +337,16 @@ class Event extends Component {
 
     OnPressStandHandler(s) {
         this.setState({ infoShown: true });
-        this.setState({ standShown: s })
+        this.setState({ standShown: s }, () => {this.showInfo()});
     }
 
     OnPressKeyWordHandler(k) {
         this.setState({ keyisChosen: true });
-        this.setState({ keywordPressed: k.keyword });
+        this.setState({ keywordPressed: k });
+    }
+
+    OnPressCompanyFakeHandler(k) {
+        alert(k);
     }
 
     OnPressCompanyHandler(k) {
@@ -155,7 +383,6 @@ class Event extends Component {
     }
 
     getDesciption(s) {
-        console.log(s)
         return (
             <Card containerStyle={Styles.cardContainer}>
                 <Card.Title style={Styles.inputSearch}>{s.name}</Card.Title>
@@ -166,18 +393,21 @@ class Event extends Component {
                     <Text style={{fontWeight:'bold'}}>Heure de fin  </Text> <Text style={Styles.textInfo}>{s.endhour}{"\n"}</Text>
                     <Text style={{fontWeight:'bold'}}>Mots-clés  </Text>
                         {
+                            /*
+                            <ButtonGroup
+                                onPress={}/>*/
                             s.keywords.map((l, i) => (
-                                <View style={Styles.keywordButton}>
+                                //<View key={i} style={Styles.keywordButton}>
                                     <Text key={i} style={Styles.keywordButtonText} onPress={() => { this.OnPressCompanyHandler(l); }} >
                                          {" "}{l.name}{" "}
                                     </Text>
-                                </View>
+                                //</View>
                             ))
                         }{"\n"}
                 </Text>
                 <Card.Divider />
                 <Text style={Styles.paragraph}> 
-                    Thales est un leader mondial des hautes technologies pour les marchés de l'Aérospatial, du Transport, de la Défense et de la Sécurité. Fort de 61 000 collaborateurs dans 56 pays, Thales a réalisé en 2014 un chiffre d'affaires de 13 milliards d'euros.
+                    {s.resume}
                 </Text>
                 <Button
                     buttonStyle={Styles.backButton}
@@ -187,15 +417,23 @@ class Event extends Component {
             </Card>);
     }
     
-    getKey(k) {//relier les noms des stands affichés au mot-clé choisi (si le mot-clé est dans la liste des kw alors on le met dans la liste)
+    filtrerParID(obj, id) {
+        if (obj.id == id) {
+            return true;
+        }
+    }
+    
+    getKey(k) {
+        const filtered = list.filter(item => this.filtrerParID(item, k.id))
+        console.log(filtered);
         return (
             <View style={Styles.boxCompany}>
                 <Text style={Styles.titleBoxCompany}> Companies </Text>
                 {
-                    list.map((l, i) => (
+                    filtered[0].stand_names.map((l, i) => (
                         <ListItem key={i} containerStyle={{backgroundColor: '#ffe4c4', borderRadius:27}} topDivider onPress={() => { this.OnPressCompanyHandler(l); }} >
                             <ListItem.Content>
-                                <ListItem.Title style={Styles.listCompany}>{l.name}</ListItem.Title>
+                                <ListItem.Title style={Styles.listCompany}>{l}</ListItem.Title>
                             </ListItem.Content>
                         </ListItem>
                     ))
@@ -249,14 +487,14 @@ class Event extends Component {
     }
 
     showSearchbar() {
-        return <Searchbar OnPressKeyWordHandler={this.OnPressKeyWordHandler.bind(this)} allKeywords={keywordsArray}/>
+        return <Searchbar OnPressKeyWordHandler={this.OnPressKeyWordHandler.bind(this)} allKeywords={keywordsArray} />
     }
 
     showHeader() {
         return <Header eventName={this.state.event.name} />
     }
     componentWillMount() {
-        fetch("http://192.168.0.11:3001/send")
+        fetch("http://23.251.135.209:3001/send")
             .then(response => response.json())
             .then(responseJson => {
                 this.setState({ event: responseJson.data[0] });
@@ -326,6 +564,6 @@ class Event extends Component {
                 </View>
             );
     }
-}
+    }
 
 export default Event;

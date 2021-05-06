@@ -22,7 +22,8 @@ var standDataExtractor = function (pathDataStruct, type) {
         respo: pathDataStruct.respo,
         keywords: keysParser(pathDataStruct.keys.split(',')),
         starthour: pathDataStruct.starthour,
-        endhour: pathDataStruct.endhour,       
+        endhour: pathDataStruct.endhour,
+        resume: pathDataStruct.resume       
     };
   } else {
     stand = {

@@ -184,6 +184,10 @@ const Styles = StyleSheet.create ({
     keywordButtonText: {
         fontSize: RFPercentage(1),
         color: 'white',
+        backgroundColor: '#deb887',
+        borderRadius: 70,
+        paddingLeft:-10,
+        paddingRight:-10
     }
 })
 

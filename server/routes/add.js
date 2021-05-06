@@ -16,7 +16,7 @@ router.get('/',(req,res) => {
 router.post('/addEvent',(req, res) =>{
   dbModels.collection.deleteMany( {} );
   var floors_number = parseInt(req.body.floors_number, 10),
-       logopath = req.files.logopath,
+        logopath = req.files.logopath,
         hostpath = req.files.hostpath,
         floors=[];
   // extract the data files

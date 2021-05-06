@@ -11,6 +11,7 @@ class Stand extends Component {
         this.starthour = props.starthour;
         this.endhour = props.endhour;
         this.keywords = props.keywords;
+        this.resume = props.resume;
         this.d = props.d;
         this.fillColor = props.fillColor;
         this.onSelected = "#32a852";
@@ -36,7 +37,9 @@ class Stand extends Component {
                                                         respo:this.props.respo,
                                                         starthour:this.props.starthour,
                                                         endhour:this.props.endhour,
-                                                        keywords:this.props.keywords},
+                                                        keywords:this.props.keywords,
+                                                        resume:this.props.resume
+                                                        },
                                                         )}}
                     onMouseMove={() => {this.setState({ isOnMouse: true })}}
                     onMouseLeave={() => {this.setState({ isOnMouse: false })}}

@@ -18,7 +18,8 @@ const standSchema = mongoose.Schema({
     starthour: String,
     endhour: String,
     path: String,
-    keywords: [keywordSchema]
+    keywords: [keywordSchema],
+    resume: String
 });
 const dateFormat = 'HH:mm';
 
