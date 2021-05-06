@@ -3,8 +3,8 @@ const fs = require('fs');
 
 
 var fileReader = function (svgFile) {
-  data=svgFile.data.toString('utf8');
-  var jsonData = JSON.parse(xmlParser.toJson(data));
+  var file = fs.readFileSync(svgFile, 'utf8');
+  var jsonData = JSON.parse(xmlParser.toJson(file));
   return jsonData;
 }
 

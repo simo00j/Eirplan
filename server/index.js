@@ -6,7 +6,6 @@ const upload = require('express-fileupload');
 const cors = require('cors');
 const app = express();
 const port = process.env.PORT || 3001;
-//const port = 3001;
 
 //connection
 connect.con();
@@ -15,7 +14,7 @@ const db = mongoose.connection;
 //bodyparser
 app.use(bodyParser.urlencoded({ extended: true }))
 app.use(bodyParser.json());
-app.use(upload());
+app.use('/uploads',express.static('uploads'));
 
 //import routes 
 const eventroutes = require('./routes/event')

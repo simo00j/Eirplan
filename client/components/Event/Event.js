@@ -491,9 +491,9 @@ class Event extends Component {
     }
 
     showHeader() {
-        return <Header eventName={this.state.event.name} />
+        return <Header eventName={this.state.event.name} logoHostPath={this.state.event.logoHost} logoEventPath={this.state.event.logoEvent} host="http://23.251.135.209:3001/" />
     }
-    componentWillMount() {
+    UNSAFE_componentWillMount() {
         fetch("http://23.251.135.209:3001/send")
             .then(response => response.json())
             .then(responseJson => {
