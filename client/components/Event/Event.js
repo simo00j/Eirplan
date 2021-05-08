@@ -7,39 +7,45 @@ import Searchbar from "../SearchBar/SearchBar";
 import Styles from "../StyleSheet/Style";
 import Header from "../Header/Header";
 import Loader from "../Loader/Loader";
-import { RFPercentage } from "react-native-responsive-fontsize";
 
 
 class Event extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            currentFloorId: 0,
-            infoShown: false,
-            standShown: undefined,
-            isLoading: true,
-            keyisChosen: false,
-            keywordPressed: undefined,
-            showUpArr: true,
-            showDownArr: false,
-            event: undefined,
-            switchDisplay: false,
-            keywordsStats: undefined,
+            currentFloorId: 0, // number representing the current floor
+            infoShown: false, // boolean : true if the card of the stand nned to be shown, false otherwise
+            standShown: undefined, //object containing the stand selected 
+            isLoading: true, //true if the database is not loaded, false otherwise
+            keyisChosen: false, //true if a keyword is selected, false otherwise
+            keywordPressed: undefined, //object containing the selected keyword
+            showUpArr: true, //boolean : true if the up arrow need to be shown, false otherwise
+            showDownArr: false, //boolean : true if the down arrow need to be shown, false otherwise
+            event: undefined, //object containing the datas from the database
+            switchDisplay: false, //boolean : true if the display is switch, false otherwise
+            keywordsStats: undefined, //object containing a list of all the keywords and the corresponding stands
         }
     }
-   
+    
+    /*  this function return true if the field keywordId of obj id equal to id
+    */
     filtrerParIDkw(obj, id) {
         if (obj.keywordId == id) {
             return true;
         }
     }
 
+    /*  this function return true if the field _id of obj id equal to id
+    */
     filtrerParID(obj, id) {
         if (obj._id == id) {
             return true;
         }
     }
 
+    /*  this function add 1 to the the state currentFloorId
+    *   and update the states of showUpArr et showDownArr 
+    */
     OnPressChangeFloorUp() {
         if (this.state.currentFloorId < this.state.event.floors.length - 1) {
             this.setState({ currentFloorId: this.state.currentFloorId + 1 });
@@ -51,6 +57,9 @@ class Event extends Component {
         }
     }
 
+    /*  this function sub 1 to the the state currentFloorId
+    *   and update the states of showUpArr et showDownArr 
+    */
     OnPressChangeFloorDown() {
         if (this.state.currentFloorId > 1) {
             this.setState({ currentFloorId: this.state.currentFloorId - 1 });
@@ -63,16 +72,28 @@ class Event extends Component {
 
     }
 
+    /*  s is a stand 
+    *   this function change the state of infoShown into true
+    *   and change the value standShown into s 
+    */
     OnPressStandHandler(s) {
         this.setState({ infoShown: true });
         this.setState({ standShown: s }, () => {this.showInfo()});
     }
 
+    /*  k is a an object from keywordstats
+    *   keyisChosen is set to true and the keywordPressed value is changed into k
+    */
     OnPressKeyWordHandler(k) {
         this.setState({ keyisChosen: true });
         this.setState({ keywordPressed: k });
     }
 
+    /*  k is a keywordstats.standList object
+    *   this function change the state of infoShown into true and keyisChosen into false
+    *   it also searches which stand in the state event is matching k
+    *   and put it into this.state.standShown
+    */
     OnPressCompanyHandler(k) {       
         let floors = this.state.event.floors;
         let s = undefined
@@ -88,6 +109,8 @@ class Event extends Component {
         this.setState({ standShown: s })
     }
 
+    /*  return the object event.floors[_id]
+    */
     getFloor(_id) {
         let floor = null;
         if (_id == null) {
@@ -99,15 +122,20 @@ class Event extends Component {
         return floor;
 
     }
-
+    /* handler for the back button of getDescription
+    */
     buttonBackClickListener = () => {
         this.setState({ infoShown: false });
     }
 
+    /* handler for the back button of getkey
+    */
     buttonBackkwClickListener = () => {
         this.setState({ keyisChosen: false });
     }
 
+    /* handler for the button switch display
+    */
     buttonSwitchClickListener = () => {
         if (this.state.switchDisplay) {
             this.setState({ switchDisplay: false })
@@ -116,7 +144,9 @@ class Event extends Component {
         }
     }
 
-    getDesciption(s) {
+    /*  return a component Card containing infos about the stand s
+    */
+    getDescription(s) {
         return (
             <Card containerStyle={Styles.cardContainer}>
                 <Card.Title style={Styles.inputSearch}>{s.name}</Card.Title>
@@ -128,7 +158,7 @@ class Event extends Component {
                     <Text style={{fontWeight:'bold'}}>Mots-clés  </Text>
                         {
                             s.keywords.map((l, i) => (
-                                    <Text key={i} style={Styles.textInfo} onPress={() => { this.OnPressCompanyHandler(l); }} >
+                                    <Text key={i} style={Styles.textInfo}>
                                          {" "}{l.name}{" "}
                                     </Text>
                             ))
@@ -146,6 +176,9 @@ class Event extends Component {
             </Card>);
     }
     
+    /*  k is an object of keywordsStats
+    *   return a View containing the list of the stand names matching the keyword k
+    */
     getKey(k) {
         const filtered = this.state.keywordsStats.find(item => this.filtrerParIDkw(item, k.keywordId))
         return (
@@ -168,6 +201,8 @@ class Event extends Component {
             </View>);
     }
 
+    /*  return the component Plan 
+    */
     drawPlan() {
         let floor = this.getFloor(this.state.currentFloorId);
         return (
@@ -177,10 +212,12 @@ class Event extends Component {
         );
     }
 
+    /*  return a text if infoshown is false, and call getDescription otherwise
+    */
     showInfo() {
         if (this.state.infoShown) {
             return (
-                <Text> {this.getDesciption(this.state.standShown)} </Text>
+                <Text> {this.getDescription(this.state.standShown)} </Text>
             );
         }
         return (
@@ -190,6 +227,8 @@ class Event extends Component {
         );
     }
 
+    /*  return a text if keyisChosen is false, and call getKey otherwise
+    */
     showKeyWord() {
         if (this.state.keyisChosen) {
             return (
@@ -204,19 +243,29 @@ class Event extends Component {
         );
     }
 
+    /* return the component WordCloud
+    */
     showWordCloud() {
         return <WordCloud keywordsArray={this.state.keywordsStats} OnPressHandler={this.OnPressKeyWordHandler.bind(this)} />
     }
 
+    /* return the component Searchbar
+    */
     showSearchbar() {
         return <Searchbar OnPressKeyWordHandler={this.OnPressKeyWordHandler.bind(this)} allKeywords={this.state.keywordsStats} />
     }
 
+    /*  return the component Header
+    */
     showHeader() {
-        return <Header eventName={this.state.event.name} logoHostPath={this.state.event.logoHost} logoEventPath={this.state.event.logoEvent} host="http://23.251.135.209:3001/" />
+        return <Header eventName={this.state.event.name} logoHostPath={this.state.event.logoHost} logoEventPath={this.state.event.logoEvent} host="http://192.168.122.1:3001/" />
     }
+
+    /*  fetch the database from the server and put it into this.state.event 
+    *   set this.state.isLoading to false if no error occured while fetching
+    */
     UNSAFE_componentWillMount() {
-        fetch("http://23.251.135.209:3001/send")
+        fetch("http://192.168.122.1:3001/send")
             .then(response => response.json())
             .then(responseJson => {
                 this.setState({ event: responseJson.data[0] });
@@ -225,6 +274,9 @@ class Event extends Component {
             }).catch(err => { console.log(err) })
     }
 
+    /*  return a view containing all the functions returning a component
+    *   modify the place of showKeyWord and DrawPlan based on the value of this.state.switchDisplay
+    */
     showAll() {
         if (this.state.switchDisplay) {
             return <View style={Styles.layer}>
@@ -272,6 +324,8 @@ class Event extends Component {
         }
     }
 
+    /*  return the component loader if isLoading is true, call showAll otherwise
+    */
     render() {
         const { isLoading } = this.state;
         if (isLoading)
