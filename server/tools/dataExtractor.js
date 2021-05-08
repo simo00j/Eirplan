@@ -1,7 +1,7 @@
 const toPath = require('element-to-path');
 const fileReader = require('./fileReader');
 const Event = require('../database/dbModels');
-
+// function that allows to parse key from "key1,key2...keyn" to [key1,key2,...,keyn]
 var keysParser = function (keys) {
   var keysArray = [];
   for (let k of keys) {
@@ -12,6 +12,7 @@ var keysParser = function (keys) {
   return keysArray;
 }
 
+// extract data from the jason fomat
 var standDataExtractor = function (pathDataStruct, type) {
   var stand = {};
 
@@ -80,26 +81,41 @@ var floorDataExtractor = function (svgFloorFile) {
 
   return floor;
 }
-
-
-var eventDataExtractor = function (xmlEventFilePath) {
-  let eventJson = fileReader(xmlEventFilePath).event;
-  let floors = [];
-
-  for (const floorFilePath of eventJson.floor) {
-    var floor = floorDataExtractor(floorFilePath);
-    floors.push(floor);
+// function that returns keyword stats need to be called after creating model (it uses the models ids)
+var keywordStatExtractor = function(floors) {
+  const list = [];
+  const nbFloors = floors.length;
+  for( i=0;i<nbFloors;i++){
+      const floor = floors[i];
+      for(let j = 0;j<floor.stands.length;j++){
+          const st = floor.stands[j];
+          for(let k =0;k<st.keywords.length;k++){
+              const key = st.keywords[k]
+              const status =exist(list,key);
+              if(status > -1){
+                list[status].standList.push({standId:st._id,name:st.name});
+                list[status].frequency+=1;
+              }
+              else {
+                  
+                  list.push({keywordId:key._id, name:key.name, standList:[{standId:st._id, name:st.name}], frequency:1})
+              }
+          }
+      } 
   }
+  return list;
+}
 
-  var event = new Event ({
-    name: eventJson.name,
-    logoEvent: eventJson.logoEventPath,
-    logoHost: eventJson.logoHostPath,
-    floors: floors
-  });
 
-  return event;
+var exist = function(list,key){
+  for (let i= 0;i<list.length;i++){
+    const status =list[i].name.localeCompare(key.name, undefined, { sensitivity: 'accent' });
+      if(!status){
+          return i;
+      }
+  }
+  return -1;
 }
 
 exports.floorDataExtractor = floorDataExtractor;
-exports.eventDataExtractor = eventDataExtractor;
+exports.keywordStatExtractor=keywordStatExtractor;

@@ -9,9 +9,9 @@
         crossorigin="anonymous">
 </head>
 <body>
-        <h1>Back office</h1>
-        <h2>Add an event</h2>
-        <form action="/add/addEvent" method="post" enctype="multipart/form-data"  class="main-form">
+    <h1>Back office</h1>
+    <h2>Add an event</h2>
+    <form action="/add/addEvent" method="post" enctype="multipart/form-data"  onsubmit="return (ValidateFileLogo()&&ValidateFilefloors());" class="main-form">
         <form class="needs-validation" novalidate>
             <div class="form-group row">
                 <label for="eventname" class="col-sm-2 col-form-label">Event name</label>
@@ -19,47 +19,80 @@
                     <input type="text" name="eventname" id="event name" class="form-control "  aria-describedby="validationTooltipUsernamePrepend" required>
                 </div>
             </div>
-
-        <div class="form-group">
-            <label for="logopath">event logo path </label>
-            <input type="file" name="logopath" class="form-control-file" id="logopath">
             
-          </div>
-
-        <div class="form-group">
-            <label for="hostpath">host logo path</label>
-            <input type="file" name="hostpath"class="form-control-file" id="fileUpload">
-        </div>
+            <div class="form-group">
+                <label for="logopath">event logo path </label>
+                <input type="file" name="logopath" class="form-control-file" id="logo1" accept=".png,.jpeg,.jpg">
+            </div>
+            
+            <div class="form-group">
+                <label for="hostpath">host logo path</label>
+                <input type="file" name="hostpath"class="form-control-file" id="logo2" accept=".png,.jpeg,.jpg">
+            </div>
         
-         <div class="form-group">
-            <label for="floorpath">floors paths</label>
-            <input type="file" name="1" class="form-control-file" id="fileUpload">
-        </div>
-    </div>
-    <div id="additionalFields"></div>
-    <div>
-    <input type="button" id="more_floors" onclick="add_fields();" value="add a floor" />
-    </div>
-          <input type="hidden" placeholder="floors_number" name="floors_number" id="floors_number" value="1" >   
-          <div class="text-center">
-<button type="submit" value="upload" class="btn btn-secondary btn-lg">submit</button>
-    </div>
+            <div class="form-group" >
+                <label for="floorpath">floors paths</label>
+                <input type="file" name="1" class="form-control-file" id="fileUpload1" accept=".svg,.xml">
+            </div>
+
+            <div id="additionalFields"></div>
+       
+            <div>
+                <input type="button" id="more_floors" onclick="add_fields();" value="add a floor" />
+            </div>
+
+            <input type="hidden" placeholder="floors_number" name="floors_number" id="floors_number" value="1" > 
+
+            <div class="text-center">
+                <button type="submit" value="upload" class="btn btn-secondary btn-lg">submit</button>
+            </div>
  
 
-    <script type="text/javascript">
+<script type="text/javascript">
     var floors_number = 1;
     function add_fields() {
         floors_number++;
         var objTo = document.getElementById('additionalFields');
 
         var divtest = document.createElement("div");
-        divtest.innerHTML = ' <div class="form-group"> <input type="file" name="'+floors_number+'" class="form-control-file" id="floorpath'+floors_number+'">  </div>';
+        divtest.innerHTML = ' <div class="form-group"> <input type="file" name="'+floors_number+'" class="form-control-file" id="fileUpload'+floors_number+'" accept=".svg,.xml">  </div>';
         objTo.appendChild(divtest)
         document.getElementById("floors_number").value=floors_number;
     }   
+    function ValidateFileLogo(){
+        var fileName1 = document.getElementById("logo1").value;
+        var fileName2 = document.getElementById("logo2").value;
 
+        if (fileName1 == "" ||fileName2 == "") {
+            alert("upload a valid logos");
+            return false;
+        }
+        else if(((fileName1.split(".")[1].toUpperCase() == "PNG")||(fileName1.split(".")[1].toUpperCase() == "JPG")||(fileName1.split(".")[1].toUpperCase() == "JPEG"))&&
+                ((fileName2.split(".")[1].toUpperCase() == "PNG")||(fileName2.split(".")[1].toUpperCase() == "JPG")||(fileName2.split(".")[1].toUpperCase() == "JPEG")))
+            return true;
+        else {
+            alert("Invalid File extension");
+            return false;
+        }
+        return true;
+    }
+    function ValidateFilefloors() {
+        for (var i =1; i<=floors_number; i++ ){
+            var fileName = document.getElementById("fileUpload"+i).value;
+            if (fileName == "") {
+                alert("upload a valid floor file");
+                return false;
+            }
+            if ((fileName.split(".")[1].toUpperCase() != "XML") && (fileName.split(".")[1].toUpperCase() != "SVG")){
+                alert("Invalid File extenxion");
+                return false;
+            }
+        }
+        return true;
+    }
 </script>
-</form>
+        </form>
+    </form>
 
 
 </html>

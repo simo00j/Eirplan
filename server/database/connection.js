@@ -1,5 +1,5 @@
 const mongoose = require('mongoose');
-
+//configure mongodb connection
 const con = function (usr = 'admin', pwd = 'randompassword', dbName = 'Eirplan') {
   mongoose.connect('mongodb+srv://'+usr+':'+pwd+'@eirplan.gdcbx.mongodb.net/'+dbName+'?retryWrites=true&w=majority',
   { 

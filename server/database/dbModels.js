@@ -1,18 +1,16 @@
 const mongoose = require('mongoose');
 const mongooseUniqueValidator = require('mongoose-unique-validator');
 
+//setting event models schemas
 const keywordSchema = mongoose.Schema({
-    //_id: mongoose.Schema.Types.ObjectId,
     name: String,
 });
 
 const wallSchema = mongoose.Schema({
-    //_id: mongoose.Schema.Types.ObjectId,
     path: String,
 });
 
 const standSchema = mongoose.Schema({
-    //_id: mongoose.Schema.Types.ObjectId,
     name: String,
     respo: String,
     starthour: String,
@@ -24,21 +22,31 @@ const standSchema = mongoose.Schema({
 const dateFormat = 'HH:mm';
 
 const floorSchema = mongoose.Schema({
-    //_id: mongoose.Schema.Types.ObjectId,
     name: {type:String, unique: true},
     planShape: [wallSchema],
     stands: [standSchema]
 });
 floorSchema.plugin(mongooseUniqueValidator);
 
+const standInfoSchema = mongoose.Schema({
+    standId:  mongoose.Schema.Types.ObjectId,
+    name: String 
+});
+
+const keywordsStatSchema = mongoose.Schema({
+    keywordId: mongoose.Schema.Types.ObjectId,
+    name: String,
+    standList: [standInfoSchema],
+    frequency: Number
+
+});
+
 const eventSchema = mongoose.Schema({
-    //_id: mongoose.Schema.Types.ObjectId,
-    name : String,
-    logoEvent : String,
-    logoHost : String,
-    floors: [floorSchema]
+    name: String,
+    logoEvent: String,
+    logoHost: String,
+    floors: [floorSchema],
+    keywordsStats: [keywordsStatSchema] 
 });
 
 module.exports = mongoose.model('Event', eventSchema);
-//module.exports = mongoose.model('Floor', floorSchema);
-//module.exports = mongoose.model('Stand', standSchema);

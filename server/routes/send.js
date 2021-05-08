@@ -4,11 +4,10 @@ var path = require('path');
 const dbModels = require('../database/dbModels');
 
 const router = express.Router();
-
+//use cors middleware to send the data to the frontend 
 router.get('/', cors(), async (req,res) => {
     try{
         const Event = await dbModels.find();
-//        res.status(200).send(Event);
         res.status(200).json({
             data:Event
         })
