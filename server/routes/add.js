@@ -8,7 +8,7 @@ var path= require('path');
 const xmlParser = require('xml2json');
 
 router.get('/',(req,res) => {
-    res.sendFile(path.resolve(__dirname + '/../interface/index2.html'))
+    res.sendFile(path.resolve(__dirname + '/../interface/formPage.html'))
 }); 
 
 //using logoupload as a midleware to store the req files in the uploads folder
@@ -37,7 +37,7 @@ router.post('/addEvent',logoupload.any(),(req, res) =>{
       console.log(err);
     }
     console.log("added sucessfully");
-    res.sendFile(path.resolve(__dirname + '/../interface/index3.html'));
+    res.sendFile(path.resolve(__dirname + '/../interface/finalPage.html'));
   });
 });
 
