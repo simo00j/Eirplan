@@ -6,12 +6,14 @@ class Header extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            eventName: props.eventName,
-            urlHostLogo : props.host + props.logoHostPath,
-            urlEventLogo : props.host+ props.logoEventPath
+            eventName: props.eventName, //props containing the name of the event 
+            urlHostLogo : props.host + props.logoHostPath, //url containing the path to the host logo
+            urlEventLogo : props.host+ props.logoEventPath //url containing the path to the event logo
         };
     }
     
+    /*returna View containing the logos and the title
+    */
     render() {
         return(
             <View style={Styles.header}>

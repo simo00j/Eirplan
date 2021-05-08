@@ -7,6 +7,7 @@ import Styles from "../StyleSheet/Style";
 import Stand from "../Shapes/Stand";
 import Wall from "../Shapes/Wall";
 
+//constants used to draw the plan
 const MARGIN = 10;
 const vWidth = 600 + MARGIN;
 const vHeight = 300 + MARGIN;
@@ -18,30 +19,34 @@ class Plan extends Component {
     constructor(props) {
         super(props);
         this.keywords = {};
-        this.defStandColor = "#FFC27A";
-        this.defStorkColor = "black";
+        this.defStandColor = "#FFC27A"; //color of the stands
+        this.defStorkColor = "black"; //color of the stroke of the plan
         this.state = {
-            currFloor: props.currFloor,
-            handler: props.handler,
-            upHandler: props.upHandler,
-            downHandler: props.downHandler
+            currFloor: props.currFloor, //props containing id of the displayed floor
+            handler: props.handler, //props containing an handler when pressing a stand
+            upHandler: props.upHandler, // props containing an handler when pressing the up arrow
+            downHandler: props.downHandler //props containing an handler when pressing the down arrow
         };
     }
 
-
+    /* draw the component stand corresponding to s
+    */
     drawStand(s) {
-        // x && y to add later
         return (
             <Stand id={s._id} name={s.name} d={s.path} key={s._id} keywords={s.keywords} starthour={s.starthour} endhour={s.endhour} respo={s.respo} resume={s.resume} fillColor={this.defStandColor} strokeColor={this.defStorkColor} strokeWidth={1} handler={this.props.handler}/>
         );
     }
 
+    /*  draw the component wall corresponding to w
+    */
     drawWall(w) {
         return (
             <Wall id={w._id} d={w.path} key={w._id}/>
         );
     }
 
+    /* return the up arrow
+    */
     drawUpArrow() {
         if (this.props.showUpArr)
             return (
@@ -57,6 +62,8 @@ class Plan extends Component {
             );
     }
 
+    /* return the down arrow
+    */
     drawDownArrow() {
         if (this.props.showDownArr)
             return (
@@ -70,6 +77,10 @@ class Plan extends Component {
             );
     }
 
+    /*  return a view containing the plan and the arrows
+    *   this function draw the wall and the stands (with the tag <G><\G>) in a svg component
+    *   and the up and down arrows
+    */
     render() {
         return (
           <View style={{flexDirection:'row',alignItems:'center',alignContent:'center'}}>

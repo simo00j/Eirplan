@@ -2,11 +2,14 @@ import { text } from "@fortawesome/fontawesome-svg-core";
 import { StyleSheet, Dimensions } from "react-native";
 import { RFPercentage } from "react-native-responsive-fontsize";
 
+//size constants used to style the components
 const width1 = Dimensions.get("window").width;
 const height1 = Dimensions.get("window").height;
 const width = width1*0.10
 const height = height1*0.08
 
+
+//styles of the different components of the app
 const Styles = StyleSheet.create ({
     loaderView: {
         alignItems:'center',

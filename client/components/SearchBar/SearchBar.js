@@ -5,22 +5,27 @@ import { SearchBar, ListItem, Text } from 'react-native-elements';
 
 
 const width1 = Dimensions.get("window").width;
-const width = width1/2
+
+
 class Searchbar extends Component {
 
   constructor(props) {
     super(props);
     this.state = {
-      search: '',
-      keywords: [],
-      allKeywords: props.allKeywords,
-      OnPressKeyWordHandler: props.OnPressKeyWordHandler
+      search: '', //input string of the searchbar
+      keywords: [], //keywords matching the string search
+      allKeywords: props.allKeywords, //props containing the entire list of the keywords of the database
+      OnPressKeyWordHandler: props.OnPressKeyWordHandler //props containing the handler called when the action OnPress is made on a keyword 
     }
   }
 
+  /*  return true if this.state.search is at the beginning of the string keyw
+  *   and allows a difference of one letter if length of this.state.search is > 3
+  *   return false otherwise
+  */
   searchMatch(keyw) {
     var searchKw = this.state.search.toLowerCase()
-    var keyword = keyw.keyword.toLowerCase()
+    var keyword = keyw.name.toLowerCase()
     var len = searchKw.length;
     var compt = 0;
     var fautes = 0;
@@ -46,19 +51,23 @@ class Searchbar extends Component {
     return true;
   };
 
+  /*  fill the state keywords with all the keywords from the props.allkeyword
+  *   on which the function searchMatch has returned true 
+  */
   searchKeyword() {
     var final_list = this.props.allKeywords.filter(item => this.searchMatch(item))
     this.setState(() => ({ keywords: final_list}));
   };
 
-  
+  /*  return a view containing a list of the state keywords
+  */
   displayList(){
     if(this.state.keywords.length>0){
       return <View style={Styles.boxList}>
         {this.state.keywords.map((l, i) => (
               <ListItem key={i} containerStyle={Styles.listView} bottomDivider onPress={() => {this.props.OnPressKeyWordHandler(l);}}>
                   <ListItem.Content>
-                      <ListItem.Title style={Styles.inputSearch}>{l.keyword}</ListItem.Title>
+                      <ListItem.Title style={Styles.inputSearch}>{l.name}</ListItem.Title>
                   </ListItem.Content>
               </ListItem>
           ))
@@ -67,10 +76,13 @@ class Searchbar extends Component {
     }
   }
 
+  /*handler called when the input of the SearchBar is modified
+  */
   updateSearch = (search) => {
     this.setState(() => ({search}), () => {this.searchKeyword()})
   };
 
+  /* return the component SearchBar */
   showSearchbar(){
     const { search } = this.state;
     return (

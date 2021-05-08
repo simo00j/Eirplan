@@ -9,8 +9,6 @@ const MARGIN = 0;
 const width = Dimensions.get("window").width;
 const height = Dimensions.get("window").height;
 
-console.log(width)
-console.log(height)
 
 class KeywordsCloud extends React.Component {
 

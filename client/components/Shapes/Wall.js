@@ -6,15 +6,16 @@ import { Path} from "react-native-svg";
 class Wall extends Component {
     constructor(props) {
         super(props);
-        this.id = props.id;
-        this.name = "Wall";
-        this.d = props.d;
-        this.fillColor = "transparent";
-        this.strokeColor = "black";
-        this.strokeWidth = 5;
+        this.id = props.id; //id of the wall
+        this.name = "Wall"; //name of the object wall
+        this.d = props.d; //delineation of the wall object
+        this.fillColor = "transparent"; //fill color of the object wall
+        this.strokeColor = "black";//stroke color of the object wall
+        this.strokeWidth = 5; //width of the stroke
     }
 
-
+    /*  draw the wall as a path component
+    */
     render() {
         return (
                 <Path 

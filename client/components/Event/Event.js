@@ -10,291 +10,6 @@ import Loader from "../Loader/Loader";
 import { RFPercentage } from "react-native-responsive-fontsize";
 
 
-const list = [//lire le commentaire!!!!
-     {
-        id: 1,
-        keyword: "Informatique",
-        stand_names: ["Altran", "CapGemini", "all", "Thales", "Atos", "Sopra Steria"]//normalement mettre les stands dans le tableau au lieu de leurs noms!!!
-    },
-    {
-        id: 2,
-        keyword: "Mathématiques",
-        stand_names: ["all"]
-    },
-    {
-        id: 3,
-        name: 'iOs',
-        stand_names: ["all"]
-    },
-    {
-        id: 4,
-        name: 'Robotique',
-        stand_names: ["Thales"]
-    },
-    {
-        id: 5,
-        name: "Telecommunications",
-        stand_names: ["Sopra Steria"]
-    },
-    {
-        id: 6,
-        name: "Innovation",
-        stand_names: ["X-Rays"]
-    },
-    {
-        id: 20,
-        name: "React Native",
-        stand_names: ["Scalian"]
-    },
-    {
-        id: 16,
-        name: "Finance",
-        stand_names: ["X-Rays"]
-    },
-    {
-        id: 17,
-        name: "Developpement web",
-        stand_names: ["Scalian", "X-Rays"]
-    },
-    {
-        id: 7,
-        name: "Bordeaux",
-        stand_names: ["all", "RPR"]
-    },
-    {
-        id: 8,
-        name: "Génie logiciel",
-        stand_names: ["RPR"]
-    },
-    {
-        id: 9,
-        name: "Electronique",
-        stand_names: ["Thales", "Altran"]
-    },
-    {
-        id: 10,
-        name: "Réseaux",
-        stand_names: ["CapGemini"]
-    },
-    {
-        id: 11,
-        name: "Cybersécurité",
-        stand_names: ["CapGemini"]
-    },
-    {
-        id: 12,
-        name: "ERP",
-        stand_names: ["RPR"]
-    },
-    {
-        id: 13,
-        name: "International",
-        stand_names: ["RPR"]
-    },
-    {
-        id: 14,
-        name: "Son",
-        stand_names: ["Altran"]
-    },
-    {
-        id: 15,
-        name: "Jeux vidéos",
-        stand_names: ["Altran"]
-    },
-    {
-        id: 18,
-        name: "Python",
-        stand_names: ["Scalian", "Sopra Steria"]
-    },
-    {
-        id: 19,
-        name: "Java",
-        stand_names: ["Scalian", "Sopra Steria"]
-    },
-    {
-        id: 21,
-        name: "Paris",
-        stand_names: ["Thales"]
-    },
-    {
-        id: 22,
-        name: "Intelligence Artificielle",
-        stand_names: ["Atos"]
-    },
-    {
-        id: 23,
-        name: "Deep Learning",
-        stand_names: ["Atos"]
-    },
-    {
-        id: 24,
-        name: "Mécanique",
-        stand_names: ["LaBRI"]
-    },
-    {
-        id: 25,
-        name: "Fluides",
-        stand_names: ["LaBRI"]
-    },
-    {
-        id: 26,
-        name: "Recherche",
-        stand_names: ["Atos"]
-    },
-]
-var keywordsArray = [
-    {
-        id: 1,
-        keyword: "Informatique",    // the actual keyword
-        frequency: 6,      // the frequency of this keyword
-    },
-    {
-        id: 2,
-        keyword: "Mathématiques",    // the actual keyword
-        frequency: 1,      // the frequency of this keyword
-    },
-    {
-        id: 3,
-        keyword: "iOs",    // the actual keyword
-        frequency: 1,      // the frequency of this keyword
-    },
-    {
-        id: 4,
-        keyword: "Robotique",    // the actual keyword
-        frequency: 1,      // the frequency of this keywor
-    },
-    {
-        id: 5,
-        keyword: "Telecommunications",    // the actual keyword
-        frequency: 2,      // the frequency of this keyword
-    },
-    {
-        id: 6,
-        keyword: "Innovation",    // the actual keyword
-        frequency: 1,      // the frequency of this keyword
-    },
-    {
-        id: 7,
-        keyword: "Bordeaux",    // the actual keyword
-        frequency: 2,      // the frequency of this keyword
-    },
-    {
-        id: 8,
-        keyword: "Génie logiciel",    // the actual keyword
-        frequency: 1,      // the frequency of this keyword
-
-    },
-    {
-        id: 9,
-        keyword: "Electronique",    // the actual keyword
-        frequency: 2,      // the frequency of this keyword
-
-    },
-    {
-        id: 10,
-        keyword: "Réseaux",    // the actual keyword
-        frequency: 1,      // the frequency of this keyword
-
-    },
-    {
-        id: 11,
-        keyword: "Cybersécurité",    // the actual keyword
-        frequency: 1,      // the frequency of this keyword
-
-    },
-    {
-        id: 12,
-        keyword: "ERP",    // the actual keyword
-        frequency: 1,      // the frequency of this keyword
-
-    },
-    {
-        id: 13,
-        keyword: "International",    // the actual keyword
-        frequency: 1,      // the frequency of this keyword
-
-    },
-    {
-        id: 14,
-        keyword: "Son",    // the actual keyword
-        frequency: 1,      // the frequency of this keyword
-
-    },
-    {
-        id: 15,
-        keyword: "Jeux Vidéos",    // the actual keyword
-        frequency: 1,      // the frequency of this keyword
-
-    },
-    {
-        id: 16,
-        keyword: "Finance",    // the actual keyword
-        frequency: 1,      // the frequency of this keyword
-
-    },
-    {
-        id: 17,
-        keyword: "Developpement web",    // the actual keyword
-        frequency: 2,      // the frequency of this keyword
-
-    },
-    {
-        id: 18,
-        keyword: "Python",    // the actual keyword
-        frequency: 2,      // the frequency of this keyword
-
-    },
-    {
-        id: 19,
-        keyword: "Java",    // the actual keyword
-        frequency: 2,      // the frequency of this keyword
-
-    },
-    {
-        id: 20,
-        keyword: "React Native",    // the actual keyword
-        frequency: 1,      // the frequency of this keyword
-
-    },
-    {
-        id: 21,
-        keyword: "Paris",    // the actual keyword
-        frequency: 1,      // the frequency of this keyword
-
-    },
-    {
-        id: 22,
-        keyword: "Intelligence Artificielle",    // the actual keyword
-        frequency: 1,      // the frequency of this keyword
-
-    },
-    {
-        id: 23,
-        keyword: "Deep Learning",    // the actual keyword
-        frequency: 1,      // the frequency of this keyword
-
-    },
-    {
-        id: 24,
-        keyword: "Mécanique",    // the actual keyword
-        frequency: 2,      // the frequency of this keyword
-
-    },
-    {
-        id: 25,
-        keyword: "Fluides",    // the actual keyword
-        frequency: 1,      // the frequency of this keyword
-
-    },
-    {
-        id: 26,
-        keyword: "Recherche",    // the actual keyword
-        frequency: 1,      // the frequency of this keyword
-
-    },
-]
-
-
 class Event extends Component {
     constructor(props) {
         super(props);
@@ -308,7 +23,20 @@ class Event extends Component {
             showUpArr: true,
             showDownArr: false,
             event: undefined,
-            switchDisplay: false
+            switchDisplay: false,
+            keywordsStats: undefined,
+        }
+    }
+   
+    filtrerParIDkw(obj, id) {
+        if (obj.keywordId == id) {
+            return true;
+        }
+    }
+
+    filtrerParID(obj, id) {
+        if (obj._id == id) {
+            return true;
         }
     }
 
@@ -345,13 +73,19 @@ class Event extends Component {
         this.setState({ keywordPressed: k });
     }
 
-    OnPressCompanyFakeHandler(k) {
-        alert(k);
-    }
-
-    OnPressCompanyHandler(k) {
+    OnPressCompanyHandler(k) {       
+        let floors = this.state.event.floors;
+        let s = undefined
+        let search = undefined
+        for (var floor in floors)
+        {
+            search = (floors[floor].stands.find(item => this.filtrerParID(item, k.standId)))
+            if (search!= undefined)
+                s = search        
+        }
         this.setState({ infoShown: true });
-        this.setState({ standShown: k })
+        this.setState({ keyisChosen: false });
+        this.setState({ standShown: s })
     }
 
     getFloor(_id) {
@@ -412,23 +146,16 @@ class Event extends Component {
             </Card>);
     }
     
-    filtrerParID(obj, id) {
-        if (obj.id == id) {
-            return true;
-        }
-    }
-    
     getKey(k) {
-        const filtered = list.filter(item => this.filtrerParID(item, k.id))
-        console.log(filtered);
+        const filtered = this.state.keywordsStats.find(item => this.filtrerParIDkw(item, k.keywordId))
         return (
             <View style={Styles.boxCompany}>
                 <Text style={Styles.titleBoxCompany}> Companies </Text>
                 {
-                    filtered[0].stand_names.map((l, i) => (
+                    filtered.standList.map((l, i) => (
                         <ListItem key={i} containerStyle={{backgroundColor: '#ffe4c4', borderRadius:27}} topDivider onPress={() => { this.OnPressCompanyHandler(l); }} >
                             <ListItem.Content>
-                                <ListItem.Title style={Styles.listCompany}>{l}</ListItem.Title>
+                                <ListItem.Title style={Styles.listCompany}>{l.name}</ListItem.Title>
                             </ListItem.Content>
                         </ListItem>
                     ))
@@ -478,11 +205,11 @@ class Event extends Component {
     }
 
     showWordCloud() {
-        return <WordCloud keywordsArray={keywordsArray} OnPressHandler={this.OnPressKeyWordHandler.bind(this)} />
+        return <WordCloud keywordsArray={this.state.keywordsStats} OnPressHandler={this.OnPressKeyWordHandler.bind(this)} />
     }
 
     showSearchbar() {
-        return <Searchbar OnPressKeyWordHandler={this.OnPressKeyWordHandler.bind(this)} allKeywords={keywordsArray} />
+        return <Searchbar OnPressKeyWordHandler={this.OnPressKeyWordHandler.bind(this)} allKeywords={this.state.keywordsStats} />
     }
 
     showHeader() {
@@ -493,6 +220,7 @@ class Event extends Component {
             .then(response => response.json())
             .then(responseJson => {
                 this.setState({ event: responseJson.data[0] });
+                this.setState( {keywordsStats: this.state.event.keywordsStats});
                 this.setState({ isLoading: false });
             }).catch(err => { console.log(err) })
     }
