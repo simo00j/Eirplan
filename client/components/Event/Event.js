@@ -7,311 +7,45 @@ import Searchbar from "../SearchBar/SearchBar";
 import Styles from "../StyleSheet/Style";
 import Header from "../Header/Header";
 import Loader from "../Loader/Loader";
-import { RFPercentage } from "react-native-responsive-fontsize";
-
-
-const list = [//lire le commentaire!!!!
-     {
-        id: 1,
-        keyword: "Informatique",
-        stand_names: ["Altran", "CapGemini", "all", "Thales", "Atos", "Sopra Steria"]//normalement mettre les stands dans le tableau au lieu de leurs noms!!!
-    },
-    {
-        id: 2,
-        keyword: "Mathématiques",
-        stand_names: ["all"]
-    },
-    {
-        id: 3,
-        name: 'iOs',
-        stand_names: ["all"]
-    },
-    {
-        id: 4,
-        name: 'Robotique',
-        stand_names: ["Thales"]
-    },
-    {
-        id: 5,
-        name: "Telecommunications",
-        stand_names: ["Sopra Steria"]
-    },
-    {
-        id: 6,
-        name: "Innovation",
-        stand_names: ["X-Rays"]
-    },
-    {
-        id: 20,
-        name: "React Native",
-        stand_names: ["Scalian"]
-    },
-    {
-        id: 16,
-        name: "Finance",
-        stand_names: ["X-Rays"]
-    },
-    {
-        id: 17,
-        name: "Developpement web",
-        stand_names: ["Scalian", "X-Rays"]
-    },
-    {
-        id: 7,
-        name: "Bordeaux",
-        stand_names: ["all", "RPR"]
-    },
-    {
-        id: 8,
-        name: "Génie logiciel",
-        stand_names: ["RPR"]
-    },
-    {
-        id: 9,
-        name: "Electronique",
-        stand_names: ["Thales", "Altran"]
-    },
-    {
-        id: 10,
-        name: "Réseaux",
-        stand_names: ["CapGemini"]
-    },
-    {
-        id: 11,
-        name: "Cybersécurité",
-        stand_names: ["CapGemini"]
-    },
-    {
-        id: 12,
-        name: "ERP",
-        stand_names: ["RPR"]
-    },
-    {
-        id: 13,
-        name: "International",
-        stand_names: ["RPR"]
-    },
-    {
-        id: 14,
-        name: "Son",
-        stand_names: ["Altran"]
-    },
-    {
-        id: 15,
-        name: "Jeux vidéos",
-        stand_names: ["Altran"]
-    },
-    {
-        id: 18,
-        name: "Python",
-        stand_names: ["Scalian", "Sopra Steria"]
-    },
-    {
-        id: 19,
-        name: "Java",
-        stand_names: ["Scalian", "Sopra Steria"]
-    },
-    {
-        id: 21,
-        name: "Paris",
-        stand_names: ["Thales"]
-    },
-    {
-        id: 22,
-        name: "Intelligence Artificielle",
-        stand_names: ["Atos"]
-    },
-    {
-        id: 23,
-        name: "Deep Learning",
-        stand_names: ["Atos"]
-    },
-    {
-        id: 24,
-        name: "Mécanique",
-        stand_names: ["LaBRI"]
-    },
-    {
-        id: 25,
-        name: "Fluides",
-        stand_names: ["LaBRI"]
-    },
-    {
-        id: 26,
-        name: "Recherche",
-        stand_names: ["Atos"]
-    },
-]
-var keywordsArray = [
-    {
-        id: 1,
-        keyword: "Informatique",    // the actual keyword
-        frequency: 6,      // the frequency of this keyword
-    },
-    {
-        id: 2,
-        keyword: "Mathématiques",    // the actual keyword
-        frequency: 1,      // the frequency of this keyword
-    },
-    {
-        id: 3,
-        keyword: "iOs",    // the actual keyword
-        frequency: 1,      // the frequency of this keyword
-    },
-    {
-        id: 4,
-        keyword: "Robotique",    // the actual keyword
-        frequency: 1,      // the frequency of this keywor
-    },
-    {
-        id: 5,
-        keyword: "Telecommunications",    // the actual keyword
-        frequency: 2,      // the frequency of this keyword
-    },
-    {
-        id: 6,
-        keyword: "Innovation",    // the actual keyword
-        frequency: 1,      // the frequency of this keyword
-    },
-    {
-        id: 7,
-        keyword: "Bordeaux",    // the actual keyword
-        frequency: 2,      // the frequency of this keyword
-    },
-    {
-        id: 8,
-        keyword: "Génie logiciel",    // the actual keyword
-        frequency: 1,      // the frequency of this keyword
-
-    },
-    {
-        id: 9,
-        keyword: "Electronique",    // the actual keyword
-        frequency: 2,      // the frequency of this keyword
-
-    },
-    {
-        id: 10,
-        keyword: "Réseaux",    // the actual keyword
-        frequency: 1,      // the frequency of this keyword
-
-    },
-    {
-        id: 11,
-        keyword: "Cybersécurité",    // the actual keyword
-        frequency: 1,      // the frequency of this keyword
-
-    },
-    {
-        id: 12,
-        keyword: "ERP",    // the actual keyword
-        frequency: 1,      // the frequency of this keyword
-
-    },
-    {
-        id: 13,
-        keyword: "International",    // the actual keyword
-        frequency: 1,      // the frequency of this keyword
-
-    },
-    {
-        id: 14,
-        keyword: "Son",    // the actual keyword
-        frequency: 1,      // the frequency of this keyword
-
-    },
-    {
-        id: 15,
-        keyword: "Jeux Vidéos",    // the actual keyword
-        frequency: 1,      // the frequency of this keyword
-
-    },
-    {
-        id: 16,
-        keyword: "Finance",    // the actual keyword
-        frequency: 1,      // the frequency of this keyword
-
-    },
-    {
-        id: 17,
-        keyword: "Developpement web",    // the actual keyword
-        frequency: 2,      // the frequency of this keyword
-
-    },
-    {
-        id: 18,
-        keyword: "Python",    // the actual keyword
-        frequency: 2,      // the frequency of this keyword
-
-    },
-    {
-        id: 19,
-        keyword: "Java",    // the actual keyword
-        frequency: 2,      // the frequency of this keyword
-
-    },
-    {
-        id: 20,
-        keyword: "React Native",    // the actual keyword
-        frequency: 1,      // the frequency of this keyword
-
-    },
-    {
-        id: 21,
-        keyword: "Paris",    // the actual keyword
-        frequency: 1,      // the frequency of this keyword
-
-    },
-    {
-        id: 22,
-        keyword: "Intelligence Artificielle",    // the actual keyword
-        frequency: 1,      // the frequency of this keyword
-
-    },
-    {
-        id: 23,
-        keyword: "Deep Learning",    // the actual keyword
-        frequency: 1,      // the frequency of this keyword
-
-    },
-    {
-        id: 24,
-        keyword: "Mécanique",    // the actual keyword
-        frequency: 2,      // the frequency of this keyword
-
-    },
-    {
-        id: 25,
-        keyword: "Fluides",    // the actual keyword
-        frequency: 1,      // the frequency of this keyword
-
-    },
-    {
-        id: 26,
-        keyword: "Recherche",    // the actual keyword
-        frequency: 1,      // the frequency of this keyword
-
-    },
-]
 
 
 class Event extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            currentFloorId: 0,
-            infoShown: false,
-            standShown: undefined,
-            isLoading: true,
-            keyisChosen: false,
-            keywordPressed: undefined,
-            showUpArr: true,
-            showDownArr: false,
-            event: undefined,
-            switchDisplay: false
+            currentFloorId: 0, // number representing the current floor
+            infoShown: false, // boolean : true if the card of the stand nned to be shown, false otherwise
+            standShown: undefined, //object containing the stand selected 
+            isLoading: true, //true if the database is not loaded, false otherwise
+            keyisChosen: false, //true if a keyword is selected, false otherwise
+            keywordPressed: undefined, //object containing the selected keyword
+            showUpArr: true, //boolean : true if the up arrow need to be shown, false otherwise
+            showDownArr: false, //boolean : true if the down arrow need to be shown, false otherwise
+            event: undefined, //object containing the datas from the database
+            switchDisplay: false, //boolean : true if the display is switch, false otherwise
+            keywordsStats: undefined, //object containing a list of all the keywords and the corresponding stands
+        }
+    }
+    
+    /*  this function return true if the field keywordId of obj id equal to id
+    */
+    filtrerParIDkw(obj, id) {
+        if (obj.keywordId == id) {
+            return true;
         }
     }
 
+    /*  this function return true if the field _id of obj id equal to id
+    */
+    filtrerParID(obj, id) {
+        if (obj._id == id) {
+            return true;
+        }
+    }
+
+    /*  this function add 1 to the the state currentFloorId
+    *   and update the states of showUpArr et showDownArr 
+    */
     OnPressChangeFloorUp() {
         if (this.state.currentFloorId < this.state.event.floors.length - 2) {
             this.setState({ currentFloorId: this.state.currentFloorId + 1});
@@ -324,6 +58,9 @@ class Event extends Component {
 
     }
 
+    /*  this function sub 1 to the the state currentFloorId
+    *   and update the states of showUpArr et showDownArr 
+    */
     OnPressChangeFloorDown() {
         if (this.state.currentFloorId > 1) {
             this.setState({ currentFloorId: this.state.currentFloorId - 1 });
@@ -335,38 +72,63 @@ class Event extends Component {
         }
     }
 
+    /*  s is a stand 
+    *   this function change the state of infoShown into true
+    *   and change the value standShown into s 
+    */
     OnPressStandHandler(s) {
         this.setState({ infoShown: true });
         this.setState({ standShown: s }, () => {this.showInfo()});
     }
 
+    /*  k is a an object from keywordstats
+    *   keyisChosen is set to true and the keywordPressed value is changed into k
+    */
     OnPressKeyWordHandler(k) {
         this.setState({ keyisChosen: true });
         this.setState({ keywordPressed: k });
     }
 
-    OnPressCompanyFakeHandler(k) {
-        alert(k);
-    }
-
-    OnPressCompanyHandler(k) {
+    /*  k is a keywordstats.standList object
+    *   this function change the state of infoShown into true and keyisChosen into false
+    *   it also searches which stand in the state event is matching k
+    *   and put it into this.state.standShown
+    */
+    OnPressCompanyHandler(k) {       
+        let floors = this.state.event.floors;
+        let s = undefined
+        let search = undefined
+        for (var floor in floors)
+        {
+            search = (floors[floor].stands.find(item => this.filtrerParID(item, k.standId)))
+            if (search!= undefined)
+                s = search        
+        }
         this.setState({ infoShown: true });
-        this.setState({ standShown: k })
+        this.setState({ keyisChosen: false });
+        this.setState({ standShown: s })
     }
 
+    /*  return the object event.floors[_id]
+    */
     getFloor(_id) {
         floor = this.state.event.floors[_id];
         return floor;
     }
-
+    /* handler for the back button of getDescription
+    */
     buttonBackClickListener = () => {
         this.setState({ infoShown: false });
     }
 
+    /* handler for the back button of getkey
+    */
     buttonBackkwClickListener = () => {
         this.setState({ keyisChosen: false });
     }
 
+    /* handler for the button switch display
+    */
     buttonSwitchClickListener = () => {
         if (this.state.switchDisplay) {
             this.setState({ switchDisplay: false })
@@ -375,7 +137,9 @@ class Event extends Component {
         }
     }
 
-    getDesciption(s) {
+    /*  return a component Card containing infos about the stand s
+    */
+    getDescription(s) {
         return (
             <Card containerStyle={Styles.cardContainer}>
                 <Card.Title style={Styles.inputSearch}>{s.name}</Card.Title>
@@ -387,7 +151,7 @@ class Event extends Component {
                     <Text style={{fontWeight:'bold'}}>Mots-clés  </Text>
                         {
                             s.keywords.map((l, i) => (
-                                    <Text key={i} style={Styles.textInfo} onPress={() => { this.OnPressCompanyHandler(l); }} >
+                                    <Text key={i} style={Styles.textInfo}>
                                          {" "}{l.name}{" "}
                                     </Text>
                             ))
@@ -405,22 +169,19 @@ class Event extends Component {
             </Card>);
     }
     
-    filtrerParID(obj, id) {
-        if (obj.id == id) {
-            return true;
-        }
-    }
-    
+    /*  k is an object of keywordsStats
+    *   return a View containing the list of the stand names matching the keyword k
+    */
     getKey(k) {
-        const filtered = list.filter(item => this.filtrerParID(item, k.id))
+        const filtered = this.state.keywordsStats.find(item => this.filtrerParIDkw(item, k.keywordId))
         return (
             <View style={Styles.boxCompany}>
                 <Text style={Styles.titleBoxCompany}> Companies </Text>
                 {
-                    filtered[0].stand_names.map((l, i) => (
+                    filtered.standList.map((l, i) => (
                         <ListItem key={i} containerStyle={{backgroundColor: '#ffe4c4', borderRadius:27}} topDivider onPress={() => { this.OnPressCompanyHandler(l); }} >
                             <ListItem.Content>
-                                <ListItem.Title style={Styles.listCompany}>{l}</ListItem.Title>
+                                <ListItem.Title style={Styles.listCompany}>{l.name}</ListItem.Title>
                             </ListItem.Content>
                         </ListItem>
                     ))
@@ -433,6 +194,8 @@ class Event extends Component {
             </View>);
     }
 
+    /*  return the component Plan 
+    */
     drawPlan() {
         let floor = this.getFloor(this.state.currentFloorId);
         if (this.state.infoShown) {
@@ -450,10 +213,12 @@ class Event extends Component {
             );
     }
 
+    /*  return a text if infoshown is false, and call getDescription otherwise
+    */
     showInfo() {
         if (this.state.infoShown) {
             return (
-                <Text> {this.getDesciption(this.state.standShown)} </Text>
+                <Text> {this.getDescription(this.state.standShown)} </Text>
             );
         }
         return (
@@ -463,6 +228,8 @@ class Event extends Component {
         );
     }
 
+    /*  return a text if keyisChosen is false, and call getKey otherwise
+    */
     showKeyWord() {
         if (this.state.keyisChosen) {
             return (
@@ -477,22 +244,33 @@ class Event extends Component {
         );
     }
 
+    /* return the component WordCloud
+    */
     showWordCloud() {
-        return <WordCloud keywordsArray={keywordsArray} OnPressHandler={this.OnPressKeyWordHandler.bind(this)} />
+        return <WordCloud keywordsArray={this.state.keywordsStats} OnPressHandler={this.OnPressKeyWordHandler.bind(this)} />
     }
 
+    /* return the component Searchbar
+    */
     showSearchbar() {
-        return <Searchbar OnPressKeyWordHandler={this.OnPressKeyWordHandler.bind(this)} allKeywords={keywordsArray} />
+        return <Searchbar OnPressKeyWordHandler={this.OnPressKeyWordHandler.bind(this)} allKeywords={this.state.keywordsStats} />
     }
 
+    /*  return the component Header
+    */
     showHeader() {
-        return <Header eventName={this.state.event.name} logoHostPath={this.state.event.logoHost} logoEventPath={this.state.event.logoEvent} host="http://23.251.135.209:3001/" />
+        return <Header eventName={this.state.event.name} logoHostPath={this.state.event.logoHost} logoEventPath={this.state.event.logoEvent} host="http://10.192.48.95:3001/" />
     }
+
+    /*  fetch the database from the server and put it into this.state.event 
+    *   set this.state.isLoading to false if no error occured while fetching
+    */
     UNSAFE_componentWillMount() {
-        fetch("http://23.251.135.209:3001/send")
+        fetch("http://10.192.48.95:3001/send")
             .then(response => response.json())
             .then(responseJson => {
                 this.setState({ event: responseJson.data[0] });
+                this.setState( {keywordsStats: this.state.event.keywordsStats});
                 this.setState({ isLoading: false });
                 if (this.state.event != undefined && this.state.event.floors != undefined)
                     this.setState({ showUpArr: (this.state.event.floors.length < 2) ?  false : true});
@@ -501,6 +279,9 @@ class Event extends Component {
             }).catch(err => { console.log(err) })
     }
 
+    /*  return a view containing all the functions returning a component
+    *   modify the place of showKeyWord and DrawPlan based on the value of this.state.switchDisplay
+    */
     showAll() {
         if (this.state.switchDisplay) {
             return <View style={Styles.layer}>
@@ -548,6 +329,8 @@ class Event extends Component {
         }
     }
 
+    /*  return the component loader if isLoading is true, call showAll otherwise
+    */
     render() {
         const { isLoading } = this.state;
         if (isLoading)

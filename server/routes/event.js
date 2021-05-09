@@ -11,7 +11,7 @@ router.get('/', async (req, res) => {
   } catch(err) {
     console.log(err);
   }
-  res.sendFile(path.resolve(__dirname + '/../interface/index3.html'));
+  res.sendFile(path.resolve(__dirname + '/../interface/finalPage.html'));
 }); 
 // search for event by id 
 router.get("/eventid", async (req, res) => {
