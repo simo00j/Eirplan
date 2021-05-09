@@ -26,7 +26,7 @@ const nameSchema = mongoose.Schema({
     label: String,
     x: Number,
     y: Number,
-    fontSize: Number
+    fontSize: String
 });
 
 const floorSchema = mongoose.Schema({
