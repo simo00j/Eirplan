@@ -8,6 +8,7 @@ const keywordSchema = mongoose.Schema({
 
 const wallSchema = mongoose.Schema({
     path: String,
+    strokeWidth: String
 });
 
 const standSchema = mongoose.Schema({

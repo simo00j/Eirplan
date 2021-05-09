@@ -23,7 +23,7 @@ class Wall extends Component {
                     d={this.d}
                     fill={this.fillColor} 
                     stroke={this.strokeColor} 
-                    strokeWidth={this.strokeWidth}
+                    strokeWidth={(this.props.strokeWidth != "None") ? this.props.strokeWidth : this.strokeWidth}
                 />
         );
     }

@@ -26,10 +26,15 @@ var standDataExtractor = function (pathDataStruct, type) {
         endhour: pathDataStruct.endhour,
         resume: pathDataStruct.resume       
     };
-  } else {
+  } else {      
     stand = {
         id: 'wall'
     };
+    if (pathDataStruct["stroke-width"]) {
+      stand["strokeWidth"] = pathDataStruct["stroke-width"];
+    } else {
+      stand["strokeWidth"] = "None";
+    }
   }
 
   if (type == 'path') {
@@ -64,38 +69,86 @@ var standsDataExtractor = function (gDataStruct) {
   if (gDataStruct) {
     for (const type in shapeTypes) {
       if (gDataStruct[type]) {
-        shapeTypes[type] = gDataStruct[type].length;
-
-        for (const index in gDataStruct[type]) {
-          let shape = standDataExtractor(gDataStruct[type][index], type);
-          if (shape.id=='wall')
-            walls.push(shape);
-          else
-            stands.push(shape);
+        if (Symbol.iterator in Object(gDataStruct[type])){
+          shapeTypes[type] = gDataStruct[type].length;
+          for (const index in gDataStruct[type]) {
+            let shape = standDataExtractor(gDataStruct[type][index], type);
+            if (shape.id=='wall')
+              walls.push(shape);
+            else
+              stands.push(shape);
+          }}
+        else {
+          let shape = standDataExtractor(gDataStruct[type], type);
+            if (shape.id=='wall')
+              walls.push(shape);
+            else
+              stands.push(shape);
         }
 
       }
     }
     if (gDataStruct['text']) {
-      for (const index in gDataStruct['text']) {
-        let name = nameDataExtractor(gDataStruct['text'][index]);
+      if (Symbol.iterator in Object(gDataStruct['text'])) {
+        for (const index in gDataStruct['text']) {
+          let name = nameDataExtractor(gDataStruct['text'][index]);
+          names.push(name);
+        }
+      } else {
+        let name = nameDataExtractor(gDataStruct['text']);
         names.push(name);
       }
     }
+    if (gDataStruct['g']) {
+      if (Symbol.iterator in Object(gDataStruct['g'])) {
+        for (let g of gDataStruct['g']) {
+          let data = standsDataExtractor(g);
+          stands.push.apply(stands, data[0]);
+          walls.push.apply(walls, data[1]);
+          names.push.apply(names, data[2]);
+        }
+      } else {
+        let data = standsDataExtractor(gDataStruct['g'])
+        console.log(data[1])
+        stands.push.apply(stands, data[0]);
+        walls.push.apply(walls, data[1]);
+        names.push.apply(names, data[2]);
+        console.log(walls)
+      }
+    }
   }
-  return {stands, walls, names};
+  return [stands, walls, names];
 }
 
 var floorDataExtractor = function (svgFloorFile) {
   let floorJson = fileReader(svgFloorFile);
-  let {stands, walls, names} = standsDataExtractor(floorJson.svg.g);
 
-  var floor = {
+  if (Symbol.iterator in Object(floorJson.svg.g)) {
+    var allStands = [], allWalls = [], allNames = [];
+    for (let g of floorJson.svg.g) {
+      let data = standsDataExtractor(g);
+      allStands.push.apply(allStands, data[0]);
+      allWalls.push.apply(allWalls, data[1]);
+      allNames.push.apply(allNames, data[2]);
+    } 
+    var floor = {
       name: floorJson.svg.title,
-      planShape: walls,
-      stands: stands,
-      names: names
-  };
+      planShape: allWalls,
+      stands: allStands,
+      names: allNames
+    };
+  }
+  else {
+    let data = standsDataExtractor(floorJson.svg.g);
+    var floor = {
+      name: floorJson.svg.title,
+      planShape: data[1],
+      stands: data[0],
+      names: data[2]
+    };
+  }
+   
+
   return floor;
 }
 // function that returns keyword stats need to be called after creating model (it uses the models ids)

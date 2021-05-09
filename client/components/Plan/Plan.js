@@ -55,7 +55,7 @@ class Plan extends Component {
     */
     drawWall(w) {
         return (
-            <Wall id={w._id} d={w.path} key={w._id}/>
+            <Wall id={w._id} d={w.path} key={w._id} strokeWidth={w["strokeWidth"]}/>
         );
     }
 
