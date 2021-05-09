@@ -23,12 +23,13 @@
       "adaptiveIcon": {
         "foregroundImage": "./assets/adaptive-icon.png",
         "backgroundColor": "#FFFFFF"
-      }
+      },
+      "package": "com.eirplan.Eirplan"
     },
     "androidNavigationBar": {
       "visible": "immersive"
     },
-    "androidStatusBar":{
+    "androidStatusBar": {
       "hidden": true
     },
     "web": {

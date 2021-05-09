@@ -51,11 +51,21 @@ var standDataExtractor = function (pathDataStruct, type) {
 }
 
 var nameDataExtractor = function (nameStruct) {
-  var name = {
-    label: nameStruct["$t"],
-    x: nameStruct["x"],
-    y: nameStruct["y"],
-    fontSize: nameStruct["font-size"]
+  if (nameStruct["tspan"]) {
+    var name = {
+      label: nameStruct["tspan"]["$t"],
+      x: nameStruct["x"],
+      y: nameStruct["y"],
+      fontSize: nameStruct["font-size"]
+    }
+  } 
+  else {
+    var name = {
+      label: nameStruct["$t"],
+      x: nameStruct["x"],
+      y: nameStruct["y"],
+      fontSize: nameStruct["font-size"]
+    }
   }
   return name;
 }
