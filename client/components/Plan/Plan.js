@@ -2,14 +2,14 @@ import React, {Component} from "react";
 import { Dimensions, View, Pressable , Text} from "react-native";
 import { FontAwesomeIcon } from "@fortawesome/react-native-fontawesome"; 
 import { faAngleDown, faAngleUp } from "@fortawesome/free-solid-svg-icons"; 
-import Svg, {G, Text as SText} from "react-native-svg";
+import Svg, {G, Rect, Text as SText} from "react-native-svg";
 import Styles from "../StyleSheet/Style";
 import Stand from "../Shapes/Stand";
 import Wall from "../Shapes/Wall";
 
 //constants used to draw the plan
-const MARGIN = 10;
-const vWidth = 600 + MARGIN;
+const MARGIN = 5;
+const vWidth = 600;
 const vHeight = 300 + MARGIN;
 const width1 = Dimensions.get("window").width;
 const width = width1 - width1*0.22 ;
@@ -20,7 +20,7 @@ class Plan extends Component {
         super(props);
         this.keywords = {};
         this.defStandColor = "#FFC27A"; //color of the stands
-        this.defStorkColor = "black"; //color of the stroke of the plan
+        this.defStorkColor = "#333"; //color of the stroke of the plan
         this.state = {
             currFloor: props.currFloor, //props containing id of the displayed floor
             handler: props.handler, //props containing an handler when pressing a stand
@@ -103,12 +103,13 @@ class Plan extends Component {
                 width={width}
                 height={height}
                 viewBox={[
+                    0,
                     -MARGIN / 2,
-                    -MARGIN / 2,
-                    vWidth + MARGIN / 2,
+                    vWidth,
                     vHeight + MARGIN / 2,
                 ].join(" ")}
                 >
+                    <Rect x="0" y="0" width={vWidth} height={vHeight} fill="#767676"/>
                     <G category="Wall">
                         {this.props.currFloor.planShape.map((wall) => (
                             this.drawWall(wall)
