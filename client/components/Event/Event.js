@@ -101,9 +101,15 @@ class Event extends Component {
         for (var floor in floors)
         {
             search = (floors[floor].stands.find(item => this.filtrerParID(item, k.standId)))
-            if (search!= undefined)
-                s = search        
-        }
+            if (search!= undefined){
+                s = search 
+                if(floor != this.state.currentFloorId){
+                    this.setState({currentFloorId : parseInt(floor)})
+                    this.setState({ showUpArr: (floor<floors.length-1), showDownArr: (floor>0) });
+                }
+                break;
+            }
+        }                       
         this.setState({ infoShown: true });
         this.setState({ keyisChosen: false });
         this.setState({ standShown: s })
@@ -201,7 +207,7 @@ class Event extends Component {
         if (this.state.infoShown) {
             return (
                 <View style={Styles.planContainer}>
-                    <Plan currFloor={floor} floorId={this.state.currentFloorId} showUpArr={this.state.showUpArr} showDownArr={this.state.showDownArr} upHandler={this.OnPressChangeFloorUp.bind(this)} downHandler={this.OnPressChangeFloorDown.bind(this)} handler={this.OnPressStandHandler.bind(this)} clickedStandId={this.state.standShown.id}/>
+                    <Plan currFloor={floor} floorId={this.state.currentFloorId} showUpArr={this.state.showUpArr} showDownArr={this.state.showDownArr} upHandler={this.OnPressChangeFloorUp.bind(this)} downHandler={this.OnPressChangeFloorDown.bind(this)} handler={this.OnPressStandHandler.bind(this)} clickedStandId={this.state.standShown._id}/>
                 </View>
             );
         }
@@ -221,11 +227,7 @@ class Event extends Component {
                 <Text> {this.getDescription(this.state.standShown)} </Text>
             );
         }
-        return (
-            <View>
-                <Text style={Styles.textInfo}> Select a Stand to see more Info </Text>
-            </View>
-        );
+        return;
     }
 
     /*  return a text if keyisChosen is false, and call getKey otherwise
@@ -259,14 +261,14 @@ class Event extends Component {
     /*  return the component Header
     */
     showHeader() {
-        return <Header eventName={this.state.event.name} logoHostPath={this.state.event.logoHost} logoEventPath={this.state.event.logoEvent} host="http://10.192.48.95:3001/" />
+        return <Header eventName={this.state.event.name} logoHostPath={this.state.event.logoHost} logoEventPath={this.state.event.logoEvent} host="http://192.168.122.1:3001/" />
     }
 
     /*  fetch the database from the server and put it into this.state.event 
     *   set this.state.isLoading to false if no error occured while fetching
     */
     UNSAFE_componentWillMount() {
-        fetch("http://10.192.48.95:3001/send")
+        fetch("http://192.168.122.1:3001/send")
             .then(response => response.json())
             .then(responseJson => {
                 this.setState({ event: responseJson.data[0] });
@@ -274,8 +276,6 @@ class Event extends Component {
                 this.setState({ isLoading: false });
                 if (this.state.event != undefined && this.state.event.floors != undefined)
                     this.setState({ showUpArr: (this.state.event.floors.length < 2) ?  false : true});
-                console.log(this.state.event.floors.length)
-                console.log(this.state.showUpArr)
             }).catch(err => { console.log(err) })
     }
 

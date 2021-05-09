@@ -42,11 +42,11 @@ class Plan extends Component {
     drawStand(s) {
         if (this.props.clickedStandId == s._id) {
             return (
-                <Stand id={s._id} name={s.name} d={s.path} key={s._id} keywords={s.keywords} starthour={s.starthour} endhour={s.endhour} respo={s.respo} resume={s.resume} fillColor={this.defStandColor} strokeColor={this.defStorkColor} strokeWidth={1} handler={this.props.handler} isSelected={true}/>
+                <Stand _id={s._id} name={s.name} d={s.path} key={s._id} keywords={s.keywords} starthour={s.starthour} endhour={s.endhour} respo={s.respo} resume={s.resume} fillColor={this.defStandColor} strokeColor={this.defStorkColor} strokeWidth={1} handler={this.props.handler} isSelected={true}/>
             );
         } else {
             return (
-                <Stand id={s._id} name={s.name} d={s.path} key={s._id} keywords={s.keywords} starthour={s.starthour} endhour={s.endhour} respo={s.respo} resume={s.resume} fillColor={this.defStandColor} strokeColor={this.defStorkColor} strokeWidth={1} handler={this.props.handler} isSelected={false}/>
+                <Stand _id={s._id} name={s.name} d={s.path} key={s._id} keywords={s.keywords} starthour={s.starthour} endhour={s.endhour} respo={s.respo} resume={s.resume} fillColor={this.defStandColor} strokeColor={this.defStorkColor} strokeWidth={1} handler={this.props.handler} isSelected={false}/>
             ); 
         }
     }
@@ -96,7 +96,6 @@ class Plan extends Component {
     *   and the up and down arrows
     */
     render() {
-        console.log(this.props.currFloor)
         return (
           <View style={{flexDirection:'row',alignItems:'center',alignContent:'center'}}>
             <View style={{flex: 4, alignItems:'center'}} onStartShouldSetResponder={() => true}>
