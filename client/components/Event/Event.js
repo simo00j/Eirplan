@@ -261,14 +261,14 @@ class Event extends Component {
     /*  return the component Header
     */
     showHeader() {
-        return <Header eventName={this.state.event.name} logoHostPath={this.state.event.logoHost} logoEventPath={this.state.event.logoEvent} host="http://192.168.122.1:3001/" />
+        return <Header eventName={this.state.event.name} logoHostPath={this.state.event.logoHost} logoEventPath={this.state.event.logoEvent} host="http://10.192.48.95:3001/" />
     }
 
     /*  fetch the database from the server and put it into this.state.event 
     *   set this.state.isLoading to false if no error occured while fetching
     */
     UNSAFE_componentWillMount() {
-        fetch("http://192.168.122.1:3001/send")
+        fetch("http://10.192.48.95:3001/send")
             .then(response => response.json())
             .then(responseJson => {
                 this.setState({ event: responseJson.data[0] });
