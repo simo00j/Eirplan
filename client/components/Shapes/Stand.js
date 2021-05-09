@@ -19,8 +19,6 @@ class Stand extends Component {
         this.strokeWidth = props.strokeWidth;
         this.state = {
             handler: props.handler,
-            isSelected: false,
-            isOnMouse: false,
         };
     }
 
@@ -29,7 +27,7 @@ class Stand extends Component {
                 <Path 
                     key={this.id}
                     d={this.d}
-                    fill={this.state.isSelected || this.state.isOnMouse ? this.onSelected : this.fillColor} //{this.fillColor} 
+                    fill={(this.props.isSelected) ? this.onSelected : this.fillColor} //{this.fillColor} 
                     stroke={this.strokeColor} 
                     strokeWidth={this.strokeWidth}
                     onPress={() => {this.props.handler({id:this.props.id,
@@ -41,8 +39,6 @@ class Stand extends Component {
                                                         resume:this.props.resume
                                                         },
                                                         )}}
-                    onMouseMove={() => {this.setState({ isOnMouse: true })}}
-                    onMouseLeave={() => {this.setState({ isOnMouse: false })}}
                 />
         );
     }

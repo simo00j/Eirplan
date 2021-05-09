@@ -313,14 +313,15 @@ class Event extends Component {
     }
 
     OnPressChangeFloorUp() {
-        if (this.state.currentFloorId < this.state.event.floors.length - 1) {
-            this.setState({ currentFloorId: this.state.currentFloorId + 1 });
+        if (this.state.currentFloorId < this.state.event.floors.length - 2) {
+            this.setState({ currentFloorId: this.state.currentFloorId + 1});
             this.setState({ showUpArr: true, showDownArr: true });
         }
         else {
             this.setState({ currentFloorId: this.state.currentFloorId + 1 });
             this.setState({ showUpArr: false, showDownArr: true });
         }
+
     }
 
     OnPressChangeFloorDown() {
@@ -332,7 +333,6 @@ class Event extends Component {
             this.setState({ currentFloorId: this.state.currentFloorId - 1 });
             this.setState({ showUpArr: true, showDownArr: false });
         }
-
     }
 
     OnPressStandHandler(s) {
@@ -355,15 +355,8 @@ class Event extends Component {
     }
 
     getFloor(_id) {
-        let floor = null;
-        if (_id == null) {
-            floor = this.state.event.floors[0];
-            this.setState({ currentFloorId: 0 });
-        } else {
-            floor = this.state.event.floors[_id];
-        }
+        floor = this.state.event.floors[_id];
         return floor;
-
     }
 
     buttonBackClickListener = () => {
@@ -420,7 +413,6 @@ class Event extends Component {
     
     getKey(k) {
         const filtered = list.filter(item => this.filtrerParID(item, k.id))
-        console.log(filtered);
         return (
             <View style={Styles.boxCompany}>
                 <Text style={Styles.titleBoxCompany}> Companies </Text>
@@ -443,11 +435,19 @@ class Event extends Component {
 
     drawPlan() {
         let floor = this.getFloor(this.state.currentFloorId);
-        return (
-            <View style={Styles.planContainer}>
-                <Plan currFloor={floor} floorId={this.state.currentFloorId} showUpArr={this.state.showUpArr} showDownArr={this.state.showDownArr} upHandler={this.OnPressChangeFloorUp.bind(this)} downHandler={this.OnPressChangeFloorDown.bind(this)} handler={this.OnPressStandHandler.bind(this)} />
-            </View>
-        );
+        if (this.state.infoShown) {
+            return (
+                <View style={Styles.planContainer}>
+                    <Plan currFloor={floor} floorId={this.state.currentFloorId} showUpArr={this.state.showUpArr} showDownArr={this.state.showDownArr} upHandler={this.OnPressChangeFloorUp.bind(this)} downHandler={this.OnPressChangeFloorDown.bind(this)} handler={this.OnPressStandHandler.bind(this)} clickedStandId={this.state.standShown.id}/>
+                </View>
+            );
+        }
+        else 
+            return (
+                <View style={Styles.planContainer}>
+                    <Plan currFloor={floor} floorId={this.state.currentFloorId} showUpArr={this.state.showUpArr} showDownArr={this.state.showDownArr} upHandler={this.OnPressChangeFloorUp.bind(this)} downHandler={this.OnPressChangeFloorDown.bind(this)} handler={this.OnPressStandHandler.bind(this)}/>
+                </View>
+            );
     }
 
     showInfo() {
@@ -494,6 +494,10 @@ class Event extends Component {
             .then(responseJson => {
                 this.setState({ event: responseJson.data[0] });
                 this.setState({ isLoading: false });
+                if (this.state.event != undefined && this.state.event.floors != undefined)
+                    this.setState({ showUpArr: (this.state.event.floors.length < 2) ?  false : true});
+                console.log(this.state.event.floors.length)
+                console.log(this.state.showUpArr)
             }).catch(err => { console.log(err) })
     }
 

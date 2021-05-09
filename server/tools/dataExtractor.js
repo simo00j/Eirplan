@@ -45,10 +45,21 @@ var standDataExtractor = function (pathDataStruct, type) {
   return stand;
 }
 
+var nameDataExtractor = function (nameStruct) {
+  var name = {
+    label: nameStruct["$t"],
+    x: nameStruct["x"],
+    y: nameStruct["y"],
+    fontSize: nameStruct["font-size"]
+  }
+  return name;
+}
+
 var standsDataExtractor = function (gDataStruct) {
   var shapeTypes =  { 'rect' : 0, 'circle' : 0, 'ellipse' : 0, 'line' : 0, 'polyline' : 0, 'polygon': 0, 'path': 0};
   var stands = [];
   var walls = [];
+  var names = [];
 
   if (gDataStruct) {
     for (const type in shapeTypes) {
@@ -65,20 +76,26 @@ var standsDataExtractor = function (gDataStruct) {
 
       }
     }
+    if (gDataStruct['text']) {
+      for (const index in gDataStruct['text']) {
+        let name = nameDataExtractor(gDataStruct['text'][index]);
+        names.push(name);
+      }
+    }
   }
-  return {stands, walls};
+  return {stands, walls, names};
 }
 
 var floorDataExtractor = function (svgFloorFile) {
   let floorJson = fileReader(svgFloorFile);
-  let {stands, walls} = standsDataExtractor(floorJson.svg.g);
+  let {stands, walls, names} = standsDataExtractor(floorJson.svg.g);
 
   var floor = {
       name: floorJson.svg.title,
       planShape: walls,
-      stands: stands
+      stands: stands,
+      names: names
   };
-
   return floor;
 }
 // function that returns keyword stats need to be called after creating model (it uses the models ids)

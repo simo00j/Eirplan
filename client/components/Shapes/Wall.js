@@ -10,7 +10,7 @@ class Wall extends Component {
         this.name = "Wall";
         this.d = props.d;
         this.fillColor = "transparent";
-        this.strokeColor = "black";
+        this.strokeColor = "white";
         this.strokeWidth = 5;
     }
 

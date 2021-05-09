@@ -21,10 +21,18 @@ const standSchema = mongoose.Schema({
 });
 const dateFormat = 'HH:mm';
 
+const nameSchema = mongoose.Schema({
+    label: String,
+    x: Number,
+    y: Number,
+    fontSize: Number
+});
+
 const floorSchema = mongoose.Schema({
     name: {type:String, unique: true},
     planShape: [wallSchema],
-    stands: [standSchema]
+    stands: [standSchema],
+    names: [nameSchema]
 });
 floorSchema.plugin(mongooseUniqueValidator);
 

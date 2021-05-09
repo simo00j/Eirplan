@@ -1,8 +1,8 @@
 import React, {Component} from "react";
-import { Dimensions, View, Text, Pressable } from "react-native";
+import { Dimensions, View, Pressable , Text} from "react-native";
 import { FontAwesomeIcon } from "@fortawesome/react-native-fontawesome"; 
 import { faAngleDown, faAngleUp } from "@fortawesome/free-solid-svg-icons"; 
-import Svg, {G} from "react-native-svg";
+import Svg, {G, Text as SText} from "react-native-svg";
 import Styles from "../StyleSheet/Style";
 import Stand from "../Shapes/Stand";
 import Wall from "../Shapes/Wall";
@@ -20,6 +20,7 @@ class Plan extends Component {
         this.keywords = {};
         this.defStandColor = "#FFC27A";
         this.defStorkColor = "black";
+        console.log(props.currFloor.names)
         this.state = {
             currFloor: props.currFloor,
             handler: props.handler,
@@ -28,12 +29,22 @@ class Plan extends Component {
         };
     }
 
+    drawText(t) {
+        return (
+            <SText key={t.label+"_"+t.x+"_"+t.y} fill="white" fontSize={(t.fontSize != undefined) ? t.fontSize : 20}  x={t.x}  y={t.y} >{t.label}</SText>
+        );
+    }
 
     drawStand(s) {
-        // x && y to add later
-        return (
-            <Stand id={s._id} name={s.name} d={s.path} key={s._id} keywords={s.keywords} starthour={s.starthour} endhour={s.endhour} respo={s.respo} resume={s.resume} fillColor={this.defStandColor} strokeColor={this.defStorkColor} strokeWidth={1} handler={this.props.handler}/>
-        );
+        if (this.props.clickedStandId == s._id) {
+            return (
+                <Stand id={s._id} name={s.name} d={s.path} key={s._id} keywords={s.keywords} starthour={s.starthour} endhour={s.endhour} respo={s.respo} resume={s.resume} fillColor={this.defStandColor} strokeColor={this.defStorkColor} strokeWidth={1} handler={this.props.handler} isSelected={true}/>
+            );
+        } else {
+            return (
+                <Stand id={s._id} name={s.name} d={s.path} key={s._id} keywords={s.keywords} starthour={s.starthour} endhour={s.endhour} respo={s.respo} resume={s.resume} fillColor={this.defStandColor} strokeColor={this.defStorkColor} strokeWidth={1} handler={this.props.handler} isSelected={false}/>
+            ); 
+        }
     }
 
     drawWall(w) {
@@ -46,31 +57,32 @@ class Plan extends Component {
         if (this.props.showUpArr)
             return (
                 <View style={Styles.bottomFloor}>
-                <Pressable onPress={() => this.state.upHandler()}>
+                <Pressable onPress={() => this.props.upHandler()}>
                     <FontAwesomeIcon icon={faAngleUp} size={width/5}/>
                 </Pressable>
                 </View>
             );
         else 
             return (
-                <FontAwesomeIcon icon={faAngleUp} size={width/5} color="transparent"/>
+                <FontAwesomeIcon icon={faAngleUp} size={width/5}/>
             );
     }
 
     drawDownArrow() {
         if (this.props.showDownArr)
             return (
-                <Pressable onPress={() => this.state.downHandler()}>
+                <Pressable onPress={() => this.props.downHandler()}>
                     <FontAwesomeIcon icon={faAngleDown} size={width/5}/>
                 </Pressable>
             );
         else 
             return (
-                <FontAwesomeIcon icon={faAngleDown} size={width/4} color="transparent"/>
+                <FontAwesomeIcon icon={faAngleDown} size={width/5}/>
             );
     }
 
     render() {
+        console.log(this.props.currFloor)
         return (
           <View style={{flexDirection:'row',alignItems:'center',alignContent:'center'}}>
             <View style={{flex: 4, alignItems:'center'}} onStartShouldSetResponder={() => true}>
@@ -85,13 +97,18 @@ class Plan extends Component {
                 ].join(" ")}
                 >
                     <G category="Wall">
-                        {this.state.currFloor.planShape.map((wall) => (
+                        {this.props.currFloor.planShape.map((wall) => (
                             this.drawWall(wall)
                         ))}
                     </G>
                     <G category="Floor">
-                        {this.state.currFloor.stands.map((stand) => (
+                        {this.props.currFloor.stands.map((stand) => (
                             this.drawStand(stand)
+                        ))}
+                    </G>
+                    <G category="Name">
+                        {this.props.currFloor.names.map((name) => (
+                            this.drawText(name)
                         ))}
                     </G>
                 </Svg>
