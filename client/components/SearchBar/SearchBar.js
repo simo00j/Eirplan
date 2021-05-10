@@ -12,6 +12,7 @@ class Searchbar extends Component {
   constructor(props) {
     super(props);
     this.state = {
+      displayWords: false, // 
       search: '', //input string of the searchbar
       keywords: [], //keywords matching the string search
       allKeywords: props.allKeywords, //props containing the entire list of the keywords of the database
@@ -63,16 +64,18 @@ class Searchbar extends Component {
   */
   displayList(){
     if(this.state.keywords.length>0){
-      return <View style={Styles.boxList}>
-        {this.state.keywords.map((l, i) => (
-              <ListItem key={i} containerStyle={Styles.listView} bottomDivider onPress={() => {this.props.OnPressKeyWordHandler(l);}}>
-                  <ListItem.Content>
-                      <ListItem.Title style={Styles.inputSearch}>{l.name}</ListItem.Title>
-                  </ListItem.Content>
-              </ListItem>
-          ))
-      }
-      </View>
+      if (this.state.displayWords) 
+        return <View style={Styles.boxList}>
+          {this.state.keywords.map((l, i) => (
+                <ListItem key={i} containerStyle={Styles.listView} bottomDivider onPress={() => {this.props.OnPressKeyWordHandler(l); this.setState({displayWords: false});}}>
+                    <ListItem.Content>
+                        <ListItem.Title style={Styles.inputSearch}>{l.name}</ListItem.Title>
+                    </ListItem.Content>
+                </ListItem>
+            ))
+        }
+        </View>
+      return 
     }
   }
 
@@ -80,6 +83,7 @@ class Searchbar extends Component {
   */
   updateSearch = (search) => {
     this.setState(() => ({search}), () => {this.searchKeyword()})
+    this.setState({displayWords : true});
   };
 
   /* return the component SearchBar */
