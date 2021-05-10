@@ -1,10 +1,10 @@
 {
   "expo": {
-    "name": "Eirplan1",
-    "slug": "Eirplan1",
+    "name": "Eirplan",
+    "slug": "Eirplan",
     "version": "1.0.0",
     "orientation": "portrait",
-    "icon": "./assets/icon.png",
+    "icon": "./assets/appIcon.png",
     "splash": {
       "image": "./assets/splash.png",
       "resizeMode": "contain",
