@@ -31,6 +31,9 @@ class Searchbar extends Component {
     var fautes = 0;
     var no_match = false;
     var len2 = keyword.length
+    if(keyword[0]==' '){
+      keyword = keyword.substring(1, len2)
+    }
     if (len2 < len || len==0) {
       return false
     }
