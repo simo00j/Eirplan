@@ -1,10 +1,46 @@
-Pour ouvrir le projet : `nodemon index.js` dans le dossier racine et `npm start` dans le dossier **react-frontend** ensuite se connecter à http://localhost:3000/. Pour la base de données afin de l'utiliser il faut au préalable avoir lancé le serveur mongodb dans un terminal.
+﻿# EIRPLAN : Affichage dynamique interactif de plans
 
-Le dossier **react-frontend** contient le code relatif à la partie frontend du projet.
+EIRPLAN est un projet réalisé par une équipe de sept étudiants en deuxième année à l'ENSEIRB-MATMECA, spécialité informatique. 
 
-**Index.js** contient tous les packages dont on a besoin et la configuration du port et des routes.
+# Fichiers 
 
- Dans le dossier **routes** on a les fichiers  contenant les routes.
-Une *route* est une section de code qui associe une instruction http (get, post...) à un chemin url et une fonction qui gère la réponse url.
+Les fichiers disponibles dans l'archive sont : 
+- Le dossier **server** qui contient les sources du serveur
+- Le dossier **client** qui contient les sources du client 
+- Le fichier Eirplan.apk qui permet l'installation de l'application 
+- Le fichier Rapport.pdf 
 
-Dans **node_modules** on a les différents modules/packages nécessaires au projet.
+
+ 
+# Installation et lancement de l'application 
+
+Pour installer l'application, il faut lancer le fichier Eirplan.apk, et suivre les instructions. 
+L'application est ensuite prête à être utilisée, et disponible sur l'appareil ou elle est installée. 
+
+# Lancement manuel de l'application
+L'application peut être lancé manuellement localement, sans utiliser le fichier d'installation. 
+
+Il faut lancer le serveur :
+	
+	Allez dans le dossier server :
+		cd server 
+	installez les dépendances :
+		npm install 
+	lancez le serveur :
+		node index.js
+		
+Puis lancer le client :
+
+	Installez react : 
+		npm install --global create-react-app
+	Installez expo-cli :
+		npm install -g expo-cli
+	Allez dans le dossier client : 
+		cd client 
+	installez les dépendances :
+		expo-cli
+		npm install 
+	lancez le client :
+		npm start
+
+
